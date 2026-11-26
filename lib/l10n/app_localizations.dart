@@ -977,7 +977,7 @@ abstract class AppLocalizations {
   /// No description provided for @statsChartHint.
   ///
   /// In uk, this message translates to:
-  /// **'Натисніть на стовпчик, щоб побачити день'**
+  /// **'Натисніть на стовпчик, щоб вибрати день'**
   String get statsChartHint;
 
   /// No description provided for @settingsAppearance.
@@ -1555,6 +1555,306 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Обов\'язково. Почніть вводити, щоб вибрати готовий продукт'**
   String get productHint;
+
+  /// No description provided for @pickDate.
+  ///
+  /// In uk, this message translates to:
+  /// **'Вибрати дату'**
+  String get pickDate;
+
+  /// No description provided for @statsOpenDay.
+  ///
+  /// In uk, this message translates to:
+  /// **'Відкрити день'**
+  String get statsOpenDay;
+
+  /// No description provided for @statsCountHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Натисніть, щоб побачити список'**
+  String get statsCountHint;
+
+  /// No description provided for @noDoses.
+  ///
+  /// In uk, this message translates to:
+  /// **'Тут поки порожньо'**
+  String get noDoses;
+
+  /// No description provided for @dayUpcoming.
+  ///
+  /// In uk, this message translates to:
+  /// **'Попереду'**
+  String get dayUpcoming;
+
+  /// No description provided for @dayDoses.
+  ///
+  /// In uk, this message translates to:
+  /// **'Прийоми'**
+  String get dayDoses;
+
+  /// No description provided for @durationMinutes.
+  ///
+  /// In uk, this message translates to:
+  /// **'{m} хв'**
+  String durationMinutes(int m);
+
+  /// No description provided for @durationHours.
+  ///
+  /// In uk, this message translates to:
+  /// **'{h} год'**
+  String durationHours(int h);
+
+  /// No description provided for @durationHoursMinutes.
+  ///
+  /// In uk, this message translates to:
+  /// **'{h} год {m} хв'**
+  String durationHoursMinutes(int h, int m);
+
+  /// No description provided for @delayLate.
+  ///
+  /// In uk, this message translates to:
+  /// **'на {d} пізніше'**
+  String delayLate(String d);
+
+  /// No description provided for @delayEarly.
+  ///
+  /// In uk, this message translates to:
+  /// **'на {d} раніше'**
+  String delayEarly(String d);
+
+  /// No description provided for @delayOnTime.
+  ///
+  /// In uk, this message translates to:
+  /// **'вчасно'**
+  String get delayOnTime;
+
+  /// No description provided for @plannedAt.
+  ///
+  /// In uk, this message translates to:
+  /// **'за планом {time}'**
+  String plannedAt(String time);
+
+  /// No description provided for @medStatsTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Аналіз прийому'**
+  String get medStatsTitle;
+
+  /// No description provided for @medStatsOpenHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Виконання, серії, графіки, точність часу'**
+  String get medStatsOpenHint;
+
+  /// No description provided for @medStatsSince.
+  ///
+  /// In uk, this message translates to:
+  /// **'У додатку з {date}'**
+  String medStatsSince(String date);
+
+  /// No description provided for @courseDayOf.
+  ///
+  /// In uk, this message translates to:
+  /// **'День {day} з {total}, курс до {date}'**
+  String courseDayOf(int day, int total, String date);
+
+  /// No description provided for @courseOngoing.
+  ///
+  /// In uk, this message translates to:
+  /// **'День {day}, без кінцевої дати'**
+  String courseOngoing(int day);
+
+  /// No description provided for @courseNotStarted.
+  ///
+  /// In uk, this message translates to:
+  /// **'Почнеться {date}'**
+  String courseNotStarted(String date);
+
+  /// No description provided for @courseFinished.
+  ///
+  /// In uk, this message translates to:
+  /// **'Курс завершено {date}'**
+  String courseFinished(String date);
+
+  /// No description provided for @periodAll.
+  ///
+  /// In uk, this message translates to:
+  /// **'Усе'**
+  String get periodAll;
+
+  /// No description provided for @trendUp.
+  ///
+  /// In uk, this message translates to:
+  /// **'На {n} п.п. краще, ніж за попередній такий самий період'**
+  String trendUp(int n);
+
+  /// No description provided for @trendDown.
+  ///
+  /// In uk, this message translates to:
+  /// **'На {n} п.п. гірше, ніж за попередній такий самий період'**
+  String trendDown(int n);
+
+  /// No description provided for @trendSame.
+  ///
+  /// In uk, this message translates to:
+  /// **'Так само, як за попередній такий самий період'**
+  String get trendSame;
+
+  /// No description provided for @streakCurrent.
+  ///
+  /// In uk, this message translates to:
+  /// **'Поточна серія'**
+  String get streakCurrent;
+
+  /// No description provided for @streakBest.
+  ///
+  /// In uk, this message translates to:
+  /// **'Найдовша серія'**
+  String get streakBest;
+
+  /// No description provided for @daysTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Дні з прийомами'**
+  String get daysTitle;
+
+  /// No description provided for @daysFull.
+  ///
+  /// In uk, this message translates to:
+  /// **'Усе прийнято'**
+  String get daysFull;
+
+  /// No description provided for @daysPartial.
+  ///
+  /// In uk, this message translates to:
+  /// **'Частково'**
+  String get daysPartial;
+
+  /// No description provided for @daysNone.
+  ///
+  /// In uk, this message translates to:
+  /// **'Жодного'**
+  String get daysNone;
+
+  /// No description provided for @chartsTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Графіки'**
+  String get chartsTitle;
+
+  /// No description provided for @byWeekday.
+  ///
+  /// In uk, this message translates to:
+  /// **'По днях тижня'**
+  String get byWeekday;
+
+  /// No description provided for @byDoseTime.
+  ///
+  /// In uk, this message translates to:
+  /// **'По часу прийому'**
+  String get byDoseTime;
+
+  /// No description provided for @weekdayWorst.
+  ///
+  /// In uk, this message translates to:
+  /// **'Найчастіше пропускаєте: {day}'**
+  String weekdayWorst(String day);
+
+  /// No description provided for @timingTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Точність часу'**
+  String get timingTitle;
+
+  /// No description provided for @timingAverage.
+  ///
+  /// In uk, this message translates to:
+  /// **'У середньому {delay}'**
+  String timingAverage(String delay);
+
+  /// No description provided for @timingOnTime.
+  ///
+  /// In uk, this message translates to:
+  /// **'Вчасно (±15 хв)'**
+  String get timingOnTime;
+
+  /// No description provided for @timingEarly.
+  ///
+  /// In uk, this message translates to:
+  /// **'Раніше ніж на 15 хв'**
+  String get timingEarly;
+
+  /// No description provided for @timingLate.
+  ///
+  /// In uk, this message translates to:
+  /// **'Пізніше на 15–60 хв'**
+  String get timingLate;
+
+  /// No description provided for @timingVeryLate.
+  ///
+  /// In uk, this message translates to:
+  /// **'Пізніше ніж на годину'**
+  String get timingVeryLate;
+
+  /// No description provided for @timingMax.
+  ///
+  /// In uk, this message translates to:
+  /// **'Найбільше запізнення: {d}'**
+  String timingMax(String d);
+
+  /// No description provided for @timingNone.
+  ///
+  /// In uk, this message translates to:
+  /// **'Ще немає прийомів із відміченим часом'**
+  String get timingNone;
+
+  /// No description provided for @amountTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Кількість'**
+  String get amountTitle;
+
+  /// No description provided for @amountPeriod.
+  ///
+  /// In uk, this message translates to:
+  /// **'За обраний період'**
+  String get amountPeriod;
+
+  /// No description provided for @amountAll.
+  ///
+  /// In uk, this message translates to:
+  /// **'За весь час'**
+  String get amountAll;
+
+  /// No description provided for @amountPerDay.
+  ///
+  /// In uk, this message translates to:
+  /// **'В середньому на день'**
+  String get amountPerDay;
+
+  /// No description provided for @dosesCount.
+  ///
+  /// In uk, this message translates to:
+  /// **'{n, plural, one{{n} прийом} few{{n} прийоми} many{{n} прийомів} other{{n} прийому}}'**
+  String dosesCount(int n);
+
+  /// No description provided for @courseRemaining.
+  ///
+  /// In uk, this message translates to:
+  /// **'До кінця курсу ще прийняти: {amount}'**
+  String courseRemaining(String amount);
+
+  /// No description provided for @packsToFinish.
+  ///
+  /// In uk, this message translates to:
+  /// **'{n, plural, =0{Запасу вистачить до кінця курсу} one{До кінця курсу треба докупити {n} упаковку} few{До кінця курсу треба докупити {n} упаковки} many{До кінця курсу треба докупити {n} упаковок} other{До кінця курсу треба докупити {n} упаковки}}'**
+  String packsToFinish(int n);
+
+  /// No description provided for @listTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'{status} · {period}'**
+  String listTitle(String status, String period);
 }
 
 class _AppLocalizationsDelegate

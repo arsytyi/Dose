@@ -304,6 +304,19 @@ final focusRequestProvider = NotifierProvider<FocusNotifier, FocusRequest?>(
   FocusNotifier.new,
 );
 
+/// Counts taps on the already selected Today tab; the Today screen jumps
+/// back to today on each one.
+class TodayTabTaps extends Notifier<int> {
+  @override
+  int build() => 0;
+
+  void tap() => state++;
+}
+
+final todayTabTapsProvider = NotifierProvider<TodayTabTaps, int>(
+  TodayTabTaps.new,
+);
+
 /// Keeps scheduled notifications in sync with the database and settings.
 /// Call [resync] after logging doses and when the app returns to the
 /// foreground to roll the window forward.

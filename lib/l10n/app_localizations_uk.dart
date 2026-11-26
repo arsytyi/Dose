@@ -545,7 +545,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get statsByMedication => 'По препаратах';
 
   @override
-  String get statsChartHint => 'Натисніть на стовпчик, щоб побачити день';
+  String get statsChartHint => 'Натисніть на стовпчик, щоб вибрати день';
 
   @override
   String get settingsAppearance => 'Оформлення';
@@ -962,4 +962,211 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get productHint =>
       'Обов\'язково. Почніть вводити, щоб вибрати готовий продукт';
+
+  @override
+  String get pickDate => 'Вибрати дату';
+
+  @override
+  String get statsOpenDay => 'Відкрити день';
+
+  @override
+  String get statsCountHint => 'Натисніть, щоб побачити список';
+
+  @override
+  String get noDoses => 'Тут поки порожньо';
+
+  @override
+  String get dayUpcoming => 'Попереду';
+
+  @override
+  String get dayDoses => 'Прийоми';
+
+  @override
+  String durationMinutes(int m) {
+    return '$m хв';
+  }
+
+  @override
+  String durationHours(int h) {
+    return '$h год';
+  }
+
+  @override
+  String durationHoursMinutes(int h, int m) {
+    return '$h год $m хв';
+  }
+
+  @override
+  String delayLate(String d) {
+    return 'на $d пізніше';
+  }
+
+  @override
+  String delayEarly(String d) {
+    return 'на $d раніше';
+  }
+
+  @override
+  String get delayOnTime => 'вчасно';
+
+  @override
+  String plannedAt(String time) {
+    return 'за планом $time';
+  }
+
+  @override
+  String get medStatsTitle => 'Аналіз прийому';
+
+  @override
+  String get medStatsOpenHint => 'Виконання, серії, графіки, точність часу';
+
+  @override
+  String medStatsSince(String date) {
+    return 'У додатку з $date';
+  }
+
+  @override
+  String courseDayOf(int day, int total, String date) {
+    return 'День $day з $total, курс до $date';
+  }
+
+  @override
+  String courseOngoing(int day) {
+    return 'День $day, без кінцевої дати';
+  }
+
+  @override
+  String courseNotStarted(String date) {
+    return 'Почнеться $date';
+  }
+
+  @override
+  String courseFinished(String date) {
+    return 'Курс завершено $date';
+  }
+
+  @override
+  String get periodAll => 'Усе';
+
+  @override
+  String trendUp(int n) {
+    return 'На $n п.п. краще, ніж за попередній такий самий період';
+  }
+
+  @override
+  String trendDown(int n) {
+    return 'На $n п.п. гірше, ніж за попередній такий самий період';
+  }
+
+  @override
+  String get trendSame => 'Так само, як за попередній такий самий період';
+
+  @override
+  String get streakCurrent => 'Поточна серія';
+
+  @override
+  String get streakBest => 'Найдовша серія';
+
+  @override
+  String get daysTitle => 'Дні з прийомами';
+
+  @override
+  String get daysFull => 'Усе прийнято';
+
+  @override
+  String get daysPartial => 'Частково';
+
+  @override
+  String get daysNone => 'Жодного';
+
+  @override
+  String get chartsTitle => 'Графіки';
+
+  @override
+  String get byWeekday => 'По днях тижня';
+
+  @override
+  String get byDoseTime => 'По часу прийому';
+
+  @override
+  String weekdayWorst(String day) {
+    return 'Найчастіше пропускаєте: $day';
+  }
+
+  @override
+  String get timingTitle => 'Точність часу';
+
+  @override
+  String timingAverage(String delay) {
+    return 'У середньому $delay';
+  }
+
+  @override
+  String get timingOnTime => 'Вчасно (±15 хв)';
+
+  @override
+  String get timingEarly => 'Раніше ніж на 15 хв';
+
+  @override
+  String get timingLate => 'Пізніше на 15–60 хв';
+
+  @override
+  String get timingVeryLate => 'Пізніше ніж на годину';
+
+  @override
+  String timingMax(String d) {
+    return 'Найбільше запізнення: $d';
+  }
+
+  @override
+  String get timingNone => 'Ще немає прийомів із відміченим часом';
+
+  @override
+  String get amountTitle => 'Кількість';
+
+  @override
+  String get amountPeriod => 'За обраний період';
+
+  @override
+  String get amountAll => 'За весь час';
+
+  @override
+  String get amountPerDay => 'В середньому на день';
+
+  @override
+  String dosesCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n прийому',
+      many: '$n прийомів',
+      few: '$n прийоми',
+      one: '$n прийом',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String courseRemaining(String amount) {
+    return 'До кінця курсу ще прийняти: $amount';
+  }
+
+  @override
+  String packsToFinish(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'До кінця курсу треба докупити $n упаковки',
+      many: 'До кінця курсу треба докупити $n упаковок',
+      few: 'До кінця курсу треба докупити $n упаковки',
+      one: 'До кінця курсу треба докупити $n упаковку',
+      zero: 'Запасу вистачить до кінця курсу',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listTitle(String status, String period) {
+    return '$status · $period';
+  }
 }

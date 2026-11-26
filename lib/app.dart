@@ -100,7 +100,12 @@ class _HomeShellState extends ConsumerState<HomeShell>
       body: IndexedStack(index: _index, children: pages),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
+        onDestinationSelected: (i) {
+          if (i == _index && i == 0) {
+            ref.read(todayTabTapsProvider.notifier).tap();
+          }
+          setState(() => _index = i);
+        },
         destinations: [
           NavigationDestination(
             icon: const Icon(Icons.today_outlined),

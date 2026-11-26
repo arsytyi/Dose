@@ -63,6 +63,18 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
     }
   }
 
+  Future<void> _pickDate() async {
+    final today = _today;
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _selected,
+      currentDate: today,
+      firstDate: addDays(today, -366),
+      lastDate: addDays(today, 366),
+    );
+    if (picked != null && mounted) _goTo(dateOnly(picked));
+  }
+
   Future<void> _handleFocus(FocusRequest request) async {
     ref.read(focusRequestProvider.notifier).clear();
     _goTo(dateOnly(request.doseTime));
@@ -94,6 +106,7 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
     ref.listen(focusRequestProvider, (_, next) {
       if (next != null) _handleFocus(next);
     });
+    ref.listen(todayTabTapsProvider, (_, _) => _goTo(_today));
     final isToday = _selected == _today;
 
     return Scaffold(
@@ -106,12 +119,11 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                 ),
         ),
         actions: [
-          if (!isToday)
-            IconButton(
-              tooltip: l.navToday,
-              onPressed: () => _goTo(_today),
-              icon: const Icon(Icons.today),
-            ),
+          IconButton(
+            tooltip: l.pickDate,
+            onPressed: _pickDate,
+            icon: const Icon(Icons.calendar_month_outlined),
+          ),
           IconButton(
             tooltip: l.prevDay,
             icon: const Icon(Icons.chevron_left),

@@ -7,7 +7,9 @@ import '../domain/schedule_rule.dart';
 import '../domain/stats.dart';
 import '../l10n/app_localizations.dart';
 import '../providers.dart';
+import 'analysis_widgets.dart';
 import 'history_screen.dart';
+import 'medication_stats_screen.dart';
 import 'pill_icon.dart';
 import 'theme.dart';
 import 'widgets.dart';
@@ -59,7 +61,10 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               children: [
                 _SummaryCard(stats: stats, period: _period),
                 SectionTitle(l.statsByDay),
-                _DailyChart(days: stats.days),
+                DailyChart(
+                  days: stats.days,
+                  onOpenDay: (day) => openDayAnalysis(context, day),
+                ),
                 SectionTitle(l.statsByMedication),
                 for (final e
                     in stats.byMedication.entries.toList()..sort(
@@ -68,7 +73,19 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                       ),
                     ))
                   if (meds[e.key] case final m?)
-                    _MedicationRow(medication: m, counts: e.value),
+                    PercentRow(
+                      leading: PillAvatar(m),
+                      label: m.name,
+                      counts: e.value,
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => MedicationStatsScreen(
+                            medication: m,
+                            initialPeriod: _period,
+                          ),
+                        ),
+                      ),
+                    ),
               ],
             );
     }
@@ -115,8 +132,6 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
   }
 }
 
-int _percent(double? v) => ((v ?? 0) * 100).round();
-
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({required this.stats, required this.period});
 
@@ -131,27 +146,6 @@ class _SummaryCard extends StatelessWidget {
     final t = stats.total;
     final onCard = scheme.onSecondaryContainer;
 
-    Widget count(IconData icon, String label, int value) => Expanded(
-      child: Column(
-        children: [
-          Icon(icon, size: 20, color: onCard),
-          const SizedBox(height: Spacing.xs),
-          Text(
-            '$value',
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: onCard,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.labelMedium?.copyWith(color: onCard),
-          ),
-        ],
-      ),
-    );
-
     return Card(
       margin: const EdgeInsets.all(Spacing.lg),
       color: scheme.secondaryContainer,
@@ -165,7 +159,7 @@ class _SummaryCard extends StatelessWidget {
               style: theme.textTheme.titleSmall?.copyWith(color: onCard),
             ),
             Text(
-              '${_percent(t.adherence)}%',
+              '${percentOf(t.adherence)}%',
               style: theme.textTheme.displayMedium?.copyWith(
                 color: onCard,
                 fontWeight: FontWeight.w700,
@@ -173,16 +167,15 @@ class _SummaryCard extends StatelessWidget {
               ),
             ),
             Text(
-              l.statsSummary(period, t.taken, t.total, _percent(t.adherence)),
+              l.statsSummary(period, t.taken, t.total, percentOf(t.adherence)),
               style: theme.textTheme.bodyMedium?.copyWith(color: onCard),
             ),
-            const SizedBox(height: Spacing.lg),
-            Row(
-              children: [
-                count(Icons.check_circle_outline, l.statsTaken, t.taken),
-                count(Icons.block, l.statsSkipped, t.skipped),
-                count(Icons.error_outline, l.statsMissed, t.missed),
-              ],
+            const SizedBox(height: Spacing.sm),
+            OutcomeCounts(
+              counts: t,
+              color: onCard,
+              onOpen: (o) =>
+                  showDoseListSheet(context, outcome: o, periodDays: period),
             ),
             if (stats.streak > 0) ...[
               const SizedBox(height: Spacing.lg),
@@ -209,21 +202,24 @@ class _SummaryCard extends StatelessWidget {
   }
 }
 
-/// One bar per day: share of due doses taken. Tap a bar for details.
-class _DailyChart extends StatefulWidget {
-  const _DailyChart({required this.days});
+/// One bar per day: share of due doses taken. Tapping a bar selects the
+/// day; [onOpenDay] opens it in detail. (Bars are too thin over 90 days to
+/// open on a single tap without mistakes.)
+class DailyChart extends StatefulWidget {
+  const DailyChart({super.key, required this.days, this.onOpenDay});
 
   final List<DayStat> days;
+  final ValueChanged<DateTime>? onOpenDay;
 
   @override
-  State<_DailyChart> createState() => _DailyChartState();
+  State<DailyChart> createState() => _DailyChartState();
 }
 
-class _DailyChartState extends State<_DailyChart> {
+class _DailyChartState extends State<DailyChart> {
   int? _selected;
 
   @override
-  void didUpdateWidget(_DailyChart old) {
+  void didUpdateWidget(DailyChart old) {
     super.didUpdateWidget(old);
     if (old.days.length != widget.days.length) _selected = null;
   }
@@ -245,7 +241,7 @@ class _DailyChartState extends State<_DailyChart> {
         ? '${dateFmt.format(d.day)}: —'
         : '${dateFmt.format(d.day)}: '
               '${l.statsOfTotal(d.counts.taken, d.counts.total)} '
-              '(${_percent(d.counts.adherence)}%)';
+              '(${percentOf(d.counts.adherence)}%)';
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
@@ -253,14 +249,26 @@ class _DailyChartState extends State<_DailyChart> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Readout of the selected day (also announced to screen readers).
-          Semantics(
-            liveRegion: true,
-            child: Text(
-              detail(sel),
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontFeatures: const [FontFeature.tabularFigures()],
+          Row(
+            children: [
+              Expanded(
+                child: Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    detail(sel),
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontFeatures: const [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ),
               ),
-            ),
+              if (widget.onOpenDay case final open?)
+                TextButton.icon(
+                  onPressed: () => open(sel.day),
+                  icon: const Icon(Icons.open_in_new, size: 18),
+                  label: Text(l.statsOpenDay),
+                ),
+            ],
           ),
           Text(
             l.statsChartHint,
@@ -374,53 +382,6 @@ class _Bar extends StatelessWidget {
             ? scheme.primary
             : scheme.primary.withValues(alpha: 0.55),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
-      ),
-    );
-  }
-}
-
-class _MedicationRow extends StatelessWidget {
-  const _MedicationRow({required this.medication, required this.counts});
-
-  final Medication medication;
-  final DoseCounts counts;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final pct = _percent(counts.adherence);
-    return ListTile(
-      leading: PillAvatar(medication),
-      title: Text(medication.name),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(top: Spacing.xs),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: counts.adherence ?? 0,
-            minHeight: 8,
-            backgroundColor: theme.colorScheme.surfaceContainerHighest,
-          ),
-        ),
-      ),
-      trailing: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            '$pct%',
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            l.statsOfTotal(counts.taken, counts.total),
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
       ),
     );
   }

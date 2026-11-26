@@ -393,12 +393,13 @@ void main() {
     expect(find.text('Сьогодні'), findsWidgets);
     await tester.tap(find.byTooltip('Попередній день'));
     await settle(tester);
-    // Not on today any more: the "back to today" button appears.
-    expect(find.byTooltip('Сьогодні'), findsOneWidget);
+    // Not on today any more: the title shows the date.
+    expect(find.widgetWithText(AppBar, 'Сьогодні'), findsNothing);
     expect(find.text('Вітамін D'), findsOneWidget);
-    await tester.tap(find.byTooltip('Сьогодні'));
+    // Tapping the Today tab again comes back to today.
+    await tester.tap(find.widgetWithText(NavigationDestination, 'Сьогодні'));
     await settle(tester);
-    expect(find.byTooltip('Сьогодні'), findsNothing);
+    expect(find.widgetWithText(AppBar, 'Сьогодні'), findsOneWidget);
     await unmount(tester);
   });
 
@@ -407,7 +408,7 @@ void main() {
     await pumpApp(tester);
     await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
     await settle(tester);
-    expect(find.byTooltip('Сьогодні'), findsOneWidget);
+    expect(find.widgetWithText(AppBar, 'Сьогодні'), findsNothing);
     await unmount(tester);
   });
 

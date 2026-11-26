@@ -295,7 +295,7 @@
   "statsMissed": "Не відмічено",
   "statsByDay": "По днях",
   "statsByMedication": "По препаратах",
-  "statsChartHint": "Натисніть на стовпчик, щоб побачити день",
+  "statsChartHint": "Натисніть на стовпчик, щоб вибрати день",
   "settingsAppearance": "Оформлення",
   "themeSystem": "Як у системі",
   "themeLight": "Світла",
@@ -572,5 +572,207 @@
   "guideProductPage": "Сторінка продукту",
   "guideAll": "Довідник добавок",
   "guideAllSubtitle": "Як приймати, протипоказання, джерела",
-  "productHint": "Обов'язково. Почніть вводити, щоб вибрати готовий продукт"
+  "productHint": "Обов'язково. Почніть вводити, щоб вибрати готовий продукт",
+  "pickDate": "Вибрати дату",
+  "statsOpenDay": "Відкрити день",
+  "statsCountHint": "Натисніть, щоб побачити список",
+  "noDoses": "Тут поки порожньо",
+  "dayUpcoming": "Попереду",
+  "dayDoses": "Прийоми",
+  "durationMinutes": "{m} хв",
+  "@durationMinutes": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "durationHours": "{h} год",
+  "@durationHours": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "durationHoursMinutes": "{h} год {m} хв",
+  "@durationHoursMinutes": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "delayLate": "на {d} пізніше",
+  "@delayLate": {
+    "placeholders": {
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "delayEarly": "на {d} раніше",
+  "@delayEarly": {
+    "placeholders": {
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "delayOnTime": "вчасно",
+  "plannedAt": "за планом {time}",
+  "@plannedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medStatsTitle": "Аналіз прийому",
+  "medStatsOpenHint": "Виконання, серії, графіки, точність часу",
+  "medStatsSince": "У додатку з {date}",
+  "@medStatsSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "courseDayOf": "День {day} з {total}, курс до {date}",
+  "@courseDayOf": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "courseOngoing": "День {day}, без кінцевої дати",
+  "@courseOngoing": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "courseNotStarted": "Почнеться {date}",
+  "@courseNotStarted": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "courseFinished": "Курс завершено {date}",
+  "@courseFinished": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "periodAll": "Усе",
+  "trendUp": "На {n} п.п. краще, ніж за попередній такий самий період",
+  "@trendUp": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "trendDown": "На {n} п.п. гірше, ніж за попередній такий самий період",
+  "@trendDown": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "trendSame": "Так само, як за попередній такий самий період",
+  "streakCurrent": "Поточна серія",
+  "streakBest": "Найдовша серія",
+  "daysTitle": "Дні з прийомами",
+  "daysFull": "Усе прийнято",
+  "daysPartial": "Частково",
+  "daysNone": "Жодного",
+  "chartsTitle": "Графіки",
+  "byWeekday": "По днях тижня",
+  "byDoseTime": "По часу прийому",
+  "weekdayWorst": "Найчастіше пропускаєте: {day}",
+  "@weekdayWorst": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "timingTitle": "Точність часу",
+  "timingAverage": "У середньому {delay}",
+  "@timingAverage": {
+    "placeholders": {
+      "delay": {
+        "type": "String"
+      }
+    }
+  },
+  "timingOnTime": "Вчасно (±15 хв)",
+  "timingEarly": "Раніше ніж на 15 хв",
+  "timingLate": "Пізніше на 15–60 хв",
+  "timingVeryLate": "Пізніше ніж на годину",
+  "timingMax": "Найбільше запізнення: {d}",
+  "@timingMax": {
+    "placeholders": {
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "timingNone": "Ще немає прийомів із відміченим часом",
+  "amountTitle": "Кількість",
+  "amountPeriod": "За обраний період",
+  "amountAll": "За весь час",
+  "amountPerDay": "В середньому на день",
+  "dosesCount": "{n, plural, one{{n} прийом} few{{n} прийоми} many{{n} прийомів} other{{n} прийому}}",
+  "@dosesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "courseRemaining": "До кінця курсу ще прийняти: {amount}",
+  "@courseRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "packsToFinish": "{n, plural, =0{Запасу вистачить до кінця курсу} one{До кінця курсу треба докупити {n} упаковку} few{До кінця курсу треба докупити {n} упаковки} many{До кінця курсу треба докупити {n} упаковок} other{До кінця курсу треба докупити {n} упаковки}}",
+  "@packsToFinish": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "listTitle": "{status} · {period}",
+  "@listTitle": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "period": {
+        "type": "String"
+      }
+    }
+  }
 }
