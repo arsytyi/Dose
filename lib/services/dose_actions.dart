@@ -42,8 +42,12 @@ class DoseActions {
         actualAt: actualAt,
       );
     }
-    for (final t in {for (final d in doses) d.scheduledAt}) {
-      await notifications.cancelForDose(t);
+    final byTime = <DateTime, Set<int>>{};
+    for (final d in doses) {
+      byTime.putIfAbsent(d.scheduledAt, () => {}).add(d.medicationId);
+    }
+    for (final MapEntry(key: t, value: ids) in byTime.entries) {
+      await notifications.cancelForDose(t, medicationIds: ids);
     }
   }
 
@@ -115,15 +119,15 @@ class DoseActions {
     ];
     if (items.isEmpty) return;
     notifications.sound = Prefs.soundKey(prefs);
-    await notifications.schedule(
-      PlannedNotification(
-        doseTime: p.doseTime,
-        at: until,
-        kind: NotificationKind.snooze,
-        items: items,
-      ),
-      localizationsFor(prefs),
-    );
+    // One reminder per medication, as when planned (see the sync).
+    for (final n in notificationsFor(
+      doseTime: p.doseTime,
+      at: until,
+      kind: NotificationKind.snooze,
+      items: items,
+    )) {
+      await notifications.schedule(n, localizationsFor(prefs));
+    }
   }
 }
 
