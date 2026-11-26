@@ -53,7 +53,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final result = await UpdateCheck.check();
     if (!mounted) return;
     if (!result.checked) {
-      _toast(l.updateUnavailable);
+      _toast(
+        (result.error ?? '').isEmpty
+            ? l.updateUnavailable
+            : '${l.updateUnavailable}\n(${result.error})',
+      );
     } else if (result.update case final u?) {
       await showUpdateDialog(context, u);
     } else {
@@ -136,8 +140,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: Column(
               children: [
                 RadioListTile(value: '', title: Text(l.langSystem)),
-                const RadioListTile(value: 'uk', title: Text('Українська')),
                 const RadioListTile(value: 'en', title: Text('English')),
+                const RadioListTile(value: 'uk', title: Text('Українська')),
+                const RadioListTile(value: 'ru', title: Text('Русский')),
+                const RadioListTile(value: 'es', title: Text('Español')),
               ],
             ),
           ),

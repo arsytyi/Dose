@@ -343,7 +343,7 @@
   "updateAuto": "Check for updates automatically",
   "updateAutoHint": "Once a day when online",
   "updateNone": "You have the latest version",
-  "updateUnavailable": "Couldn't check: no internet, or the repository is private",
+  "updateUnavailable": "Couldn't reach GitHub. Check your internet and try again later.",
   "updateAvailable": "Version {version} is available",
   "@updateAvailable": {
     "placeholders": {
