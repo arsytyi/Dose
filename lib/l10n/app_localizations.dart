@@ -1545,13 +1545,13 @@ abstract class AppLocalizations {
   /// No description provided for @guideAll.
   ///
   /// In uk, this message translates to:
-  /// **'Довідник добавок'**
+  /// **'Довідник добавок і ліків'**
   String get guideAll;
 
   /// No description provided for @guideAllSubtitle.
   ///
   /// In uk, this message translates to:
-  /// **'Як приймати, протипоказання, джерела'**
+  /// **'Як приймати, сумісність, джерела'**
   String get guideAllSubtitle;
 
   /// No description provided for @productHint.
@@ -1859,6 +1859,90 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'{status} · {period}'**
   String listTitle(String status, String period);
+
+  /// No description provided for @guideSupplements.
+  ///
+  /// In uk, this message translates to:
+  /// **'Добавки'**
+  String get guideSupplements;
+
+  /// No description provided for @guideDrugs.
+  ///
+  /// In uk, this message translates to:
+  /// **'Ліки'**
+  String get guideDrugs;
+
+  /// No description provided for @guideSearch.
+  ///
+  /// In uk, this message translates to:
+  /// **'Пошук'**
+  String get guideSearch;
+
+  /// No description provided for @guideSearchHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Назва або бренд, напр. Олідетрим'**
+  String get guideSearchHint;
+
+  /// No description provided for @guideNothingFound.
+  ///
+  /// In uk, this message translates to:
+  /// **'Нічого не знайдено'**
+  String get guideNothingFound;
+
+  /// No description provided for @guideDrugNote.
+  ///
+  /// In uk, this message translates to:
+  /// **'Для ліків показуємо лише сумісність. Як і скільки приймати — за призначенням лікаря та інструкцією.'**
+  String get guideDrugNote;
+
+  /// No description provided for @guideRuleCount.
+  ///
+  /// In uk, this message translates to:
+  /// **'{n, plural, one{{n} правило сумісності} few{{n} правила сумісності} many{{n} правил сумісності} other{{n} правила сумісності}}'**
+  String guideRuleCount(int n);
+
+  /// No description provided for @guideRuleAvoid.
+  ///
+  /// In uk, this message translates to:
+  /// **'обережно разом'**
+  String get guideRuleAvoid;
+
+  /// No description provided for @guideRuleSeparate.
+  ///
+  /// In uk, this message translates to:
+  /// **'розділяти на {hours} год'**
+  String guideRuleSeparate(int hours);
+
+  /// No description provided for @guideRuleTogether.
+  ///
+  /// In uk, this message translates to:
+  /// **'добре разом'**
+  String get guideRuleTogether;
+
+  /// No description provided for @ingredientsAdd.
+  ///
+  /// In uk, this message translates to:
+  /// **'Додати речовину'**
+  String get ingredientsAdd;
+
+  /// No description provided for @ingredientsPick.
+  ///
+  /// In uk, this message translates to:
+  /// **'Діючі речовини'**
+  String get ingredientsPick;
+
+  /// No description provided for @ingredientsDone.
+  ///
+  /// In uk, this message translates to:
+  /// **'Готово'**
+  String get ingredientsDone;
+
+  /// No description provided for @ingredientsRemove.
+  ///
+  /// In uk, this message translates to:
+  /// **'Прибрати'**
+  String get ingredientsRemove;
 }
 
 class _AppLocalizationsDelegate

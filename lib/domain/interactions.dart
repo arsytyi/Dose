@@ -7,6 +7,9 @@ import 'schedule_rule.dart';
 
 enum RuleType { avoid, separate, together }
 
+/// Whether a substance is a supplement or a medicine.
+enum SubstanceKind { supplement, drug }
+
 /// Text in [uk], [en] and, when translated, Russian and Spanish; other
 /// languages fall back to English.
 String _pick(String code, String uk, String en, Map<String, String> more) =>
@@ -29,6 +32,7 @@ class Substance {
     this.more = const {},
     this.aliases = const [],
     this.info,
+    this.kind = SubstanceKind.supplement,
   });
 
   final String key;
@@ -38,6 +42,7 @@ class Substance {
   /// Names in further languages (ru, es).
   final Map<String, String> more;
   final List<String> aliases;
+  final SubstanceKind kind;
 
   /// How to take it and what to watch for, when the catalog has it.
   final SubstanceInfo? info;
@@ -194,6 +199,9 @@ class InteractionCatalog {
               en: s['en'] as String,
               more: _moreLanguages(s as Map<String, dynamic>),
               aliases: [for (final a in s['aliases'] as List) a as String],
+              kind: SubstanceKind.values.byName(
+                (s['kind'] as String?) ?? 'supplement',
+              ),
               info: switch (s['info']) {
                 final Map<String, dynamic> info => SubstanceInfo.fromJson(info),
                 _ => null,
@@ -228,18 +236,53 @@ class InteractionCatalog {
   Substance? substance(String key) => _byKey[key];
 
   /// Substances whose names appear in a medication name, e.g.
-  /// "Магній B6" -> magnesium. Short aliases must match a whole word.
+  /// "Магній B6" -> magnesium. An alias must start a word (after a space or
+  /// a hyphen, so "Кальцій-Д3" finds vitamin D but "spironolactone" doesn't
+  /// find iron); short aliases must match a whole word.
   Set<String> detect(String name) {
     final text =
         ' ${name.toLowerCase().replaceAll(RegExp(r'[^\p{L}\p{N}\-\x27]+', unicode: true), ' ')} ';
+    bool has(String a) => a.length <= 3
+        ? text.contains(' $a ') || text.contains('-$a ')
+        : text.contains(' $a') || text.contains('-$a');
     return {
       for (final s in substances)
-        if (s.aliases.any(
-          (a) => a.length <= 3 ? text.contains(' $a ') : text.contains(a),
-        ))
-          s.key,
+        if (s.aliases.any(has)) s.key,
     };
   }
+
+  /// Rules that involve [key], for the reference page.
+  List<InteractionRule> rulesAbout(String key) => [
+    for (final r in rules)
+      if (r.a == key || r.b == key) r,
+  ];
+
+  /// Substances where every word of [query] starts a word of the name or an
+  /// alias; all of them for an empty query.
+  List<Substance> searchSubstances(String query) {
+    final words = query
+        .toLowerCase()
+        .split(RegExp(r'\s+'))
+        .where((w) => w.isNotEmpty)
+        .toList();
+    if (words.isEmpty) return substances;
+    return [
+      for (final s in substances)
+        if (_substanceMatches(s, words)) s,
+    ];
+  }
+
+  bool _substanceMatches(Substance s, List<String> words) {
+    final haystack = [
+      s.uk,
+      s.en,
+      ...s.aliases,
+    ].join(' ').toLowerCase().split(RegExp(r'[\s(),-]+'));
+    return words.every((w) => haystack.any((t) => t.startsWith(w)));
+  }
+
+  /// Whether the reference has anything to show for [s].
+  bool hasGuide(Substance s) => s.info != null || rulesAbout(s.key).isNotEmpty;
 
   /// Products where every word of [query] starts a word of the product's
   /// name, brand or substance names.

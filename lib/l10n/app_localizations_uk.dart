@@ -954,10 +954,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get guideProductPage => 'Сторінка продукту';
 
   @override
-  String get guideAll => 'Довідник добавок';
+  String get guideAll => 'Довідник добавок і ліків';
 
   @override
-  String get guideAllSubtitle => 'Як приймати, протипоказання, джерела';
+  String get guideAllSubtitle => 'Як приймати, сумісність, джерела';
 
   @override
   String get productHint =>
@@ -1169,4 +1169,59 @@ class AppLocalizationsUk extends AppLocalizations {
   String listTitle(String status, String period) {
     return '$status · $period';
   }
+
+  @override
+  String get guideSupplements => 'Добавки';
+
+  @override
+  String get guideDrugs => 'Ліки';
+
+  @override
+  String get guideSearch => 'Пошук';
+
+  @override
+  String get guideSearchHint => 'Назва або бренд, напр. Олідетрим';
+
+  @override
+  String get guideNothingFound => 'Нічого не знайдено';
+
+  @override
+  String get guideDrugNote =>
+      'Для ліків показуємо лише сумісність. Як і скільки приймати — за призначенням лікаря та інструкцією.';
+
+  @override
+  String guideRuleCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n правила сумісності',
+      many: '$n правил сумісності',
+      few: '$n правила сумісності',
+      one: '$n правило сумісності',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get guideRuleAvoid => 'обережно разом';
+
+  @override
+  String guideRuleSeparate(int hours) {
+    return 'розділяти на $hours год';
+  }
+
+  @override
+  String get guideRuleTogether => 'добре разом';
+
+  @override
+  String get ingredientsAdd => 'Додати речовину';
+
+  @override
+  String get ingredientsPick => 'Діючі речовини';
+
+  @override
+  String get ingredientsDone => 'Готово';
+
+  @override
+  String get ingredientsRemove => 'Прибрати';
 }

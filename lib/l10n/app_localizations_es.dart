@@ -943,10 +943,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get guideProductPage => 'Página del producto';
 
   @override
-  String get guideAll => 'Guía de suplementos';
+  String get guideAll => 'Guía de suplementos y medicamentos';
 
   @override
-  String get guideAllSubtitle => 'Cómo tomar, precauciones, fuentes';
+  String get guideAllSubtitle => 'Cómo tomar, compatibilidad, fuentes';
 
   @override
   String get productHint =>
@@ -1154,4 +1154,57 @@ class AppLocalizationsEs extends AppLocalizations {
   String listTitle(String status, String period) {
     return '$status · $period';
   }
+
+  @override
+  String get guideSupplements => 'Suplementos';
+
+  @override
+  String get guideDrugs => 'Medicamentos';
+
+  @override
+  String get guideSearch => 'Buscar';
+
+  @override
+  String get guideSearchHint => 'Nombre o marca, p. ej. Xarelto';
+
+  @override
+  String get guideNothingFound => 'No se encontró nada';
+
+  @override
+  String get guideDrugNote =>
+      'Para los medicamentos solo mostramos la compatibilidad. Cómo y cuánto tomar lo indican su médico y el prospecto.';
+
+  @override
+  String guideRuleCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n reglas de compatibilidad',
+      one: '$n regla de compatibilidad',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get guideRuleAvoid => 'cuidado juntos';
+
+  @override
+  String guideRuleSeparate(int hours) {
+    return 'separar $hours h';
+  }
+
+  @override
+  String get guideRuleTogether => 'bien juntos';
+
+  @override
+  String get ingredientsAdd => 'Añadir sustancia';
+
+  @override
+  String get ingredientsPick => 'Principios activos';
+
+  @override
+  String get ingredientsDone => 'Listo';
+
+  @override
+  String get ingredientsRemove => 'Quitar';
 }
