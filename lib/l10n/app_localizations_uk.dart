@@ -921,7 +921,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get updateUnavailable =>
-      'Не вдалося перевірити: немає інтернету або репозиторій закритий';
+      'Не вдалося зв\'язатися з GitHub. Перевірте інтернет і спробуйте пізніше.';
 
   @override
   String updateAvailable(String version) {

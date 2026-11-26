@@ -46,7 +46,7 @@ abstract final class Prefs {
   }
 }
 
-/// The language actually in use (setting, else system, else Ukrainian).
+/// The language actually in use (setting, else system, else English).
 Locale effectiveLocale(Locale? chosen) {
   if (chosen != null) return chosen;
   for (final l in PlatformDispatcher.instance.locales) {
@@ -56,7 +56,7 @@ Locale effectiveLocale(Locale? chosen) {
       return Locale(l.languageCode);
     }
   }
-  return const Locale('uk');
+  return const Locale('en');
 }
 
 AppLocalizations localizationsFor(SharedPreferences p) =>

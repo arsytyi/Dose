@@ -553,7 +553,7 @@
   "updateAuto": "Перевіряти оновлення самостійно",
   "updateAutoHint": "Раз на день, коли є інтернет",
   "updateNone": "У вас остання версія",
-  "updateUnavailable": "Не вдалося перевірити: немає інтернету або репозиторій закритий",
+  "updateUnavailable": "Не вдалося зв'язатися з GitHub. Перевірте інтернет і спробуйте пізніше.",
   "updateAvailable": "Доступна нова версія {version}",
   "@updateAvailable": {
     "placeholders": {

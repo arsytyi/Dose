@@ -192,4 +192,29 @@ void main() {
     expect(types, {RuleType.avoid, RuleType.together});
     expect(issues.where((i) => i.isWarning), hasLength(1));
   });
+
+  test('every text is translated into Russian and Spanish', () {
+    for (final s in catalog.substances) {
+      for (final lang in const ['ru', 'es']) {
+        expect(s.more[lang], isNotEmpty, reason: '${s.key} $lang');
+        if (s.info case final info?) {
+          expect(info.intake[lang], isNotEmpty, reason: '${s.key} $lang');
+          expect(info.cautions[lang], isNotEmpty, reason: '${s.key} $lang');
+        }
+      }
+    }
+    for (final r in catalog.rules) {
+      expect(r.more.keys.toSet(), {'ru', 'es'}, reason: '${r.a}-${r.b}');
+    }
+    for (final p in catalog.products) {
+      expect(p.amount.keys.toSet(), containsAll(['uk', 'en', 'ru', 'es']));
+    }
+    final iron = catalog.substance('iron')!;
+    expect(iron.name('ru'), 'Железо');
+    expect(iron.name('es'), 'Hierro');
+    expect(iron.name('de'), 'Iron');
+    // Russian and Spanish names are recognised in medication names.
+    expect(catalog.detect('Магний B6'), contains('magnesium'));
+    expect(catalog.detect('Hierro bisglicinato'), contains('iron'));
+  });
 }

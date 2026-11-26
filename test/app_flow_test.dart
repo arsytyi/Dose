@@ -58,6 +58,15 @@ void main() {
     await unmount(tester);
   });
 
+  testWidgets('Russian and Spanish UI when chosen', (tester) async {
+    await pumpApp(tester, locale: 'ru');
+    expect(find.text('На сегодня приёмов нет'), findsOneWidget);
+    await unmount(tester);
+    await pumpApp(tester, locale: 'es');
+    expect(find.text('No hay tomas para hoy'), findsOneWidget);
+    await unmount(tester);
+  });
+
   testWidgets('English UI when chosen', (tester) async {
     await pumpApp(tester, locale: 'en');
     expect(find.text('No doses planned for today'), findsOneWidget);
@@ -84,6 +93,12 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getString('themeMode'), 'dark');
 
+    // Two more languages push the sound setting further down.
+    await tester.scrollUntilVisible(
+      find.text('Звук сповіщення'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.tap(find.text('Звук сповіщення'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Дзвіночок'));
@@ -139,6 +154,75 @@ void main() {
     await settle(tester);
     expect(find.text('Як приймати'), findsOneWidget);
     expect(find.text('Обережно'), findsOneWidget);
+    await unmount(tester);
+  });
+
+  testWidgets('pick active substances from a searchable list', (tester) async {
+    await pumpApp(tester);
+    await settle(tester);
+    await tester.tap(find.text('Препарати'));
+    await settle(tester);
+    await tester.tap(find.text('Додати препарат'));
+    await settle(tester);
+    await tester.enterText(find.byType(TextFormField).first, 'Ксарелто 20');
+    await settle(tester);
+    // Detected from the brand name, shown as a removable chip.
+    await tester.scrollUntilVisible(
+      find.text('Додати речовину'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.widgetWithText(
+        InputChip,
+        'Прямі антикоагулянти (ривароксабан тощо)',
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Додати речовину'));
+    await settle(tester);
+    expect(find.text('Добавки'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).last, 'гінкго');
+    await settle(tester);
+    expect(find.text('Ліки'), findsNothing);
+    await tester.tap(find.text('Гінкго білоба'));
+    await tester.pump();
+    await tester.tap(find.text('Готово'));
+    await settle(tester);
+    await tester.tap(find.text('Зберегти'));
+    await settle(tester);
+
+    final m = (await tester.runAsync(() => db.watchMedications().first))!
+        .single;
+    expect(m.ingredientKeys, {'doac', 'ginkgo'});
+    await unmount(tester);
+  });
+
+  testWidgets('guide lists medicines with their compatibility', (tester) async {
+    await pumpApp(tester);
+    await tester.tap(find.text('Налаштування'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Довідник добавок і ліків'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -300));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Довідник добавок і ліків'));
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), 'звіроб');
+    await settle(tester);
+    expect(find.text('Звіробій'), findsOneWidget);
+    await tester.tap(find.text('Ліки'));
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), 'ксарелто');
+    await settle(tester);
+    await tester.tap(find.text('Прямі антикоагулянти (ривароксабан тощо)'));
+    await settle(tester);
+    expect(find.text('Сумісність'), findsOneWidget);
+    expect(find.textContaining('· обережно разом'), findsWidgets);
     await unmount(tester);
   });
 

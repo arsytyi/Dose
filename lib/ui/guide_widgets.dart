@@ -356,12 +356,11 @@ class _GuideListScreenState extends ConsumerState<GuideListScreen> {
     final l = AppLocalizations.of(context);
     final lang = _lang(l);
     final catalog = ref.watch(interactionCatalogProvider).value;
-    final substances = catalog == null
-        ? const <Substance>[]
-        : [
-            for (final s in catalog.searchSubstances(_query))
-              if (s.kind == _kind && catalog.hasGuide(s)) s,
-          ];
+    final substances = <Substance>[
+      if (catalog != null)
+        for (final s in catalog.searchSubstances(_query))
+          if (s.kind == _kind && catalog.hasGuide(s)) s,
+    ];
     substances.sort((a, b) => a.name(lang).compareTo(b.name(lang)));
     return Scaffold(
       appBar: AppBar(title: Text(l.guideAll)),

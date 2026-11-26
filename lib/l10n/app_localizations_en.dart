@@ -907,7 +907,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateUnavailable =>
-      'Couldn\'t check: no internet, or the repository is private';
+      'Couldn\'t reach GitHub. Check your internet and try again later.';
 
   @override
   String updateAvailable(String version) {
