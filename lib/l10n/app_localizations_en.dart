@@ -536,7 +536,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsByMedication => 'By medication';
 
   @override
-  String get statsChartHint => 'Tap a bar to see the day';
+  String get statsChartHint => 'Tap a bar to select a day';
 
   @override
   String get settingsAppearance => 'Appearance';
@@ -948,4 +948,207 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get productHint =>
       'Required. Start typing to pick a ready-made product';
+
+  @override
+  String get pickDate => 'Choose date';
+
+  @override
+  String get statsOpenDay => 'Open day';
+
+  @override
+  String get statsCountHint => 'Tap to see the list';
+
+  @override
+  String get noDoses => 'Nothing here yet';
+
+  @override
+  String get dayUpcoming => 'Upcoming';
+
+  @override
+  String get dayDoses => 'Doses';
+
+  @override
+  String durationMinutes(int m) {
+    return '$m min';
+  }
+
+  @override
+  String durationHours(int h) {
+    return '$h h';
+  }
+
+  @override
+  String durationHoursMinutes(int h, int m) {
+    return '$h h $m min';
+  }
+
+  @override
+  String delayLate(String d) {
+    return '$d late';
+  }
+
+  @override
+  String delayEarly(String d) {
+    return '$d early';
+  }
+
+  @override
+  String get delayOnTime => 'on time';
+
+  @override
+  String plannedAt(String time) {
+    return 'planned $time';
+  }
+
+  @override
+  String get medStatsTitle => 'Intake analysis';
+
+  @override
+  String get medStatsOpenHint => 'Adherence, streaks, charts, timing';
+
+  @override
+  String medStatsSince(String date) {
+    return 'In the app since $date';
+  }
+
+  @override
+  String courseDayOf(int day, int total, String date) {
+    return 'Day $day of $total, until $date';
+  }
+
+  @override
+  String courseOngoing(int day) {
+    return 'Day $day, no end date';
+  }
+
+  @override
+  String courseNotStarted(String date) {
+    return 'Starts $date';
+  }
+
+  @override
+  String courseFinished(String date) {
+    return 'Course finished $date';
+  }
+
+  @override
+  String get periodAll => 'All';
+
+  @override
+  String trendUp(int n) {
+    return '$n points better than the period before';
+  }
+
+  @override
+  String trendDown(int n) {
+    return '$n points worse than the period before';
+  }
+
+  @override
+  String get trendSame => 'Same as the period before';
+
+  @override
+  String get streakCurrent => 'Current streak';
+
+  @override
+  String get streakBest => 'Best streak';
+
+  @override
+  String get daysTitle => 'Days with doses';
+
+  @override
+  String get daysFull => 'All taken';
+
+  @override
+  String get daysPartial => 'Partly';
+
+  @override
+  String get daysNone => 'None taken';
+
+  @override
+  String get chartsTitle => 'Charts';
+
+  @override
+  String get byWeekday => 'By weekday';
+
+  @override
+  String get byDoseTime => 'By dose time';
+
+  @override
+  String weekdayWorst(String day) {
+    return 'Most often missed: $day';
+  }
+
+  @override
+  String get timingTitle => 'Timing';
+
+  @override
+  String timingAverage(String delay) {
+    return 'On average $delay';
+  }
+
+  @override
+  String get timingOnTime => 'On time (±15 min)';
+
+  @override
+  String get timingEarly => 'Over 15 min early';
+
+  @override
+  String get timingLate => '15–60 min late';
+
+  @override
+  String get timingVeryLate => 'Over an hour late';
+
+  @override
+  String timingMax(String d) {
+    return 'Latest dose: $d late';
+  }
+
+  @override
+  String get timingNone => 'No doses with a recorded time yet';
+
+  @override
+  String get amountTitle => 'Amount';
+
+  @override
+  String get amountPeriod => 'In this period';
+
+  @override
+  String get amountAll => 'All time';
+
+  @override
+  String get amountPerDay => 'Average per day';
+
+  @override
+  String dosesCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n doses',
+      one: '$n dose',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String courseRemaining(String amount) {
+    return 'Left to take in the course: $amount';
+  }
+
+  @override
+  String packsToFinish(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Buy $n more packs to finish the course',
+      one: 'Buy $n more pack to finish the course',
+      zero: 'Enough stock to finish the course',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String listTitle(String status, String period) {
+    return '$status · $period';
+  }
 }

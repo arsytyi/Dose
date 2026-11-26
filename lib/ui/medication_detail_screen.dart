@@ -7,6 +7,7 @@ import '../domain/format.dart';
 import '../l10n/app_localizations.dart';
 import '../providers.dart';
 import 'medication_form_screen.dart';
+import 'medication_stats_screen.dart';
 import 'schedule_editor_screen.dart';
 import 'compat_widgets.dart';
 import 'guide_widgets.dart';
@@ -112,6 +113,17 @@ class MedicationDetailScreen extends ConsumerWidget {
               ].join(' · '),
             ),
             subtitle: m.meal.index == 0 ? null : Text(l.mealName(m.meal.name)),
+          ),
+          ListTile(
+            leading: const Icon(Icons.insights_outlined),
+            title: Text(l.medStatsTitle),
+            subtitle: Text(l.medStatsOpenHint),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => MedicationStatsScreen(medication: m),
+              ),
+            ),
           ),
           SectionTitle(l.stockTitle),
           StockSection(medication: m),

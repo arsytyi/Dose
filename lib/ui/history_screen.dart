@@ -8,6 +8,7 @@ import '../domain/schedule_rule.dart';
 import '../domain/stats.dart';
 import '../l10n/app_localizations.dart';
 import '../providers.dart';
+import 'analysis_widgets.dart';
 import 'stats_screen.dart';
 import 'theme.dart';
 
@@ -194,12 +195,7 @@ class _DayCell extends ConsumerWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap: () {
-            // Show that day on the Today tab.
-            ref
-                .read(focusRequestProvider.notifier)
-                .request(DateTime(day.year, day.month, day.day, 12));
-          },
+          onTap: () => openDayAnalysis(context, day),
           child: Opacity(
             opacity: isFuture ? 0.5 : 1,
             child: Column(
