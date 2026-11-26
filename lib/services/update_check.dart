@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -90,20 +91,38 @@ abstract final class UpdateCheck {
   /// when nothing is newer. The API allows only 60 requests an hour per
   /// address (mobile networks share addresses), so when it refuses, the
   /// public releases page is asked instead.
-  static Future<({bool checked, UpdateInfo? update})> check() async {
+  ///
+  /// [error] says why it failed (e.g. "API: HTTP 403; page: SocketException"),
+  /// so the user can tell us.
+  static Future<({bool checked, UpdateInfo? update, String? error})>
+  check() async {
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 10);
+    final errors = <String>[];
     try {
-      final api = await _fromApi(client);
-      if (api != null) return api;
-      return await _fromPage(client) ?? (checked: false, update: null);
+      final api = await _fromApi(client, errors);
+      if (api != null) return (checked: true, update: api.update, error: null);
+      final page = await _fromPage(client, errors);
+      if (page != null) {
+        return (checked: true, update: page.update, error: null);
+      }
+      return (checked: false, update: null, error: errors.join('; '));
     } finally {
       client.close();
     }
   }
 
+  static String describeError(Object e) => switch (e) {
+    SocketException(:final osError) =>
+      'SocketException ${osError?.message ?? ''}'.trim(),
+    HandshakeException() => 'HandshakeException (TLS)',
+    TimeoutException() => 'timeout',
+    _ => e.runtimeType.toString(),
+  };
+
   static Future<({bool checked, UpdateInfo? update})?> _fromApi(
     HttpClient client,
+    List<String> errors,
   ) async {
     try {
       final req = await client.getUrl(_latest);
@@ -113,6 +132,7 @@ abstract final class UpdateCheck {
       final res = await req.close().timeout(const Duration(seconds: 15));
       if (res.statusCode != 200) {
         debugPrint('Update check: API answered ${res.statusCode}');
+        errors.add('API: HTTP ${res.statusCode}');
         await res.drain<void>();
         return null;
       }
@@ -123,12 +143,14 @@ abstract final class UpdateCheck {
       );
     } catch (e) {
       debugPrint('Update check failed: $e');
+      errors.add('API: ${describeError(e)}');
       return null;
     }
   }
 
   static Future<({bool checked, UpdateInfo? update})?> _fromPage(
     HttpClient client,
+    List<String> errors,
   ) async {
     try {
       final req = await client.getUrl(_latestPage);
@@ -138,10 +160,14 @@ abstract final class UpdateCheck {
       final res = await req.close().timeout(const Duration(seconds: 15));
       await res.drain<void>();
       final location = res.headers.value(HttpHeaders.locationHeader);
-      if (!res.isRedirect || location == null) return null;
+      if (!res.isRedirect || location == null) {
+        errors.add('page: HTTP ${res.statusCode}');
+        return null;
+      }
       return (checked: true, update: parseLatestRedirect(location));
     } catch (e) {
       debugPrint('Update check (page) failed: $e');
+      errors.add('page: ${describeError(e)}');
       return null;
     }
   }
