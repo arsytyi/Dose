@@ -37,4 +37,34 @@ void main() {
       'Залізо: 1 ${l.unitShort('tablet')} · ${l.mealName('after')}\nD3: 2',
     );
   });
+
+  test('a medication in a group is titled with its name', () {
+    final l = lookupAppLocalizations(const Locale('uk'));
+    const items = [
+      NotificationItem(
+        medicationId: 1,
+        name: 'Залізо',
+        dose: 1,
+        unit: '@tablet',
+        meal: MealRelation.after,
+      ),
+      NotificationItem(medicationId: 2, name: 'D3', dose: 2, unit: ''),
+    ];
+    final list = notificationsFor(
+      doseTime: DateTime(2026, 11, 19, 9),
+      at: DateTime(2026, 11, 19, 9),
+      kind: NotificationKind.main,
+      items: [...items],
+    );
+    final summary = list.first;
+    expect(summary.role, NotificationRole.summary);
+    expect(NotificationService.body(summary, l), 'D3, Залізо');
+    expect(NotificationService.title(summary, l), '${l.notifTitle} · 09:00');
+    final iron = list.firstWhere((n) => n.items.first.name == 'Залізо');
+    expect(iron.role, NotificationRole.child);
+    expect(
+      NotificationService.body(iron, l),
+      '1 ${l.unitShort('tablet')} · ${l.mealName('after')}',
+    );
+  });
 }

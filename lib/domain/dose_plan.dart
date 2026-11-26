@@ -256,42 +256,125 @@ class NotificationItem {
   final MealRelation meal;
 }
 
+/// How a notification relates to the others for the same dose time.
+enum NotificationRole {
+  /// The only notification for its dose time and fire time.
+  single,
+
+  /// One medication's notification inside a group; it has its own buttons.
+  child,
+
+  /// The group header listing all medications; no buttons.
+  summary,
+}
+
 /// One notification to schedule. [doseTime] identifies the doses it is
-/// about; [at] is when it fires.
+/// about; [at] is when it fires. Doses due at the same time get one
+/// notification per medication, bundled under a [NotificationRole.summary]
+/// when there are several, so each can be taken, snoozed or skipped alone.
 class PlannedNotification {
   PlannedNotification({
     required this.doseTime,
     required this.at,
     required this.kind,
     required this.items,
+    this.role = NotificationRole.single,
+    this.timeoutAfter,
     int followUpIndex = 0,
-  }) : id = notificationIdFor(doseTime, switch (kind) {
-         NotificationKind.main => 0,
-         NotificationKind.followUp => 1 + followUpIndex.clamp(0, 1),
-         NotificationKind.snooze => 3,
-       });
+  }) : id = notificationIdFor(
+         doseTime,
+         role == NotificationRole.summary
+             ? summarySlot
+             : slotFor(items.first.medicationId),
+         _kindIndex(kind, followUpIndex),
+       );
 
   final int id;
   final DateTime doseTime;
   final DateTime at;
   final NotificationKind kind;
   final List<NotificationItem> items;
+  final NotificationRole role;
+
+  /// Dismiss after this long, when the next follow-up replaces it.
+  final Duration? timeoutAfter;
+
+  /// Android bundles notifications with the same key.
+  String get groupKey =>
+      'dose_${doseTime.millisecondsSinceEpoch ~/ Duration.millisecondsPerMinute}';
 }
 
-/// Four notification ids per dose minute: main, two follow-ups, snooze.
-int notificationIdFor(DateTime doseTime, int slot) {
+int _kindIndex(NotificationKind kind, int followUpIndex) => switch (kind) {
+  NotificationKind.main => 0,
+  NotificationKind.followUp => 1 + followUpIndex.clamp(0, 1),
+  NotificationKind.snooze => 3,
+};
+
+/// Medications get one of 15 slots per dose minute; slot 15 is the group
+/// summary. Two medications sharing a slot (ids 15 apart, due at the same
+/// minute) share one notification.
+const summarySlot = 15;
+int slotFor(int medicationId) => medicationId % 15;
+
+/// 16 slots × 4 kinds (main, two follow-ups, snooze) per dose minute.
+int notificationIdFor(DateTime doseTime, int slot, int kind) {
   final minute =
       doseTime.millisecondsSinceEpoch ~/ Duration.millisecondsPerMinute;
-  return (minute % 0x1FFFFFFF) * 4 + slot;
+  return (minute % 0x1FFFFFF) * 64 + slot * 4 + kind;
 }
 
-List<int> allNotificationIdsFor(DateTime doseTime) => [
-  for (var k = 0; k < 4; k++) notificationIdFor(doseTime, k),
+/// Every notification id for [doseTime] in [slots] (default: all).
+List<int> notificationIdsFor(DateTime doseTime, [Iterable<int>? slots]) => [
+  for (final slot in slots ?? List.generate(16, (i) => i))
+    for (var k = 0; k < 4; k++) notificationIdFor(doseTime, slot, k),
 ];
+
+/// Whether notification [id] is a medication's (not the summary's) for
+/// [doseTime].
+bool isChildIdFor(int id, DateTime doseTime) {
+  final minute =
+      doseTime.millisecondsSinceEpoch ~/ Duration.millisecondsPerMinute;
+  return id >= 0 &&
+      id ~/ 64 == minute % 0x1FFFFFF &&
+      (id % 64) ~/ 4 != summarySlot;
+}
+
+/// Splits one fire time's medications into per-medication notifications,
+/// with a summary when there are several.
+List<PlannedNotification> notificationsFor({
+  required DateTime doseTime,
+  required DateTime at,
+  required NotificationKind kind,
+  int followUpIndex = 0,
+  required List<NotificationItem> items,
+  Duration? timeoutAfter,
+}) {
+  items.sort((a, b) => a.name.compareTo(b.name));
+  final bySlot = <int, List<NotificationItem>>{};
+  for (final i in items) {
+    bySlot.putIfAbsent(slotFor(i.medicationId), () => []).add(i);
+  }
+  PlannedNotification make(List<NotificationItem> list, NotificationRole r) =>
+      PlannedNotification(
+        doseTime: doseTime,
+        at: at,
+        kind: kind,
+        followUpIndex: followUpIndex,
+        items: list,
+        role: r,
+        timeoutAfter: timeoutAfter,
+      );
+  if (bySlot.length == 1) return [make(items, NotificationRole.single)];
+  return [
+    make(items, NotificationRole.summary),
+    for (final list in bySlot.values) make(list, NotificationRole.child),
+  ];
+}
 
 /// Works out every notification to schedule from [now] to [now] + [horizon]:
 /// the main reminder, follow-ups for doses still not logged, and snoozed
-/// reminders. Doses already taken or skipped get nothing.
+/// reminders. Doses already taken or skipped get nothing. At most
+/// [maxCount] notifications, earliest first, never splitting a group.
 List<PlannedNotification> buildNotificationPlan({
   required Iterable<PlanEntry> entries,
   required Iterable<LoggedDose> logged,
@@ -300,9 +383,8 @@ List<PlannedNotification> buildNotificationPlan({
   List<int> followUpMinutes = const [15, 30],
   int maxCount = 400,
 }) {
-  final maxFollow = followUpMinutes.isEmpty
-      ? 0
-      : followUpMinutes.reduce((a, b) => a > b ? a : b);
+  final follow = followUpMinutes.take(2).toList();
+  final maxFollow = follow.isEmpty ? 0 : follow.reduce((a, b) => a > b ? a : b);
   final from = now.subtract(Duration(minutes: maxFollow));
   final to = now.add(horizon);
   final byKey = <_Key, LoggedDose>{
@@ -347,7 +429,7 @@ List<PlannedNotification> buildNotificationPlan({
         continue;
       }
       add(o.at, NotificationKind.main, 0, o.at, item);
-      for (final (i, m) in followUpMinutes.take(2).indexed) {
+      for (final (i, m) in follow.indexed) {
         add(
           o.at.add(Duration(minutes: m)),
           NotificationKind.followUp,
@@ -359,15 +441,32 @@ List<PlannedNotification> buildNotificationPlan({
     }
   }
 
-  final keys = groups.keys.toList()..sort((a, b) => a.$1.compareTo(b.$1));
-  return [
-    for (final k in keys.take(maxCount))
-      PlannedNotification(
-        doseTime: k.$4,
-        at: k.$1,
-        kind: k.$2,
-        followUpIndex: k.$3,
-        items: groups[k]!..sort((a, b) => a.name.compareTo(b.name)),
-      ),
-  ];
+  // Each reminder clears itself when the next follow-up arrives.
+  Duration? timeoutFor(NotificationKind kind, int index) {
+    if (kind == NotificationKind.snooze || follow.isEmpty) return null;
+    final current = kind == NotificationKind.main ? 0 : follow[index];
+    final nextIndex = kind == NotificationKind.main ? 0 : index + 1;
+    if (nextIndex >= follow.length) return null;
+    return Duration(minutes: follow[nextIndex] - current);
+  }
+
+  final keys = groups.keys.toList()
+    ..sort((a, b) {
+      final c = a.$1.compareTo(b.$1);
+      return c != 0 ? c : a.$4.compareTo(b.$4);
+    });
+  final result = <PlannedNotification>[];
+  for (final k in keys) {
+    final list = notificationsFor(
+      doseTime: k.$4,
+      at: k.$1,
+      kind: k.$2,
+      followUpIndex: k.$3,
+      items: groups[k]!,
+      timeoutAfter: timeoutFor(k.$2, k.$3),
+    );
+    if (result.length + list.length > maxCount) break;
+    result.addAll(list);
+  }
+  return result;
 }

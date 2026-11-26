@@ -127,43 +127,77 @@ class NotificationService {
     AppLocalizations l, {
     bool actions = true,
     Uint8List? largeIcon,
-  }) => NotificationDetails(
-    android: AndroidNotificationDetails(
-      channelIdFor(sound),
-      l.notifChannelName,
-      channelDescription: l.notifChannelDescription,
-      importance: Importance.high,
-      priority: Priority.high,
-      sound: _soundFor(sound),
-      category: AndroidNotificationCategory.reminder,
-      styleInformation: const DefaultStyleInformation(true, true),
-      largeIcon: largeIcon == null ? null : ByteArrayAndroidBitmap(largeIcon),
-      actions: actions
-          ? [
-              AndroidNotificationAction(
-                NotificationActions.taken,
-                l.actionTaken,
-              ),
-              AndroidNotificationAction(
-                NotificationActions.snooze,
-                l.actionSnooze,
-              ),
-              AndroidNotificationAction(NotificationActions.skip, l.actionSkip),
-            ]
-          : null,
-    ),
-  );
+    PlannedNotification? n,
+  }) {
+    final role = n?.role ?? NotificationRole.single;
+    final grouped = n != null && role != NotificationRole.single;
+    return NotificationDetails(
+      android: AndroidNotificationDetails(
+        channelIdFor(sound),
+        l.notifChannelName,
+        channelDescription: l.notifChannelDescription,
+        importance: Importance.high,
+        priority: Priority.high,
+        sound: _soundFor(sound),
+        category: AndroidNotificationCategory.reminder,
+        styleInformation: role == NotificationRole.summary
+            ? InboxStyleInformation([
+                for (final i in n!.items) itemLine(i, l),
+              ], contentTitle: title(n, l))
+            : const DefaultStyleInformation(true, true),
+        largeIcon: largeIcon == null ? null : ByteArrayAndroidBitmap(largeIcon),
+        // A group sounds once, through its summary.
+        groupKey: n?.groupKey,
+        setAsGroupSummary: role == NotificationRole.summary,
+        groupAlertBehavior: grouped
+            ? GroupAlertBehavior.summary
+            : GroupAlertBehavior.all,
+        subText: role == NotificationRole.child ? title(n!, l) : null,
+        timeoutAfter: n?.timeoutAfter?.inMilliseconds,
+        actions: actions && role != NotificationRole.summary
+            ? [
+                AndroidNotificationAction(
+                  NotificationActions.taken,
+                  l.actionTaken,
+                ),
+                AndroidNotificationAction(
+                  NotificationActions.snooze,
+                  l.actionSnooze,
+                ),
+                AndroidNotificationAction(
+                  NotificationActions.skip,
+                  l.actionSkip,
+                ),
+              ]
+            : null,
+      ),
+    );
+  }
 
-  static String body(PlannedNotification n, AppLocalizations l) => n.items
-      .map(
-        (i) => [
-          '${i.name}: ${formatDoseWithUnit(i.dose, i.unit, l)}',
-          if (i.meal != MealRelation.any) l.mealName(i.meal.name),
-        ].join(' · '),
-      )
-      .join('\n');
+  /// "Залізо: 1 табл. · після їжі".
+  static String itemLine(NotificationItem i, AppLocalizations l) => [
+    '${i.name}: ${formatDoseWithUnit(i.dose, i.unit, l)}',
+    if (i.meal != MealRelation.any) l.mealName(i.meal.name),
+  ].join(' · ');
 
-  String _title(PlannedNotification n, AppLocalizations l) {
+  /// "1 табл. · після їжі", for a medication's own notification.
+  static String _doseLine(NotificationItem i, AppLocalizations l) => [
+    formatDoseWithUnit(i.dose, i.unit, l),
+    if (i.meal != MealRelation.any) l.mealName(i.meal.name),
+  ].join(' · ');
+
+  static String body(PlannedNotification n, AppLocalizations l) =>
+      switch (n.role) {
+        NotificationRole.summary => n.items.map((i) => i.name).join(', '),
+        NotificationRole.child when n.items.length == 1 => _doseLine(
+          n.items.single,
+          l,
+        ),
+        _ => n.items.map((i) => itemLine(i, l)).join('\n'),
+      };
+
+  /// "Час прийняти ліки · 08:00".
+  static String title(PlannedNotification n, AppLocalizations l) {
     final time = formatTime(n.doseTime.hour, n.doseTime.minute);
     return switch (n.kind) {
       NotificationKind.main => '${l.notifTitle} · $time',
@@ -171,6 +205,12 @@ class NotificationService {
       NotificationKind.snooze => '${l.notifTitleSnoozed} · $time',
     };
   }
+
+  /// A medication's own notification is titled with its name.
+  static String _shownTitle(PlannedNotification n, AppLocalizations l) =>
+      n.role == NotificationRole.child
+      ? n.items.map((i) => i.name).join(', ')
+      : title(n, l);
 
   static String payloadFor(PlannedNotification n) => NotificationPayload(
     doseTime: n.doseTime,
@@ -185,13 +225,19 @@ class NotificationService {
     await _plugin.zonedSchedule(
       id: n.id,
       scheduledDate: tz.TZDateTime.from(n.at, tz.local),
-      notificationDetails: _details(l, largeIcon: await _iconFor(n)),
+      notificationDetails: _details(
+        l,
+        n: n,
+        largeIcon: n.role == NotificationRole.summary
+            ? null
+            : await _iconFor(n),
+      ),
       androidScheduleMode:
           mode ??
           (await canScheduleExact()
               ? AndroidScheduleMode.exactAllowWhileIdle
               : AndroidScheduleMode.inexactAllowWhileIdle),
-      title: _title(n, l),
+      title: _shownTitle(n, l),
       body: body(n, l),
       payload: payloadFor(n),
     );
@@ -254,9 +300,11 @@ class NotificationService {
             n.at.millisecondsSinceEpoch,
             channel,
             mode.name,
-            _title(n, l),
+            _shownTitle(n, l),
             body(n, l),
             payloadFor(n),
+            n.role.name,
+            n.timeoutAfter?.inMinutes,
             if (n.items.isNotEmpty) n.items.first.look.key,
           ].join('\u0000'),
         ),
@@ -320,11 +368,38 @@ class NotificationService {
     }
   }
 
-  /// Removes shown and pending notifications for doses at [doseTime].
-  Future<void> cancelForDose(DateTime doseTime) async {
+  /// Removes shown and pending notifications for doses at [doseTime]: only
+  /// those of [medicationIds] when given. The group summary goes once no
+  /// other medication's notification for that time is left.
+  Future<void> cancelForDose(
+    DateTime doseTime, {
+    Iterable<int>? medicationIds,
+  }) async {
     if (!supported) return;
-    for (final id in allNotificationIdsFor(doseTime)) {
+    if (medicationIds == null) {
+      for (final id in notificationIdsFor(doseTime)) {
+        await _plugin.cancel(id: id);
+      }
+      return;
+    }
+    final slots = {for (final m in medicationIds) slotFor(m)};
+    for (final id in notificationIdsFor(doseTime, slots)) {
       await _plugin.cancel(id: id);
+    }
+    List<int> others;
+    try {
+      others = [
+        for (final a in await _android?.getActiveNotifications() ?? const [])
+          if (a.id case final id? when isChildIdFor(id, doseTime)) id,
+      ];
+    } catch (e) {
+      debugPrint('Active notifications lookup failed: $e');
+      return;
+    }
+    if (others.isEmpty) {
+      for (final id in notificationIdsFor(doseTime, const [summarySlot])) {
+        await _plugin.cancel(id: id);
+      }
     }
   }
 
