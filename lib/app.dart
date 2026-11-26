@@ -33,7 +33,7 @@ class DoseApp extends ConsumerWidget {
         for (final s in supported) {
           if (s.languageCode == device?.languageCode) return s;
         }
-        return const Locale('uk');
+        return const Locale('en');
       },
       themeMode: themeMode,
       theme: buildTheme(Brightness.light),

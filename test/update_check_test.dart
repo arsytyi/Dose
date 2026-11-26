@@ -43,4 +43,25 @@ void main() {
     ).firstMatch(pubspec)!.group(1);
     expect(appVersion, v);
   });
+
+  test('falls back to the releases page redirect', () {
+    final u = parseLatestRedirect(
+      'https://github.com/arsytyi/Dose/releases/tag/v0.9.0',
+      current: '0.8.0',
+    )!;
+    expect(u.version, '0.9.0');
+    expect(u.pageUrl, 'https://github.com/arsytyi/Dose/releases/tag/v0.9.0');
+    expect(
+      u.apkUrl,
+      'https://github.com/arsytyi/Dose/releases/download/v0.9.0/dose-v0.9.0.apk',
+    );
+    expect(
+      parseLatestRedirect(
+        'https://github.com/arsytyi/Dose/releases/tag/v0.9.0',
+        current: '0.9.0',
+      ),
+      isNull,
+    );
+    expect(parseLatestRedirect('https://github.com/login'), isNull);
+  });
 }

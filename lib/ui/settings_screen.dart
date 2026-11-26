@@ -136,8 +136,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: Column(
               children: [
                 RadioListTile(value: '', title: Text(l.langSystem)),
-                const RadioListTile(value: 'uk', title: Text('Українська')),
                 const RadioListTile(value: 'en', title: Text('English')),
+                const RadioListTile(value: 'uk', title: Text('Українська')),
+                const RadioListTile(value: 'ru', title: Text('Русский')),
+                const RadioListTile(value: 'es', title: Text('Español')),
               ],
             ),
           ),

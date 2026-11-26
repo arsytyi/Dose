@@ -57,17 +57,54 @@ UpdateInfo? parseLatestRelease(
   );
 }
 
+/// Reads the tag from where `github.com/{repo}/releases/latest` redirects,
+/// e.g. ".../releases/tag/v0.9.0". Null when it isn't newer.
+UpdateInfo? parseLatestRedirect(
+  String location, {
+  String repo = UpdateCheck.repo,
+  String current = appVersion,
+}) {
+  final match = RegExp(r'/releases/tag/([^/?#]+)').firstMatch(location);
+  if (match == null) return null;
+  final tag = Uri.decodeComponent(match.group(1)!);
+  if (compareVersions(tag, current) <= 0) return null;
+  final base = 'https://github.com/$repo/releases';
+  return UpdateInfo(
+    version: tag.replaceFirst(RegExp('^v'), ''),
+    pageUrl: '$base/tag/$tag',
+    // The release workflow names the file dose-<tag>.apk.
+    apkUrl: '$base/download/$tag/dose-$tag.apk',
+  );
+}
+
 abstract final class UpdateCheck {
   static const repo = 'arsytyi/Dose';
   static final _latest = Uri.parse(
     'https://api.github.com/repos/$repo/releases/latest',
   );
+  static final _latestPage = Uri.parse(
+    'https://github.com/$repo/releases/latest',
+  );
 
-  /// [checked] is false when GitHub couldn't be reached (offline, or the
-  /// repository isn't public); [update] is null when nothing is newer.
+  /// [checked] is false when GitHub couldn't be reached; [update] is null
+  /// when nothing is newer. The API allows only 60 requests an hour per
+  /// address (mobile networks share addresses), so when it refuses, the
+  /// public releases page is asked instead.
   static Future<({bool checked, UpdateInfo? update})> check() async {
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 10);
+    try {
+      final api = await _fromApi(client);
+      if (api != null) return api;
+      return await _fromPage(client) ?? (checked: false, update: null);
+    } finally {
+      client.close();
+    }
+  }
+
+  static Future<({bool checked, UpdateInfo? update})?> _fromApi(
+    HttpClient client,
+  ) async {
     try {
       final req = await client.getUrl(_latest);
       req.headers
@@ -75,8 +112,9 @@ abstract final class UpdateCheck {
         ..set(HttpHeaders.userAgentHeader, 'Dose-app');
       final res = await req.close().timeout(const Duration(seconds: 15));
       if (res.statusCode != 200) {
+        debugPrint('Update check: API answered ${res.statusCode}');
         await res.drain<void>();
-        return (checked: false, update: null);
+        return null;
       }
       final body = await res.transform(utf8.decoder).join();
       return (
@@ -85,9 +123,26 @@ abstract final class UpdateCheck {
       );
     } catch (e) {
       debugPrint('Update check failed: $e');
-      return (checked: false, update: null);
-    } finally {
-      client.close();
+      return null;
+    }
+  }
+
+  static Future<({bool checked, UpdateInfo? update})?> _fromPage(
+    HttpClient client,
+  ) async {
+    try {
+      final req = await client.getUrl(_latestPage);
+      req
+        ..followRedirects = false
+        ..headers.set(HttpHeaders.userAgentHeader, 'Dose-app');
+      final res = await req.close().timeout(const Duration(seconds: 15));
+      await res.drain<void>();
+      final location = res.headers.value(HttpHeaders.locationHeader);
+      if (!res.isRedirect || location == null) return null;
+      return (checked: true, update: parseLatestRedirect(location));
+    } catch (e) {
+      debugPrint('Update check (page) failed: $e');
+      return null;
     }
   }
 }

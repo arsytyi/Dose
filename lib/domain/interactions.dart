@@ -7,11 +7,26 @@ import 'schedule_rule.dart';
 
 enum RuleType { avoid, separate, together }
 
+/// Text in [uk], [en] and, when translated, Russian and Spanish; other
+/// languages fall back to English.
+String _pick(String code, String uk, String en, Map<String, String> more) =>
+    switch (code) {
+      'uk' => uk,
+      'en' => en,
+      _ => more[code] ?? en,
+    };
+
+Map<String, String> _moreLanguages(Map<String, dynamic> json) => {
+  for (final code in const ['ru', 'es'])
+    if (json[code] case final String t) code: t,
+};
+
 class Substance {
   const Substance({
     required this.key,
     required this.uk,
     required this.en,
+    this.more = const {},
     this.aliases = const [],
     this.info,
   });
@@ -19,12 +34,15 @@ class Substance {
   final String key;
   final String uk;
   final String en;
+
+  /// Names in further languages (ru, es).
+  final Map<String, String> more;
   final List<String> aliases;
 
   /// How to take it and what to watch for, when the catalog has it.
   final SubstanceInfo? info;
 
-  String name(String languageCode) => languageCode == 'uk' ? uk : en;
+  String name(String languageCode) => _pick(languageCode, uk, en, more);
 }
 
 /// A named reference with a link.
@@ -35,7 +53,8 @@ class Source {
   final String url;
 }
 
-/// Reference notes about a substance, in Ukrainian and English.
+/// Reference notes about a substance, in Ukrainian and English and,
+/// when translated, Russian and Spanish.
 class SubstanceInfo {
   const SubstanceInfo({
     required this.intake,
@@ -45,12 +64,14 @@ class SubstanceInfo {
 
   factory SubstanceInfo.fromJson(Map<String, dynamic> json) => SubstanceInfo(
     intake: {
-      for (final lang in const ['uk', 'en'])
-        lang: (json[lang] as Map<String, dynamic>)['intake'] as String,
+      for (final lang in const ['uk', 'en', 'ru', 'es'])
+        if (json[lang] case final Map<String, dynamic> t)
+          lang: t['intake'] as String,
     },
     cautions: {
-      for (final lang in const ['uk', 'en'])
-        lang: (json[lang] as Map<String, dynamic>)['cautions'] as String,
+      for (final lang in const ['uk', 'en', 'ru', 'es'])
+        if (json[lang] case final Map<String, dynamic> t)
+          lang: t['cautions'] as String,
     },
     sources: [
       for (final s in json['sources'] as List)
@@ -134,6 +155,7 @@ class InteractionRule {
     this.hours = 0,
     required this.uk,
     required this.en,
+    this.more = const {},
     this.source = '',
     this.url,
   });
@@ -146,10 +168,13 @@ class InteractionRule {
   final int hours;
   final String uk;
   final String en;
+
+  /// Text in further languages (ru, es).
+  final Map<String, String> more;
   final String source;
   final String? url;
 
-  String text(String languageCode) => languageCode == 'uk' ? uk : en;
+  String text(String languageCode) => _pick(languageCode, uk, en, more);
 }
 
 class InteractionCatalog {
@@ -167,6 +192,7 @@ class InteractionCatalog {
               key: s['key'] as String,
               uk: s['uk'] as String,
               en: s['en'] as String,
+              more: _moreLanguages(s as Map<String, dynamic>),
               aliases: [for (final a in s['aliases'] as List) a as String],
               info: switch (s['info']) {
                 final Map<String, dynamic> info => SubstanceInfo.fromJson(info),
@@ -183,6 +209,7 @@ class InteractionCatalog {
               hours: (r['hours'] as int?) ?? 0,
               uk: r['uk'] as String,
               en: r['en'] as String,
+              more: _moreLanguages(r as Map<String, dynamic>),
               source: (r['source'] as String?) ?? '',
               url: r['url'] as String?,
             ),
@@ -236,6 +263,7 @@ class InteractionCatalog {
       for (final key in p.substances) ...[
         ?_byKey[key]?.uk,
         ?_byKey[key]?.en,
+        ...?_byKey[key]?.more.values,
         ...?_byKey[key]?.aliases,
       ],
     ].join(' ').toLowerCase().split(RegExp(r'[\s()]+'));

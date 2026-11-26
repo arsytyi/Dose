@@ -58,6 +58,15 @@ void main() {
     await unmount(tester);
   });
 
+  testWidgets('Russian and Spanish UI when chosen', (tester) async {
+    await pumpApp(tester, locale: 'ru');
+    expect(find.text('На сегодня приёмов нет'), findsOneWidget);
+    await unmount(tester);
+    await pumpApp(tester, locale: 'es');
+    expect(find.text('No hay tomas para hoy'), findsOneWidget);
+    await unmount(tester);
+  });
+
   testWidgets('English UI when chosen', (tester) async {
     await pumpApp(tester, locale: 'en');
     expect(find.text('No doses planned for today'), findsOneWidget);
@@ -84,6 +93,12 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getString('themeMode'), 'dark');
 
+    // Two more languages push the sound setting further down.
+    await tester.scrollUntilVisible(
+      find.text('Звук сповіщення'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.tap(find.text('Звук сповіщення'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Дзвіночок'));
