@@ -27,7 +27,8 @@ void main() {
   test('every rule names known substances and has a source', () {
     final keys = {for (final s in catalog.substances) s.key};
     for (final r in catalog.rules) {
-      expect(keys, containsAll([r.a, r.b]));
+      expect(keys, contains(r.a));
+      expect(keys, contains(r.b));
       expect(r.source, isNotEmpty);
       if (r.type == RuleType.separate) expect(r.hours, greaterThan(0));
     }
@@ -81,7 +82,7 @@ void main() {
   });
 
   test('detects substances from names', () {
-    expect(catalog.detect('Магній B6'), {'magnesium'});
+    expect(catalog.detect('Магній B6'), {'magnesium', 'vitamin_b6'});
     expect(catalog.detect('Кальцій D3 Нікомед'), {'calcium', 'vitamin_d'});
     expect(catalog.detect('Вітамін D3 2000 МО'), {'vitamin_d'});
     expect(catalog.detect('Сорбіфер Дурулес'), {'iron'});
@@ -89,6 +90,68 @@ void main() {
     // Short aliases need a whole word: "Fe" is not inside "Coffee".
     expect(catalog.detect('Coffee'), isEmpty);
     expect(catalog.detect('Еутирокс 50'), {'levothyroxine'});
+  });
+
+  test('every alias finds its own substance', () {
+    for (final s in catalog.substances) {
+      for (final a in s.aliases) {
+        expect(a, a.toLowerCase(), reason: '${s.key}: aliases are lowercase');
+        expect(catalog.detect(a), contains(s.key), reason: '${s.key}: $a');
+      }
+    }
+  });
+
+  test('detects medicines by Ukrainian brand names', () {
+    expect(catalog.detect('Ксарелто 20 мг'), {'doac'});
+    expect(catalog.detect('Аторвастатин 20'), {'statin'});
+    expect(catalog.detect('Нурофєн Форте'), {'nsaid'});
+    expect(catalog.detect('Цитрамон-Дарниця'), {'aspirin', 'paracetamol'});
+    expect(catalog.detect('Трипліксам'), {'ace_inhibitor', 'thiazide'});
+    expect(catalog.detect('Олідетрим 2000'), {'vitamin_d'});
+    expect(catalog.detect('Кальцій-Д3 Нікомед'), {'calcium', 'vitamin_d'});
+    expect(catalog.detect('Магне-B6'), {'magnesium', 'vitamin_b6'});
+    expect(catalog.detect('Атоксіл'), {'enterosorbent'});
+    // "iron" inside a longer word is not iron.
+    expect(catalog.detect('Spironolactone'), {'potassium_sparing'});
+  });
+
+  test('medicines are marked as drugs', () {
+    for (final k in ['statin', 'doac', 'warfarin', 'levothyroxine', 'nsaid']) {
+      expect(catalog.substance(k)!.kind, SubstanceKind.drug, reason: k);
+    }
+    expect(catalog.substance('magnesium')!.kind, SubstanceKind.supplement);
+  });
+
+  test('every substance has something to show in the guide', () {
+    for (final s in catalog.substances) {
+      expect(catalog.hasGuide(s), isTrue, reason: s.key);
+    }
+  });
+
+  test('searches substances by name, alias and brand', () {
+    List<String> keys(String q) => [
+      for (final s in catalog.searchSubstances(q)) s.key,
+    ];
+    expect(keys('ксарел'), ['doac']);
+    expect(keys('вітамін b12'), ['vitamin_b12']);
+    expect(keys('звіробій'), ['st_johns_wort']);
+    expect(catalog.searchSubstances(''), hasLength(catalog.substances.length));
+  });
+
+  test('two painkillers with paracetamol are flagged', () {
+    final issues = findInteractions(catalog, [
+      med(1, 'Цитрамон', catalog.detect('Цитрамон'), [9]),
+      med(2, 'Колдрекс', catalog.detect('Колдрекс'), [9]),
+    ]);
+    expect(issues.map((i) => i.rule.a), contains('paracetamol'));
+  });
+
+  test('St. John\'s wort and an antidepressant are flagged', () {
+    final issues = findInteractions(catalog, [
+      med(1, 'Звіробій', {'st_johns_wort'}, [9]),
+      med(2, 'Золофт', catalog.detect('Золофт 50'), [21]),
+    ]);
+    expect(issues.single.rule.type, RuleType.avoid);
   });
 
   test('iron and calcium too close in time are flagged with a fix', () {

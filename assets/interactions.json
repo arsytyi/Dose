@@ -18,8 +18,27 @@
         "сорбифер",
         "тардиферон",
         "мальтофер",
-        "fe"
-      ]
+        "fe",
+        "фероплекс",
+        "актиферин",
+        "тотема"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Краще засвоюється натщесерце, але якщо болить шлунок — з їжею. Вітамін C разом допомагає засвоєнню. Чай, кава, молочне й кальцій — окремо (див. правила).",
+          "cautions": "Не перевищуйте 45 мг заліза на день без лікаря: надлишок шкодить печінці й шлунку. Зберігайте подалі від дітей — передозування заліза небезпечне для них. Може темніти кал і бути закреп."
+        },
+        "en": {
+          "intake": "Absorbed best on an empty stomach, but take with food if it upsets your stomach. Vitamin C helps absorption. Keep tea, coffee, dairy and calcium apart (see rules).",
+          "cautions": "Don't exceed 45 mg of iron a day without a doctor: too much harms the gut and liver. Keep away from children — iron overdose is dangerous for them. Dark stools and constipation are common."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Iron",
+            "url": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/"
+          }
+        ]
+      }
     },
     {
       "key": "calcium",
@@ -32,8 +51,26 @@
         "calcium",
         "кальцемін",
         "кальцемин",
-        "ca"
-      ]
+        "ca",
+        "кальцій-д3",
+        "кальцид"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Карбонат — з їжею, цитрат — будь-коли. Організм краще засвоює до 500 мг за раз, тож більші дози діліть. Разом із вітаміном D.",
+          "cautions": "Верхня межа з їжею й добавками — 2000–2500 мг на день залежно від віку. Надлишок — ризик каменів у нирках і закрепів. Окремо від заліза, L-тироксину й деяких антибіотиків."
+        },
+        "en": {
+          "intake": "Carbonate with food, citrate at any time. The body absorbs up to 500 mg at once best, so split larger doses. Pairs well with vitamin D.",
+          "cautions": "Upper limit from food and supplements is 2000–2500 mg a day depending on age. Too much raises the risk of kidney stones and constipation. Keep apart from iron, levothyroxine and some antibiotics."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Calcium",
+            "url": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/"
+          }
+        ]
+      }
     },
     {
       "key": "magnesium",
@@ -44,7 +81,10 @@
         "магний",
         "magnesium",
         "magne",
-        "магне"
+        "магне",
+        "магнікум",
+        "магникум",
+        "магнефар"
       ],
       "info": {
         "uk": {
@@ -142,7 +182,18 @@
         "d3",
         "холекальциферол",
         "cholecalciferol",
-        "аквадетрим"
+        "аквадетрим",
+        "олідетрим",
+        "олидетрим",
+        "декрістол",
+        "декристол",
+        "dekristol",
+        "ергокальциферол",
+        "эргокальциферол",
+        "ergocalciferol",
+        "вігантол",
+        "вигантол",
+        "д3"
       ],
       "info": {
         "uk": {
@@ -174,7 +225,23 @@
         "k2",
         "mk-7",
         "менахінон"
-      ]
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею, де є жири (жиророзчинний вітамін). Часто поєднують із вітаміном D.",
+          "cautions": "Якщо приймаєте варфарин — не починайте й не кидайте вітамін K без лікаря: він змінює дію варфарину. Для прямих антикоагулянтів (ривароксабан, апіксабан) такої взаємодії немає."
+        },
+        "en": {
+          "intake": "With a meal that has some fat (fat-soluble vitamin). Often combined with vitamin D.",
+          "cautions": "If you take warfarin, don't start or stop vitamin K without your doctor: it changes how warfarin works. Direct anticoagulants (rivaroxaban, apixaban) don't have this interaction."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Vitamin K",
+            "url": "https://ods.od.nih.gov/factsheets/VitaminK-HealthProfessional/"
+          }
+        ]
+      }
     },
     {
       "key": "omega3",
@@ -185,8 +252,29 @@
         "omega",
         "риб'ячий жир",
         "рыбий жир",
-        "fish oil"
-      ]
+        "fish oil",
+        "омега-3",
+        "epa",
+        "dha",
+        "олія криля",
+        "krill"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею, де є жири: так краще засвоюється й менше відрижки «рибою».",
+          "cautions": "Високі дози можуть посилювати кровоточивість, особливо разом із варфарином. Перед операцією скажіть лікарю, що приймаєте. При алергії на рибу — обережно."
+        },
+        "en": {
+          "intake": "With a meal that has some fat: better absorbed and fewer fishy burps.",
+          "cautions": "High doses may increase bleeding, especially with warfarin. Tell your doctor before surgery. Be careful with a fish allergy."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Omega-3 fatty acids",
+            "url": "https://ods.od.nih.gov/factsheets/Omega3FattyAcids-HealthProfessional/"
+          }
+        ]
+      }
     },
     {
       "key": "levothyroxine",
@@ -199,8 +287,12 @@
         "еутирокс",
         "эутирокс",
         "euthyrox",
-        "levothyroxine"
-      ]
+        "levothyroxine",
+        "тироксин",
+        "l-thyroxin",
+        "баготирокс"
+      ],
+      "kind": "drug"
     },
     {
       "key": "warfarin",
@@ -208,8 +300,11 @@
       "en": "Warfarin",
       "aliases": [
         "варфарин",
-        "warfarin"
-      ]
+        "warfarin",
+        "варфарекс",
+        "warfarex"
+      ],
+      "kind": "drug"
     },
     {
       "key": "fluoroquinolone",
@@ -222,8 +317,17 @@
         "моксифлоксацин",
         "ciprofloxacin",
         "levofloxacin",
-        "moxifloxacin"
-      ]
+        "moxifloxacin",
+        "ципринол",
+        "таванік",
+        "таваник",
+        "лефлок",
+        "офлоксацин",
+        "ofloxacin",
+        "авелокс",
+        "норфлоксацин"
+      ],
+      "kind": "drug"
     },
     {
       "key": "tetracycline",
@@ -236,8 +340,14 @@
         "тетрациклін",
         "тетрациклин",
         "doxycycline",
-        "tetracycline"
-      ]
+        "tetracycline",
+        "вібраміцин",
+        "вибрамицин",
+        "міносiклін",
+        "миноциклин",
+        "minocycline"
+      ],
+      "kind": "drug"
     },
     {
       "key": "quercetin",
@@ -450,6 +560,1235 @@
           }
         ]
       }
+    },
+    {
+      "key": "vitamin_b12",
+      "uk": "Вітамін B12",
+      "en": "Vitamin B12",
+      "aliases": [
+        "b12",
+        "в12",
+        "кобаламін",
+        "кобаламин",
+        "cobalamin",
+        "ціанокобаламін",
+        "цианокобаламин",
+        "метилкобаламін",
+        "метилкобаламин",
+        "methylcobalamin",
+        "нейробекс",
+        "мільгама",
+        "мильгамма",
+        "нейрорубін",
+        "нейрорубин"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без. Добре засвоюється й у таблетках для розсмоктування.",
+          "cautions": "Верхньої межі немає: надлишок виводиться. Метформін і препарати від печії (омепразол тощо) при довгому прийомі знижують рівень B12 — варто перевіряти аналізи."
+        },
+        "en": {
+          "intake": "Any time, with or without food. Chewable and sublingual forms work too.",
+          "cautions": "No upper limit: the excess is excreted. Long-term metformin or heartburn drugs (omeprazole etc.) lower B12 levels — worth checking blood tests."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Vitamin B12",
+            "url": "https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "folate",
+      "uk": "Фолієва кислота (B9)",
+      "en": "Folic acid (B9)",
+      "aliases": [
+        "фолієв",
+        "фолиев",
+        "folic",
+        "folate",
+        "фолат",
+        "метилфолат",
+        "methylfolate",
+        "b9",
+        "в9",
+        "фолацин"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без. При плануванні вагітності — за порадою лікаря заздалегідь.",
+          "cautions": "Верхня межа синтетичної фолієвої кислоти — 1000 мкг на день. Великі дози можуть маскувати дефіцит B12. З метотрексатом — лише за схемою лікаря."
+        },
+        "en": {
+          "intake": "Any time, with or without food. When planning a pregnancy, start in advance as your doctor advises.",
+          "cautions": "Upper limit of synthetic folic acid is 1000 mcg a day. High doses can mask B12 deficiency. With methotrexate, only as your doctor prescribes."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Folate",
+            "url": "https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "vitamin_b6",
+      "uk": "Вітамін B6",
+      "en": "Vitamin B6",
+      "aliases": [
+        "b6",
+        "в6",
+        "піридоксин",
+        "пиридоксин",
+        "pyridoxine",
+        "піридоксаль",
+        "пиридоксаль",
+        "p-5-p",
+        "магне-b6",
+        "магне-в6",
+        "magne-b6",
+        "магне b6"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без. Часто входить у комплекси з магнієм.",
+          "cautions": "Верхня межа — 100 мг на день. Тривалий прийом великих доз може пошкоджувати нерви (оніміння, поколювання). Перевіряйте, скільки B6 у всіх ваших комплексах разом."
+        },
+        "en": {
+          "intake": "Any time, with or without food. Often combined with magnesium.",
+          "cautions": "Upper limit is 100 mg a day. Long-term high doses can damage nerves (numbness, tingling). Add up B6 across all your multi-products."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Vitamin B6",
+            "url": "https://ods.od.nih.gov/factsheets/VitaminB6-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "biotin",
+      "uk": "Біотин (B7)",
+      "en": "Biotin (B7)",
+      "aliases": [
+        "біотин",
+        "биотин",
+        "biotin",
+        "b7",
+        "в7"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без.",
+          "cautions": "Високі дози біотину спотворюють результати аналізів (гормони щитоподібної залози, тропонін). Скажіть лікарю й лабораторії, що приймаєте біотин, і запитайте, за скільки днів до аналізу його зупинити."
+        },
+        "en": {
+          "intake": "Any time, with or without food.",
+          "cautions": "High-dose biotin skews lab tests (thyroid hormones, troponin). Tell your doctor and the lab you take biotin and ask how many days before the test to stop it."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Biotin",
+            "url": "https://ods.od.nih.gov/factsheets/Biotin-HealthProfessional/"
+          },
+          {
+            "name": "FDA: Biotin interference with lab tests",
+            "url": "https://www.fda.gov/medical-devices/in-vitro-diagnostics/biotin-interference-troponin-lab-tests-assays-subject-biotin-interference"
+          }
+        ]
+      }
+    },
+    {
+      "key": "vitamin_e",
+      "uk": "Вітамін E",
+      "en": "Vitamin E",
+      "aliases": [
+        "вітамін e",
+        "вітамін е",
+        "витамин e",
+        "витамин е",
+        "vitamin e",
+        "токоферол",
+        "tocopherol",
+        "токотрієнол",
+        "tocotrienol"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею, де є жири (жиророзчинний вітамін).",
+          "cautions": "Верхня межа — 1000 мг (≈1500 МО природної форми) на день. Великі дози можуть посилювати кровоточивість, особливо з антикоагулянтами й антиагрегантами."
+        },
+        "en": {
+          "intake": "With a meal that has some fat (fat-soluble vitamin).",
+          "cautions": "Upper limit is 1000 mg (≈1500 IU natural form) a day. High doses may increase bleeding, especially with anticoagulants and antiplatelet drugs."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Vitamin E",
+            "url": "https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "vitamin_a",
+      "uk": "Вітамін A",
+      "en": "Vitamin A",
+      "aliases": [
+        "вітамін a",
+        "вітамін а",
+        "витамин a",
+        "витамин а",
+        "vitamin a",
+        "ретинол",
+        "retinol",
+        "бета-каротин",
+        "beta-carotene",
+        "аевіт",
+        "аевит"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею, де є жири (жиророзчинний вітамін).",
+          "cautions": "Верхня межа готового вітаміну A (ретинолу) — 3000 мкг (10 000 МО) на день. Надлишок шкодить печінці й кісткам, а у вагітних — плоду. Курцям не варто приймати великі дози бета-каротину."
+        },
+        "en": {
+          "intake": "With a meal that has some fat (fat-soluble vitamin).",
+          "cautions": "Upper limit of preformed vitamin A (retinol) is 3000 mcg (10,000 IU) a day. Too much harms the liver and bones, and the baby in pregnancy. Smokers should avoid high-dose beta-carotene."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Vitamin A",
+            "url": "https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "selenium",
+      "uk": "Селен",
+      "en": "Selenium",
+      "aliases": [
+        "селен",
+        "selenium",
+        "селеноміонін",
+        "селенометіонін",
+        "selenomethionine",
+        "se"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без.",
+          "cautions": "Верхня межа — 400 мкг на день. Надлишок дає ламкість нігтів і волосся, часниковий запах з рота. Враховуйте селен у мультивітамінах."
+        },
+        "en": {
+          "intake": "Any time, with or without food.",
+          "cautions": "Upper limit is 400 mcg a day. Too much causes brittle hair and nails and garlic breath. Count the selenium in your multivitamins too."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Selenium",
+            "url": "https://ods.od.nih.gov/factsheets/Selenium-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "iodine",
+      "uk": "Йод",
+      "en": "Iodine",
+      "aliases": [
+        "йод",
+        "iodine",
+        "йодид",
+        "iodide",
+        "йодомарин",
+        "калію йодид",
+        "ламінарія",
+        "келп",
+        "kelp"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Будь-коли, з їжею або без.",
+          "cautions": "Верхня межа — 1100 мкг на день. При хворобах щитоподібної залози (вузли, тиреоїдит, гіпертиреоз) — лише за порадою ендокринолога. Добавки з келпу можуть містити дуже багато йоду."
+        },
+        "en": {
+          "intake": "Any time, with or without food.",
+          "cautions": "Upper limit is 1100 mcg a day. With thyroid disease (nodules, thyroiditis, hyperthyroidism) only on an endocrinologist's advice. Kelp products can contain a lot of iodine."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Iodine",
+            "url": "https://ods.od.nih.gov/factsheets/Iodine-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "potassium",
+      "uk": "Калій",
+      "en": "Potassium",
+      "aliases": [
+        "калій",
+        "калий",
+        "калію",
+        "калия",
+        "potassium",
+        "аспаркам",
+        "панангін",
+        "панангин",
+        "калінор",
+        "калинор",
+        "kalinor",
+        "електроліт",
+        "электролит",
+        "electrolyte"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею й водою, щоб не подразнювати шлунок.",
+          "cautions": "Без лікаря не приймайте калій при хворобі нирок і разом із ліками від тиску типу АПФ-інгібіторів, сартанів чи спіронолактону: можлива небезпечна гіперкаліємія."
+        },
+        "en": {
+          "intake": "With food and water, to avoid an upset stomach.",
+          "cautions": "Don't take potassium without a doctor if you have kidney disease or take ACE inhibitors, ARBs or spironolactone: dangerous hyperkalaemia is possible."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Potassium",
+            "url": "https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "probiotics",
+      "uk": "Пробіотики",
+      "en": "Probiotics",
+      "aliases": [
+        "пробіотик",
+        "пробиотик",
+        "probiotic",
+        "lactobacillus",
+        "лактобакт",
+        "bifidobacter",
+        "біфідо",
+        "бифидо",
+        "boulardii",
+        "буларді",
+        "буларди",
+        "ентерожерміна",
+        "лінекс",
+        "линекс",
+        "ентерол",
+        "энтерол",
+        "симбітер",
+        "симбитер"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Зазвичай раз на день; з антибіотиком — через 2–3 години після його прийому, щоб бактерії не загинули.",
+          "cautions": "Здоровим людям зазвичай безпечні. При тяжкому імунодефіциті, центральному венозному катетері або у недоношених дітей — лише за порадою лікаря."
+        },
+        "en": {
+          "intake": "Usually once a day; with an antibiotic, take them 2–3 hours after it so the bacteria survive.",
+          "cautions": "Usually safe for healthy people. With severe immune deficiency, a central line, or in premature babies, only on a doctor's advice."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Probiotics",
+            "url": "https://ods.od.nih.gov/factsheets/Probiotics-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "creatine",
+      "uk": "Креатин",
+      "en": "Creatine",
+      "aliases": [
+        "креатин",
+        "creatine",
+        "creapure"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Щодня, у будь-який час, краще з їжею. Пийте достатньо води.",
+          "cautions": "Добре вивчений і зазвичай безпечний. Може трохи збільшити вагу через воду в м'язах. При хворобі нирок — лише за порадою лікаря."
+        },
+        "en": {
+          "intake": "Daily, at any time, preferably with food. Drink enough water.",
+          "cautions": "Well studied and usually safe. May add a little water weight. With kidney disease, only on a doctor's advice."
+        },
+        "sources": [
+          {
+            "name": "NIH ODS: Supplements for exercise and athletic performance",
+            "url": "https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-HealthProfessional/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "melatonin",
+      "uk": "Мелатонін",
+      "en": "Melatonin",
+      "aliases": [
+        "мелатонін",
+        "мелатонин",
+        "melatonin",
+        "мелаксен",
+        "віта-мелатонін",
+        "вита-мелатонин"
+      ],
+      "info": {
+        "uk": {
+          "intake": "За 30–60 хвилин до сну. Почніть із найменшої дози.",
+          "cautions": "При короткому прийомі зазвичай безпечний; можливі сонливість зранку, головний біль. Не сідайте за кермо після прийому. Вагітним, дітям і людям з епілепсією — лише за порадою лікаря."
+        },
+        "en": {
+          "intake": "30–60 minutes before bed. Start with the lowest dose.",
+          "cautions": "Usually safe short term; may cause morning drowsiness or headache. Don't drive after taking it. Pregnant women, children and people with epilepsy only on a doctor's advice."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Melatonin",
+            "url": "https://www.nccih.nih.gov/health/melatonin-what-you-need-to-know"
+          }
+        ]
+      }
+    },
+    {
+      "key": "green_tea",
+      "uk": "Екстракт зеленого чаю",
+      "en": "Green tea extract",
+      "aliases": [
+        "зеленого чаю",
+        "зеленого чая",
+        "green tea",
+        "egcg",
+        "епігалокатехін",
+        "эпигаллокатехин"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею: натщесерце екстракт сильніше навантажує печінку.",
+          "cautions": "Концентровані екстракти зеленого чаю пов'язані з рідкими випадками ураження печінки. Зупиніться й зверніться до лікаря при пожовтінні шкіри, темній сечі, болю в животі. Містить кофеїн."
+        },
+        "en": {
+          "intake": "With food: on an empty stomach the extract stresses the liver more.",
+          "cautions": "Concentrated green tea extracts are linked to rare cases of liver injury. Stop and see a doctor if you notice yellow skin, dark urine or belly pain. Contains caffeine."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Green tea",
+            "url": "https://www.nccih.nih.gov/health/green-tea"
+          }
+        ]
+      }
+    },
+    {
+      "key": "glucosamine",
+      "uk": "Глюкозамін і хондроїтин",
+      "en": "Glucosamine and chondroitin",
+      "aliases": [
+        "глюкозамін",
+        "глюкозамин",
+        "glucosamine",
+        "хондроїтин",
+        "хондроитин",
+        "chondroitin",
+        "структум",
+        "терафлекс",
+        "дона",
+        "артра",
+        "мсм",
+        "msm"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею. Ефект, якщо є, помітний не раніше ніж за кілька тижнів.",
+          "cautions": "Може посилювати дію варфарину (ризик кровотечі). При алергії на молюсків — обережно з глюкозаміном."
+        },
+        "en": {
+          "intake": "With food. Any effect shows only after several weeks.",
+          "cautions": "May boost warfarin's effect (bleeding risk). Be careful with glucosamine if you're allergic to shellfish."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Glucosamine and chondroitin",
+            "url": "https://www.nccih.nih.gov/health/glucosamine-and-chondroitin-for-osteoarthritis-what-you-need-to-know"
+          }
+        ]
+      }
+    },
+    {
+      "key": "ginkgo",
+      "uk": "Гінкго білоба",
+      "en": "Ginkgo biloba",
+      "aliases": [
+        "гінкго",
+        "гинкго",
+        "ginkgo",
+        "білобіл",
+        "билобил",
+        "танакан",
+        "мемоплант",
+        "гінкофар"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею.",
+          "cautions": "Може підвищувати ризик кровотеч, особливо з антикоагулянтами й аспірином. Зупиніть за 2 тижні до операції. Не їжте сире насіння гінкго — воно отруйне."
+        },
+        "en": {
+          "intake": "With food.",
+          "cautions": "May raise the risk of bleeding, especially with anticoagulants and aspirin. Stop 2 weeks before surgery. Don't eat raw ginkgo seeds — they are poisonous."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Ginkgo",
+            "url": "https://www.nccih.nih.gov/health/ginkgo"
+          }
+        ]
+      }
+    },
+    {
+      "key": "st_johns_wort",
+      "uk": "Звіробій",
+      "en": "St. John's wort",
+      "aliases": [
+        "звіробій",
+        "звіробою",
+        "зверобой",
+        "hypericum",
+        "st. john",
+        "st john",
+        "деприм",
+        "гелариум",
+        "геларіум",
+        "негрустин"
+      ],
+      "info": {
+        "uk": {
+          "intake": "За інструкцією препарату. Під час прийому уникайте засмаги: шкіра чутливіша до сонця.",
+          "cautions": "Послаблює дію багатьох ліків: протизаплідних таблеток, варфарину, антикоагулянтів, деяких ліків від серця й ВІЛ. З антидепресантами може викликати серотоніновий синдром. Обов'язково скажіть лікарю."
+        },
+        "en": {
+          "intake": "As the product label says. Avoid tanning while taking it: skin is more sensitive to the sun.",
+          "cautions": "Weakens many medicines: birth control pills, warfarin, anticoagulants, some heart and HIV drugs. With antidepressants it can cause serotonin syndrome. Always tell your doctor."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: St. John's wort",
+            "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+          }
+        ]
+      }
+    },
+    {
+      "key": "red_yeast_rice",
+      "uk": "Червоний дріжджовий рис",
+      "en": "Red yeast rice",
+      "aliases": [
+        "червоний дріжджовий",
+        "червоного дріжджового",
+        "красный дрожжевой",
+        "red yeast",
+        "монаколін",
+        "монаколин",
+        "monacolin",
+        "армолипид",
+        "армоліпід"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Увечері з їжею.",
+          "cautions": "Містить монаколін K — ту саму речовину, що й статин ловастатин. Тому не поєднуйте зі статинами. Можливі ті самі побічні ефекти: біль у м'язах, ураження печінки. Не для вагітних."
+        },
+        "en": {
+          "intake": "In the evening with food.",
+          "cautions": "Contains monacolin K — the same compound as the statin lovastatin. So don't combine it with statins. The same side effects are possible: muscle pain, liver damage. Not for pregnancy."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Red yeast rice",
+            "url": "https://www.nccih.nih.gov/health/red-yeast-rice"
+          }
+        ]
+      }
+    },
+    {
+      "key": "rhodiola",
+      "uk": "Родіола рожева",
+      "en": "Rhodiola",
+      "aliases": [
+        "родіол",
+        "родиол",
+        "rhodiola",
+        "золотий корінь",
+        "золотой корень"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Зранку або вдень: увечері може заважати сну.",
+          "cautions": "Даних про безпеку мало. Можливі запаморочення, сухість у роті. Вагітним і при біполярному розладі — лише за порадою лікаря."
+        },
+        "en": {
+          "intake": "In the morning or afternoon: in the evening it may disturb sleep.",
+          "cautions": "Safety data are limited. Dizziness or dry mouth are possible. Pregnant women and people with bipolar disorder only on a doctor's advice."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Rhodiola",
+            "url": "https://www.nccih.nih.gov/health/rhodiola"
+          }
+        ]
+      }
+    },
+    {
+      "key": "milk_thistle",
+      "uk": "Розторопша (силімарин)",
+      "en": "Milk thistle (silymarin)",
+      "aliases": [
+        "розторопш",
+        "расторопш",
+        "milk thistle",
+        "silymarin",
+        "силімарин",
+        "силимарин",
+        "карсил",
+        "легалон",
+        "гепабене",
+        "silybum"
+      ],
+      "info": {
+        "uk": {
+          "intake": "За інструкцією, зазвичай з їжею.",
+          "cautions": "Зазвичай добре переноситься; можливі розлади травлення. При алергії на рослини родини айстрових (амброзія, ромашка) — обережно. Не замінює лікування хвороб печінки."
+        },
+        "en": {
+          "intake": "As the label says, usually with food.",
+          "cautions": "Usually well tolerated; may upset digestion. Be careful if allergic to the daisy family (ragweed, chamomile). It doesn't replace treatment of liver disease."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Milk thistle",
+            "url": "https://www.nccih.nih.gov/health/milk-thistle"
+          }
+        ]
+      }
+    },
+    {
+      "key": "echinacea",
+      "uk": "Ехінацея",
+      "en": "Echinacea",
+      "aliases": [
+        "ехінаце",
+        "эхинаце",
+        "echinacea",
+        "імунал",
+        "иммунал"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Короткими курсами, за інструкцією препарату.",
+          "cautions": "Можливі алергії, особливо при алергії на айстрові (амброзія, ромашка). Розлади травлення. При автоімунних хворобах — порадьтеся з лікарем."
+        },
+        "en": {
+          "intake": "In short courses, as the product label says.",
+          "cautions": "Allergic reactions are possible, especially with a daisy-family allergy (ragweed, chamomile). May upset digestion. With autoimmune disease, ask your doctor."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Echinacea",
+            "url": "https://www.nccih.nih.gov/health/echinacea"
+          }
+        ]
+      }
+    },
+    {
+      "key": "cranberry",
+      "uk": "Журавлина (екстракт)",
+      "en": "Cranberry extract",
+      "aliases": [
+        "журавлин",
+        "клюкв",
+        "cranberry",
+        "уропрофіт",
+        "монурель",
+        "d-маноза",
+        "d-mannose"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Щодня, з водою.",
+          "cautions": "Зазвичай безпечна; великі кількості можуть розладнати шлунок. Може впливати на дію варфарину. Не лікує вже наявну інфекцію сечових шляхів — зверніться до лікаря."
+        },
+        "en": {
+          "intake": "Daily, with water.",
+          "cautions": "Usually safe; large amounts can upset the stomach. May affect how warfarin works. It doesn't treat an existing urinary infection — see a doctor."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Cranberry",
+            "url": "https://www.nccih.nih.gov/health/cranberry"
+          }
+        ]
+      }
+    },
+    {
+      "key": "berberine",
+      "uk": "Берберин",
+      "en": "Berberine",
+      "aliases": [
+        "берберин",
+        "berberine",
+        "berbevis"
+      ],
+      "info": {
+        "uk": {
+          "intake": "З їжею, часто ділять на 2–3 прийоми.",
+          "cautions": "Можливі закреп, діарея, здуття. Впливає на ферменти печінки, що розщеплюють багато ліків, і може знижувати цукор — якщо приймаєте ліки (особливо від діабету), спершу порадьтеся з лікарем. Не для вагітних і годуючих."
+        },
+        "en": {
+          "intake": "With food, often split into 2–3 doses.",
+          "cautions": "May cause constipation, diarrhoea or bloating. It affects liver enzymes that break down many drugs and can lower blood sugar — if you take medicines (especially for diabetes), ask your doctor first. Not for pregnancy or breastfeeding."
+        },
+        "sources": [
+          {
+            "name": "NCCIH: Berberine",
+            "url": "https://www.nccih.nih.gov/health/berberine-and-weight-loss-what-you-need-to-know"
+          }
+        ]
+      }
+    },
+    {
+      "key": "enterosorbent",
+      "uk": "Ентеросорбенти",
+      "en": "Enterosorbents",
+      "aliases": [
+        "ентеросорбент",
+        "энтеросорбент",
+        "атоксіл",
+        "атоксил",
+        "atoxil",
+        "ентеросгель",
+        "энтеросгель",
+        "enterosgel",
+        "біле вугілля",
+        "белый уголь",
+        "активоване вугілля",
+        "активированный уголь",
+        "смекта",
+        "smecta",
+        "сорбекс",
+        "діоксид кремнію",
+        "диоксид кремния",
+        "полісорб",
+        "полисорб"
+      ],
+      "info": {
+        "uk": {
+          "intake": "Окремо від їжі та інших ліків: щонайменше за 1–2 години до або після них.",
+          "cautions": "Зв'язують у кишківнику не лише токсини, а й ліки та вітаміни — тому інші препарати приймайте окремо. Тривалий прийом може викликати закреп."
+        },
+        "en": {
+          "intake": "Apart from food and other medicines: at least 1–2 hours before or after them.",
+          "cautions": "They bind not only toxins but also medicines and vitamins in the gut — so take other drugs separately. Long use can cause constipation."
+        },
+        "sources": [
+          {
+            "name": "Інструкція «Ентеросгель», Державний реєстр лікарських засобів України",
+            "url": "https://www.drlz.com.ua/"
+          }
+        ]
+      }
+    },
+    {
+      "key": "statin",
+      "uk": "Статини (аторвастатин тощо)",
+      "en": "Statins (atorvastatin etc.)",
+      "aliases": [
+        "статин",
+        "statin",
+        "аторвастатин",
+        "atorvastatin",
+        "аторис",
+        "atoris",
+        "ліпримар",
+        "липримар",
+        "lipitor",
+        "торвакард",
+        "розувастатин",
+        "rosuvastatin",
+        "крестор",
+        "crestor",
+        "роксера",
+        "мертеніл",
+        "мертенил",
+        "розукард",
+        "симвастатин",
+        "simvastatin",
+        "зокор",
+        "вазиліп",
+        "вазилип",
+        "ловастатин",
+        "lovastatin",
+        "правастатин",
+        "pravastatin",
+        "флувастатин",
+        "fluvastatin",
+        "пітавастатин"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "doac",
+      "uk": "Прямі антикоагулянти (ривароксабан тощо)",
+      "en": "Direct anticoagulants (rivaroxaban etc.)",
+      "aliases": [
+        "ривароксабан",
+        "rivaroxaban",
+        "ксарелто",
+        "xarelto",
+        "апіксабан",
+        "апиксабан",
+        "apixaban",
+        "еліквіс",
+        "эликвис",
+        "eliquis",
+        "дабігатран",
+        "дабигатран",
+        "dabigatran",
+        "прадакса",
+        "pradaxa",
+        "едоксабан",
+        "эдоксабан",
+        "edoxaban"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "antiplatelet",
+      "uk": "Антиагреганти (клопідогрель тощо)",
+      "en": "Antiplatelets (clopidogrel etc.)",
+      "aliases": [
+        "клопідогрель",
+        "клопидогрел",
+        "clopidogrel",
+        "плавікс",
+        "плавикс",
+        "plavix",
+        "атрогрел",
+        "тікагрелор",
+        "тикагрелор",
+        "ticagrelor",
+        "брилінта",
+        "брилинта",
+        "brilinta",
+        "прасугрел",
+        "prasugrel"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "aspirin",
+      "uk": "Аспірин (ацетилсаліцилова кислота)",
+      "en": "Aspirin",
+      "aliases": [
+        "аспірин",
+        "аспирин",
+        "aspirin",
+        "ацетилсаліцил",
+        "ацетилсалицил",
+        "acetylsalicylic",
+        "кардіомагніл",
+        "кардиомагнил",
+        "магнікор",
+        "магникор",
+        "тромбо асс",
+        "тромбо асс",
+        "аспекард",
+        "цитрамон"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "nsaid",
+      "uk": "Протизапальні знеболювальні (ібупрофен тощо)",
+      "en": "NSAID painkillers (ibuprofen etc.)",
+      "aliases": [
+        "ібупрофен",
+        "ибупрофен",
+        "ibuprofen",
+        "нурофєн",
+        "нурофен",
+        "nurofen",
+        "ібупром",
+        "ибупром",
+        "ібуклін",
+        "ибуклин",
+        "диклофенак",
+        "diclofenac",
+        "вольтарен",
+        "voltaren",
+        "диклоберл",
+        "наклофен",
+        "олфен",
+        "німесил",
+        "нимесил",
+        "німесулід",
+        "нимесулид",
+        "nimesulide",
+        "мелоксикам",
+        "meloxicam",
+        "мовалис",
+        "мовалікс",
+        "напроксен",
+        "naproxen",
+        "налгезин",
+        "кеторолак",
+        "ketorolac",
+        "кетанов",
+        "кеторол",
+        "декскетопрофен",
+        "dexketoprofen",
+        "дексалгін",
+        "дексалгин",
+        "целекоксиб",
+        "celecoxib",
+        "целебрекс",
+        "еторикоксиб",
+        "эторикоксиб",
+        "аркоксія",
+        "аркоксиа"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "paracetamol",
+      "uk": "Парацетамол",
+      "en": "Paracetamol (acetaminophen)",
+      "aliases": [
+        "парацетамол",
+        "paracetamol",
+        "acetaminophen",
+        "панадол",
+        "panadol",
+        "ефералган",
+        "эффералган",
+        "efferalgan",
+        "цитрамон",
+        "колдрекс",
+        "coldrex",
+        "терафлю",
+        "theraflu",
+        "фервекс",
+        "fervex",
+        "ринзасип",
+        "ібуклін",
+        "ибуклин",
+        "солпадеїн",
+        "солпадеин"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "ssri",
+      "uk": "Антидепресанти СІЗЗС (сертралін тощо)",
+      "en": "SSRI antidepressants (sertraline etc.)",
+      "aliases": [
+        "сертралін",
+        "сертралин",
+        "sertraline",
+        "золофт",
+        "zoloft",
+        "асентра",
+        "стимулотон",
+        "есциталопрам",
+        "эсциталопрам",
+        "escitalopram",
+        "ципралекс",
+        "cipralex",
+        "есципрам",
+        "эсципрам",
+        "лексапро",
+        "циталопрам",
+        "citalopram",
+        "флуоксетин",
+        "fluoxetine",
+        "прозак",
+        "prozac",
+        "пароксетин",
+        "paroxetine",
+        "паксил",
+        "рексетин",
+        "флувоксамін",
+        "флувоксамин",
+        "fluvoxamine",
+        "феварин"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "snri",
+      "uk": "Антидепресанти СІЗЗСН (венлафаксин, дулоксетин)",
+      "en": "SNRI antidepressants (venlafaxine, duloxetine)",
+      "aliases": [
+        "венлафаксин",
+        "venlafaxine",
+        "велаксин",
+        "велафакс",
+        "дулоксетин",
+        "duloxetine",
+        "симбалта",
+        "cymbalta",
+        "мілнаципран",
+        "милнаципран",
+        "milnacipran"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "trazodone",
+      "uk": "Тразодон",
+      "en": "Trazodone",
+      "aliases": [
+        "тразодон",
+        "trazodone",
+        "тритіко",
+        "триттико",
+        "trittico"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "tramadol",
+      "uk": "Трамадол",
+      "en": "Tramadol",
+      "aliases": [
+        "трамадол",
+        "tramadol",
+        "залдіар",
+        "залдиар",
+        "трамал"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "ace_inhibitor",
+      "uk": "Інгібітори АПФ (лізиноприл, периндоприл тощо)",
+      "en": "ACE inhibitors (lisinopril, perindopril etc.)",
+      "aliases": [
+        "лізиноприл",
+        "лизиноприл",
+        "lisinopril",
+        "диротон",
+        "ліприл",
+        "липрил",
+        "еналаприл",
+        "эналаприл",
+        "enalapril",
+        "енап",
+        "энап",
+        "берліприл",
+        "берлиприл",
+        "периндоприл",
+        "perindopril",
+        "престаріум",
+        "престариум",
+        "prestarium",
+        "пренеса",
+        "трипліксам",
+        "трипликсам",
+        "престанс",
+        "нолiпрел",
+        "нолипрел",
+        "раміприл",
+        "рамиприл",
+        "ramipril",
+        "хартил",
+        "тритаце",
+        "каптоприл",
+        "captopril",
+        "фозиноприл",
+        "fosinopril",
+        "моноприл",
+        "зофеноприл",
+        "zofenopril"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "arb",
+      "uk": "Сартани (лозартан, валсартан тощо)",
+      "en": "ARBs (losartan, valsartan etc.)",
+      "aliases": [
+        "сартан",
+        "sartan",
+        "лозартан",
+        "losartan",
+        "лозап",
+        "лориста",
+        "козаар",
+        "cozaar",
+        "валсартан",
+        "valsartan",
+        "вальсакор",
+        "діован",
+        "диован",
+        "diovan",
+        "кандесартан",
+        "candesartan",
+        "атаканд",
+        "телмісартан",
+        "телмисартан",
+        "telmisartan",
+        "мікардис",
+        "микардис",
+        "micardis",
+        "ірбесартан",
+        "ирбесартан",
+        "irbesartan",
+        "апровель",
+        "олмесартан",
+        "olmesartan"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "potassium_sparing",
+      "uk": "Калійзберігаючі діуретики (спіронолактон тощо)",
+      "en": "Potassium-sparing diuretics (spironolactone etc.)",
+      "aliases": [
+        "спіронолактон",
+        "спиронолактон",
+        "spironolactone",
+        "верошпірон",
+        "верошпирон",
+        "veroshpiron",
+        "альдактон",
+        "aldactone",
+        "еплеренон",
+        "эплеренон",
+        "eplerenone",
+        "інспра",
+        "инспра",
+        "амілорид",
+        "амилорид",
+        "amiloride",
+        "тріамтерен",
+        "триамтерен",
+        "triamterene"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "thiazide",
+      "uk": "Тіазидні діуретики (гідрохлоротіазид, індапамід)",
+      "en": "Thiazide diuretics (hydrochlorothiazide, indapamide)",
+      "aliases": [
+        "гідрохлоротіазид",
+        "гидрохлоротиазид",
+        "hydrochlorothiazide",
+        "гіпотіазид",
+        "гипотиазид",
+        "індапамід",
+        "индапамид",
+        "indapamide",
+        "арифон",
+        "хлорталідон",
+        "хлорталидон",
+        "chlorthalidone",
+        "пренеса",
+        "трипліксам",
+        "трипликсам",
+        "нолiпрел",
+        "нолипрел",
+        "ко-діован",
+        "ко-диован"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "bisphosphonate",
+      "uk": "Бісфосфонати (алендронат тощо)",
+      "en": "Bisphosphonates (alendronate etc.)",
+      "aliases": [
+        "алендрон",
+        "alendron",
+        "фосамакс",
+        "fosamax",
+        "осталон",
+        "ібандрон",
+        "ибандрон",
+        "ibandron",
+        "бонвіва",
+        "бонвива",
+        "bonviva",
+        "ризедрон",
+        "risedron",
+        "актонел"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "methotrexate",
+      "uk": "Метотрексат",
+      "en": "Methotrexate",
+      "aliases": [
+        "метотрексат",
+        "methotrexate",
+        "методжект",
+        "metoject",
+        "трексан"
+      ],
+      "kind": "drug"
+    },
+    {
+      "key": "hormonal_contraceptive",
+      "uk": "Гормональні контрацептиви",
+      "en": "Hormonal contraceptives",
+      "aliases": [
+        "контрацептив",
+        "contraceptive",
+        "ярина",
+        "yarina",
+        "джес",
+        "регулон",
+        "regulon",
+        "новинет",
+        "ліндинет",
+        "линдинет",
+        "мідіана",
+        "мидиана",
+        "клайра",
+        "белара",
+        "жанін",
+        "жанин",
+        "janine",
+        "лактинет",
+        "чарозета",
+        "етинілестрадіол",
+        "этинилэстрадиол",
+        "ethinyl",
+        "дроспіренон",
+        "дроспиренон",
+        "drospirenone",
+        "левоноргестрел",
+        "levonorgestrel",
+        "дезогестрел",
+        "desogestrel",
+        "дієногест",
+        "диеногест",
+        "dienogest",
+        "постинор",
+        "ескапел",
+        "эскапел"
+      ],
+      "kind": "drug"
     }
   ],
   "rules": [
@@ -691,6 +2030,406 @@
       "en": "Piperine improves coenzyme Q10 absorption.",
       "source": "Linus Pauling Institute, Coenzyme Q10",
       "url": "https://lpi.oregonstate.edu/mic/dietary-factors/coenzyme-Q10"
+    },
+    {
+      "a": "potassium",
+      "b": "ace_inhibitor",
+      "type": "avoid",
+      "uk": "Разом можуть надмірно підвищити калій у крові (небезпечно для серця). Лише під контролем лікаря й аналізів.",
+      "en": "Together they can raise blood potassium too high (dangerous for the heart). Only with your doctor and blood tests.",
+      "source": "NIH Office of Dietary Supplements, Potassium fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/"
+    },
+    {
+      "a": "potassium",
+      "b": "arb",
+      "type": "avoid",
+      "uk": "Разом можуть надмірно підвищити калій у крові (небезпечно для серця). Лише під контролем лікаря й аналізів.",
+      "en": "Together they can raise blood potassium too high (dangerous for the heart). Only with your doctor and blood tests.",
+      "source": "NIH Office of Dietary Supplements, Potassium fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/"
+    },
+    {
+      "a": "potassium",
+      "b": "potassium_sparing",
+      "type": "avoid",
+      "uk": "Разом можуть надмірно підвищити калій у крові (небезпечно для серця). Лише під контролем лікаря й аналізів.",
+      "en": "Together they can raise blood potassium too high (dangerous for the heart). Only with your doctor and blood tests.",
+      "source": "NIH Office of Dietary Supplements, Potassium fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/"
+    },
+    {
+      "a": "calcium",
+      "b": "thiazide",
+      "type": "avoid",
+      "uk": "Тіазидні діуретики затримують кальцій: з великими дозами кальцію можлива гіперкальціємія.",
+      "en": "Thiazide diuretics retain calcium: with high-dose calcium, hypercalcaemia is possible.",
+      "source": "NIH Office of Dietary Supplements, Calcium fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/"
+    },
+    {
+      "a": "magnesium",
+      "b": "bisphosphonate",
+      "type": "separate",
+      "hours": 2,
+      "uk": "Магній заважає засвоєнню бісфосфонату. Бісфосфонат — натщесерце, магній — щонайменше через 2 години.",
+      "en": "Magnesium reduces bisphosphonate absorption. Take the bisphosphonate on an empty stomach and magnesium at least 2 hours apart.",
+      "source": "NIH Office of Dietary Supplements, Magnesium fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"
+    },
+    {
+      "a": "calcium",
+      "b": "bisphosphonate",
+      "type": "separate",
+      "hours": 2,
+      "uk": "Бісфосфонат приймають натщесерце окремо від мінералів: вони блокують його засвоєння.",
+      "en": "Take the bisphosphonate on an empty stomach, apart from minerals: they block its absorption.",
+      "source": "Alendronate prescribing information (FDA label)"
+    },
+    {
+      "a": "iron",
+      "b": "bisphosphonate",
+      "type": "separate",
+      "hours": 2,
+      "uk": "Бісфосфонат приймають натщесерце окремо від мінералів: вони блокують його засвоєння.",
+      "en": "Take the bisphosphonate on an empty stomach, apart from minerals: they block its absorption.",
+      "source": "Alendronate prescribing information (FDA label)"
+    },
+    {
+      "a": "vitamin_e",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Великі дози вітаміну E можуть посилювати кровоточивість.",
+      "en": "High-dose vitamin E may increase bleeding.",
+      "source": "NIH Office of Dietary Supplements, Vitamin E fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/"
+    },
+    {
+      "a": "vitamin_e",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Великі дози вітаміну E можуть посилювати кровоточивість.",
+      "en": "High-dose vitamin E may increase bleeding.",
+      "source": "NIH Office of Dietary Supplements, Vitamin E fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/"
+    },
+    {
+      "a": "vitamin_e",
+      "b": "antiplatelet",
+      "type": "avoid",
+      "uk": "Великі дози вітаміну E можуть посилювати кровоточивість.",
+      "en": "High-dose vitamin E may increase bleeding.",
+      "source": "NIH Office of Dietary Supplements, Vitamin E fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/"
+    },
+    {
+      "a": "ginkgo",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Гінкго може підвищувати ризик кровотеч.",
+      "en": "Ginkgo may raise the risk of bleeding.",
+      "source": "NCCIH, Ginkgo",
+      "url": "https://www.nccih.nih.gov/health/ginkgo"
+    },
+    {
+      "a": "ginkgo",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Гінкго може підвищувати ризик кровотеч.",
+      "en": "Ginkgo may raise the risk of bleeding.",
+      "source": "NCCIH, Ginkgo",
+      "url": "https://www.nccih.nih.gov/health/ginkgo"
+    },
+    {
+      "a": "ginkgo",
+      "b": "antiplatelet",
+      "type": "avoid",
+      "uk": "Гінкго може підвищувати ризик кровотеч.",
+      "en": "Ginkgo may raise the risk of bleeding.",
+      "source": "NCCIH, Ginkgo",
+      "url": "https://www.nccih.nih.gov/health/ginkgo"
+    },
+    {
+      "a": "ginkgo",
+      "b": "aspirin",
+      "type": "avoid",
+      "uk": "Гінкго може підвищувати ризик кровотеч.",
+      "en": "Ginkgo may raise the risk of bleeding.",
+      "source": "NCCIH, Ginkgo",
+      "url": "https://www.nccih.nih.gov/health/ginkgo"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "ssri",
+      "type": "avoid",
+      "uk": "Звіробій з антидепресантами може викликати серотоніновий синдром (жар, тремор, сплутаність).",
+      "en": "St. John's wort with antidepressants can cause serotonin syndrome (fever, tremor, confusion).",
+      "source": "NCCIH, St. John's wort",
+      "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "snri",
+      "type": "avoid",
+      "uk": "Звіробій з антидепресантами може викликати серотоніновий синдром (жар, тремор, сплутаність).",
+      "en": "St. John's wort with antidepressants can cause serotonin syndrome (fever, tremor, confusion).",
+      "source": "NCCIH, St. John's wort",
+      "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "trazodone",
+      "type": "avoid",
+      "uk": "Звіробій з антидепресантами може викликати серотоніновий синдром (жар, тремор, сплутаність).",
+      "en": "St. John's wort with antidepressants can cause serotonin syndrome (fever, tremor, confusion).",
+      "source": "NCCIH, St. John's wort",
+      "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "hormonal_contraceptive",
+      "type": "avoid",
+      "uk": "Звіробій послаблює дію протизаплідних таблеток: можлива небажана вагітність і кровотечі між менструаціями.",
+      "en": "St. John's wort weakens birth control pills: unplanned pregnancy and breakthrough bleeding are possible.",
+      "source": "NCCIH, St. John's wort",
+      "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Звіробій послаблює дію варфарину: зростає ризик тромбів.",
+      "en": "St. John's wort weakens warfarin: the risk of clots rises.",
+      "source": "NCCIH, St. John's wort",
+      "url": "https://www.nccih.nih.gov/health/st-johns-wort"
+    },
+    {
+      "a": "st_johns_wort",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Звіробій знижує рівень прямих антикоагулянтів у крові: вони гірше захищають від тромбів.",
+      "en": "St. John's wort lowers blood levels of direct anticoagulants, so they protect less against clots.",
+      "source": "Rivaroxaban and apixaban prescribing information (FDA labels)"
+    },
+    {
+      "a": "red_yeast_rice",
+      "b": "statin",
+      "type": "avoid",
+      "uk": "Червоний дріжджовий рис уже містить статин (монаколін K): разом зростає ризик ураження м'язів і печінки.",
+      "en": "Red yeast rice already contains a statin (monacolin K): together the risk of muscle and liver damage rises.",
+      "source": "NCCIH, Red yeast rice",
+      "url": "https://www.nccih.nih.gov/health/red-yeast-rice"
+    },
+    {
+      "a": "folate",
+      "b": "methotrexate",
+      "type": "together",
+      "uk": "Фолієву кислоту часто призначають до метотрексату, щоб зменшити побічні ефекти — лише за схемою лікаря.",
+      "en": "Folic acid is often prescribed with methotrexate to reduce side effects — only on your doctor's schedule.",
+      "source": "NIH Office of Dietary Supplements, Folate fact sheet",
+      "url": "https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/"
+    },
+    {
+      "a": "glucosamine",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Глюкозамін може посилювати дію варфарину (ризик кровотечі).",
+      "en": "Glucosamine may boost warfarin's effect (bleeding risk).",
+      "source": "NCCIH, Glucosamine and chondroitin",
+      "url": "https://www.nccih.nih.gov/health/glucosamine-and-chondroitin-for-osteoarthritis-what-you-need-to-know"
+    },
+    {
+      "a": "cranberry",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Журавлина може змінювати дію варфарину — частіше контролюйте МНВ.",
+      "en": "Cranberry may change warfarin's effect — check INR more often.",
+      "source": "NCCIH, Cranberry",
+      "url": "https://www.nccih.nih.gov/health/cranberry"
+    },
+    {
+      "a": "ssri",
+      "b": "nsaid",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "snri",
+      "b": "nsaid",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "ssri",
+      "b": "aspirin",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "snri",
+      "b": "aspirin",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "ssri",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "snri",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "ssri",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "snri",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "ssri",
+      "b": "antiplatelet",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "snri",
+      "b": "antiplatelet",
+      "type": "avoid",
+      "uk": "Антидепресант разом із цим препаратом підвищує ризик кровотеч (зокрема шлункових).",
+      "en": "This antidepressant together with this drug raises the risk of bleeding (including stomach bleeding).",
+      "source": "Sertraline and venlafaxine prescribing information (FDA labels)"
+    },
+    {
+      "a": "tramadol",
+      "b": "ssri",
+      "type": "avoid",
+      "uk": "Трамадол з антидепресантами може викликати серотоніновий синдром і судоми.",
+      "en": "Tramadol with antidepressants can cause serotonin syndrome and seizures.",
+      "source": "Tramadol prescribing information (FDA label)"
+    },
+    {
+      "a": "tramadol",
+      "b": "snri",
+      "type": "avoid",
+      "uk": "Трамадол з антидепресантами може викликати серотоніновий синдром і судоми.",
+      "en": "Tramadol with antidepressants can cause serotonin syndrome and seizures.",
+      "source": "Tramadol prescribing information (FDA label)"
+    },
+    {
+      "a": "tramadol",
+      "b": "trazodone",
+      "type": "avoid",
+      "uk": "Трамадол з антидепресантами може викликати серотоніновий синдром і судоми.",
+      "en": "Tramadol with antidepressants can cause serotonin syndrome and seizures.",
+      "source": "Tramadol prescribing information (FDA label)"
+    },
+    {
+      "a": "nsaid",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Протизапальні знеболювальні разом з антикоагулянтами різко підвищують ризик кровотеч.",
+      "en": "NSAID painkillers with anticoagulants sharply raise the risk of bleeding.",
+      "source": "Ibuprofen and rivaroxaban prescribing information (FDA labels)"
+    },
+    {
+      "a": "nsaid",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Протизапальні знеболювальні разом з антикоагулянтами різко підвищують ризик кровотеч.",
+      "en": "NSAID painkillers with anticoagulants sharply raise the risk of bleeding.",
+      "source": "Ibuprofen and rivaroxaban prescribing information (FDA labels)"
+    },
+    {
+      "a": "nsaid",
+      "b": "antiplatelet",
+      "type": "avoid",
+      "uk": "Протизапальні знеболювальні разом з антикоагулянтами різко підвищують ризик кровотеч.",
+      "en": "NSAID painkillers with anticoagulants sharply raise the risk of bleeding.",
+      "source": "Ibuprofen and rivaroxaban prescribing information (FDA labels)"
+    },
+    {
+      "a": "nsaid",
+      "b": "aspirin",
+      "type": "avoid",
+      "uk": "Два препарати групи НПЗП разом шкодять шлунку; ібупрофен ще й послаблює захисну дію аспірину для серця.",
+      "en": "Two NSAID-type drugs together harm the stomach; ibuprofen also weakens aspirin's heart protection.",
+      "source": "FDA: Concomitant use of ibuprofen and aspirin"
+    },
+    {
+      "a": "nsaid",
+      "b": "nsaid",
+      "type": "avoid",
+      "uk": "Два протизапальні знеболювальні одночасно не діють краще, але сильніше шкодять шлунку й ниркам.",
+      "en": "Two NSAID painkillers at once don't work better but harm the stomach and kidneys more.",
+      "source": "Ibuprofen OTC Drug Facts label (FDA)"
+    },
+    {
+      "a": "nsaid",
+      "b": "ace_inhibitor",
+      "type": "avoid",
+      "uk": "НПЗП послаблюють дію ліків від тиску й разом можуть шкодити ниркам. Для частого прийому порадьтеся з лікарем.",
+      "en": "NSAIDs weaken blood pressure medicines and together they can harm the kidneys. Ask your doctor before regular use.",
+      "source": "Ibuprofen prescribing information (FDA label)"
+    },
+    {
+      "a": "nsaid",
+      "b": "arb",
+      "type": "avoid",
+      "uk": "НПЗП послаблюють дію ліків від тиску й разом можуть шкодити ниркам. Для частого прийому порадьтеся з лікарем.",
+      "en": "NSAIDs weaken blood pressure medicines and together they can harm the kidneys. Ask your doctor before regular use.",
+      "source": "Ibuprofen prescribing information (FDA label)"
+    },
+    {
+      "a": "aspirin",
+      "b": "warfarin",
+      "type": "avoid",
+      "uk": "Аспірин з антикоагулянтом підвищує ризик кровотеч — лише якщо так призначив лікар.",
+      "en": "Aspirin with an anticoagulant raises the risk of bleeding — only if your doctor prescribed both.",
+      "source": "Rivaroxaban prescribing information (FDA label)"
+    },
+    {
+      "a": "aspirin",
+      "b": "doac",
+      "type": "avoid",
+      "uk": "Аспірин з антикоагулянтом підвищує ризик кровотеч — лише якщо так призначив лікар.",
+      "en": "Aspirin with an anticoagulant raises the risk of bleeding — only if your doctor prescribed both.",
+      "source": "Rivaroxaban prescribing information (FDA label)"
+    },
+    {
+      "a": "paracetamol",
+      "b": "paracetamol",
+      "type": "avoid",
+      "uk": "У двох препаратах є парацетамол (часто в порошках від застуди): легко перевищити добову дозу й пошкодити печінку.",
+      "en": "Both products contain paracetamol (common in cold remedies): it's easy to exceed the daily limit and damage the liver.",
+      "source": "Acetaminophen OTC Drug Facts label (FDA): liver warning"
     }
   ],
   "products": [

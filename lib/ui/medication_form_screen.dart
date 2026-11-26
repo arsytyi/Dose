@@ -359,16 +359,30 @@ class _MedicationFormScreenState extends ConsumerState<MedicationFormScreen> {
                 spacing: Spacing.sm,
                 runSpacing: Spacing.xs,
                 children: [
-                  for (final sub in catalog.substances)
-                    FilterChip(
-                      label: Text(sub.name(l.localeName.split('_').first)),
-                      selected: _effectiveIngredients.contains(sub.key),
-                      onSelected: (on) => setState(() {
-                        final next = {..._effectiveIngredients};
-                        on ? next.add(sub.key) : next.remove(sub.key);
-                        _ingredients = next;
-                      }),
-                    ),
+                  for (final key in _effectiveIngredients)
+                    if (catalog.substance(key) case final sub?)
+                      InputChip(
+                        label: Text(sub.name(l.localeName.split('_').first)),
+                        onDeleted: () => setState(() {
+                          _ingredients = {..._effectiveIngredients}
+                            ..remove(key);
+                        }),
+                        deleteButtonTooltipMessage: l.ingredientsRemove,
+                      ),
+                  ActionChip(
+                    avatar: const Icon(Icons.add),
+                    label: Text(l.ingredientsAdd),
+                    onPressed: () async {
+                      final picked = await showSubstancePicker(
+                        context,
+                        catalog,
+                        _effectiveIngredients,
+                      );
+                      if (picked != null && mounted) {
+                        setState(() => _ingredients = picked);
+                      }
+                    },
+                  ),
                 ],
               ),
             const SizedBox(height: Spacing.xl),

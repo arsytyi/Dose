@@ -570,8 +570,8 @@
   "guideCautions": "Обережно",
   "guideSources": "Джерела",
   "guideProductPage": "Сторінка продукту",
-  "guideAll": "Довідник добавок",
-  "guideAllSubtitle": "Як приймати, протипоказання, джерела",
+  "guideAll": "Довідник добавок і ліків",
+  "guideAllSubtitle": "Як приймати, сумісність, джерела",
   "productHint": "Обов'язково. Почніть вводити, щоб вибрати готовий продукт",
   "pickDate": "Вибрати дату",
   "statsOpenDay": "Відкрити день",
@@ -774,5 +774,33 @@
         "type": "String"
       }
     }
-  }
+  },
+  "guideSupplements": "Добавки",
+  "guideDrugs": "Ліки",
+  "guideSearch": "Пошук",
+  "guideSearchHint": "Назва або бренд, напр. Олідетрим",
+  "guideNothingFound": "Нічого не знайдено",
+  "guideDrugNote": "Для ліків показуємо лише сумісність. Як і скільки приймати — за призначенням лікаря та інструкцією.",
+  "guideRuleCount": "{n, plural, one{{n} правило сумісності} few{{n} правила сумісності} many{{n} правил сумісності} other{{n} правила сумісності}}",
+  "@guideRuleCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "guideRuleAvoid": "обережно разом",
+  "guideRuleSeparate": "розділяти на {hours} год",
+  "@guideRuleSeparate": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "guideRuleTogether": "добре разом",
+  "ingredientsAdd": "Додати речовину",
+  "ingredientsPick": "Діючі речовини",
+  "ingredientsDone": "Готово",
+  "ingredientsRemove": "Прибрати"
 }

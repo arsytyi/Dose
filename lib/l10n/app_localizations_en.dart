@@ -940,10 +940,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get guideProductPage => 'Product page';
 
   @override
-  String get guideAll => 'Supplement guide';
+  String get guideAll => 'Supplement and medicine guide';
 
   @override
-  String get guideAllSubtitle => 'How to take, cautions, sources';
+  String get guideAllSubtitle => 'How to take, compatibility, sources';
 
   @override
   String get productHint =>
@@ -1151,4 +1151,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String listTitle(String status, String period) {
     return '$status · $period';
   }
+
+  @override
+  String get guideSupplements => 'Supplements';
+
+  @override
+  String get guideDrugs => 'Medicines';
+
+  @override
+  String get guideSearch => 'Search';
+
+  @override
+  String get guideSearchHint => 'Name or brand, e.g. Xarelto';
+
+  @override
+  String get guideNothingFound => 'Nothing found';
+
+  @override
+  String get guideDrugNote =>
+      'For medicines we only show compatibility. How and how much to take is up to your doctor and the leaflet.';
+
+  @override
+  String guideRuleCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n compatibility rules',
+      one: '$n compatibility rule',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get guideRuleAvoid => 'careful together';
+
+  @override
+  String guideRuleSeparate(int hours) {
+    return 'keep $hours h apart';
+  }
+
+  @override
+  String get guideRuleTogether => 'good together';
+
+  @override
+  String get ingredientsAdd => 'Add substance';
+
+  @override
+  String get ingredientsPick => 'Active substances';
+
+  @override
+  String get ingredientsDone => 'Done';
+
+  @override
+  String get ingredientsRemove => 'Remove';
 }
