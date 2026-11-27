@@ -362,12 +362,13 @@ class _ProgressCard extends StatelessWidget {
                     child: CircularProgressIndicator(
                       value: future ? 0 : summary.progress,
                       strokeWidth: 6,
+                      color: Accents.of(context).good,
                       backgroundColor: scheme.surface,
                       strokeCap: StrokeCap.round,
                     ),
                   ),
                   if (done)
-                    Icon(Icons.check, color: scheme.primary, size: 32)
+                    Icon(Icons.check, color: Accents.of(context).good, size: 32)
                   else
                     Text(
                       future ? '${summary.total}' : l.progressPercent(percent),
@@ -436,6 +437,13 @@ class _PartSection extends ConsumerWidget {
       DayPart.afternoon => (l.partAfternoon, Icons.wb_sunny_outlined),
       DayPart.evening => (l.partEvening, Icons.nights_stay_outlined),
     };
+    final accents = Accents.of(context);
+    final iconColor = switch (part) {
+      DayPart.night => accents.night,
+      DayPart.morning => accents.morning,
+      DayPart.afternoon => accents.afternoon,
+      DayPart.evening => accents.evening,
+    };
     final pending = slots
         .where((s) => s.isPending && s.scheduledAt != null)
         .toList();
@@ -457,11 +465,7 @@ class _PartSection extends ConsumerWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                icon,
-                size: 20,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              Icon(icon, size: 20, color: iconColor),
               const SizedBox(width: Spacing.sm),
               Expanded(
                 child: Text(
@@ -609,7 +613,7 @@ class StatusChip extends StatelessWidget {
         slot.actualAt == null
             ? l.stateTaken
             : l.stateTakenAt(hm(slot.actualAt)),
-        scheme.primary,
+        Accents.of(context).good,
       ),
       DoseState.skipped => (
         Icons.block,

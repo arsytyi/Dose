@@ -1,3 +1,3 @@
 /// App version shown in settings and compared with GitHub releases.
 /// Keep in sync with `version:` in pubspec.yaml (CI checks this).
-const appVersion = '0.13.1';
+const appVersion = '0.14.0';

@@ -20,6 +20,18 @@ Seed: teal `#2E7D6B` (trust, health, not alarming). Material 3 generates the ful
 
 Medication colors (`medColors`) are user-chosen identification colors. They are always shown together with the medication's name, never as the only signal.
 
+Accents (`Accents` theme extension in `lib/ui/theme.dart`): a few bright touches on top of the teal, never on large surfaces. Light values are dark enough for text on light surfaces; dark values are lighter tones.
+
+| Token | Light | Dark | Used for |
+|---|---|---|---|
+| good | `#16753E` | `#6FD39A` | taken, days ≥ 90%, progress ring |
+| warn | `#A65F00` | `#F5C04A` | skipped, days 60–89% |
+| bad | `#C4413C` | `#FF8A80` | not marked, days < 60% |
+| flame | `#E8590C` | `#FFA24D` | streak |
+| morning / afternoon / evening / night | `#D9731A` / `#B88A00` / `#5B55D6` / `#3F64C8` | `#FFB36B` / `#FFD45C` / `#A9A4FF` / `#8FB4FF` | day-part icons |
+
+Rules: an accent always sits next to a number, label or icon that says the same thing. Today's bar in the daily chart stays teal until the day is over. Per-medication bars use the medication's own color. Settings icons sit in 16% tinted circles (`TonalIcon`).
+
 ## Typography
 
 System font (Roboto on Android) with Material 3 type roles:

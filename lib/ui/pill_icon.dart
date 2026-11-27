@@ -288,7 +288,11 @@ class PillAvatar extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        // A soft tint of the pill's own color.
+        color: Color.alphaBlend(
+          Color(medication.color).withValues(alpha: 0.18),
+          Theme.of(context).colorScheme.surface,
+        ),
         shape: BoxShape.circle,
       ),
       alignment: Alignment.center,

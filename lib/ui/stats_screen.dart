@@ -74,6 +74,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                     ))
                   if (meds[e.key] case final m?)
                     PercentRow(
+                      barColor: Color(m.color),
                       leading: PillAvatar(m),
                       label: m.name,
                       counts: e.value,
@@ -174,6 +175,7 @@ class _SummaryCard extends StatelessWidget {
             OutcomeCounts(
               counts: t,
               color: onCard,
+              colorfulIcons: true,
               onOpen: (o) =>
                   showDoseListSheet(context, outcome: o, periodDays: period),
             ),
@@ -181,7 +183,10 @@ class _SummaryCard extends StatelessWidget {
               const SizedBox(height: Spacing.lg),
               Row(
                 children: [
-                  Icon(Icons.local_fire_department, color: onCard),
+                  Icon(
+                    Icons.local_fire_department,
+                    color: Accents.of(context).flame,
+                  ),
                   const SizedBox(width: Spacing.sm),
                   Expanded(
                     child: Text(
@@ -231,6 +236,7 @@ class _DailyChartState extends State<DailyChart> {
     final scheme = theme.colorScheme;
     final locale = Localizations.localeOf(context).toLanguageTag();
     final days = widget.days;
+    final today = dateOnly(DateTime.now());
     final selected = _selected ?? days.length - 1;
     final sel = days[selected];
     final dateFmt = DateFormat.MMMEd(locale);
@@ -317,6 +323,8 @@ class _DailyChartState extends State<DailyChart> {
                                   ),
                                   child: _Bar(
                                     fraction: d.counts.adherence,
+                                    // Today isn't over: no verdict color yet.
+                                    inProgress: d.day == today,
                                     height: chartHeight,
                                     selected: i == selected,
                                   ),
@@ -355,10 +363,12 @@ class _Bar extends StatelessWidget {
     required this.fraction,
     required this.height,
     required this.selected,
+    this.inProgress = false,
   });
 
   /// Null when nothing was due that day.
   final double? fraction;
+  final bool inProgress;
   final double height;
   final bool selected;
 
@@ -378,9 +388,11 @@ class _Bar extends StatelessWidget {
     return Container(
       height: h,
       decoration: BoxDecoration(
-        color: selected
-            ? scheme.primary
-            : scheme.primary.withValues(alpha: 0.55),
+        color:
+            (inProgress
+                    ? scheme.primary
+                    : Accents.of(context).forAdherence(fraction!))
+                .withValues(alpha: selected ? 1 : 0.6),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
       ),
     );
