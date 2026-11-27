@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -126,7 +127,7 @@ class NotificationService {
   NotificationDetails _details(
     AppLocalizations l, {
     bool actions = true,
-    Uint8List? largeIcon,
+    String? largeIcon,
     PlannedNotification? n,
   }) {
     final role = n?.role ?? NotificationRole.single;
@@ -145,7 +146,10 @@ class NotificationService {
                 for (final i in n!.items) itemLine(i, l),
               ], contentTitle: title(n, l))
             : const DefaultStyleInformation(true, true),
-        largeIcon: largeIcon == null ? null : ByteArrayAndroidBitmap(largeIcon),
+        // A file path, not the picture's bytes: the plugin keeps every
+        // scheduled reminder in one JSON string and rewrites it on each
+        // change, so bytes there made every reminder update slow.
+        largeIcon: largeIcon == null ? null : FilePathAndroidBitmap(largeIcon),
         // A group sounds once, through its summary.
         groupKey: n?.groupKey,
         setAsGroupSummary: role == NotificationRole.summary,
@@ -243,23 +247,45 @@ class NotificationService {
     );
   }
 
-  final _iconCache = <(PillShape, int, int?), Uint8List>{};
+  final _iconCache = <(PillShape, int, int?), String>{};
 
-  /// Drawing of the first medication in the reminder.
-  Future<Uint8List?> _iconFor(PlannedNotification n) async {
+  /// Drawing of the first medication in the reminder, saved once as a PNG
+  /// file in the app's own storage. Returns its path.
+  Future<String?> _iconFor(PlannedNotification n) async {
     if (n.items.isEmpty) return null;
     final look = n.items.first.look;
     final key = (look.shape, look.color, look.color2);
+    if (_iconCache[key] case final path?) return path;
     try {
-      return _iconCache[key] ??= await renderPillPng(
-        shape: look.shape,
-        color: look.color,
-        color2: look.color2,
+      final dir = Directory(
+        '${(await getApplicationSupportDirectory()).path}/reminder_icons',
       );
+      final name = [
+        look.shape.name,
+        look.color.toRadixString(16),
+        look.color2?.toRadixString(16) ?? 'none',
+      ].join('_');
+      final file = File('${dir.path}/$name.png');
+      if (!await file.exists()) {
+        await dir.create(recursive: true);
+        final png = await renderPillPng(
+          shape: look.shape,
+          color: look.color,
+          color2: look.color2,
+        );
+        await file.writeAsBytes(png, flush: true);
+      }
+      return _iconCache[key] = file.path;
     } catch (e) {
       debugPrint('Pill icon failed: $e');
       return null;
     }
+  }
+
+  /// Cancels every scheduled reminder in one step (shown ones stay).
+  Future<void> cancelAllPending() async {
+    if (!supported) return;
+    await _plugin.cancelAllPendingNotifications();
   }
 
   /// Brings pending reminders in line with [plan] and [stock], touching only

@@ -20,6 +20,9 @@ abstract final class Prefs {
   /// Whether the first-run request for exact reminders was shown.
   static const exactAlarmAsked = 'exactAlarmAsked';
 
+  /// Format of the reminders stored by the notification plugin.
+  static const reminderStoreVersion = 'reminderStoreVersion';
+
   /// JSON map of notification id to signature, from the last reminder sync.
   static const scheduledReminders = 'scheduledReminders';
 

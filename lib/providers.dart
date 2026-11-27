@@ -343,7 +343,36 @@ class ReminderSync {
     _debounce = Timer(const Duration(milliseconds: 400), resync);
   }
 
-  Future<void> resync() async {
+  Future<void>? _running;
+  bool _again = false;
+
+  /// Brings scheduled reminders up to date. One sync runs at a time: a call
+  /// during a sync waits for it and then for one more pass, so overlapping
+  /// calls (start, restore, return to the app) never schedule in parallel.
+  Future<void> resync() {
+    if (_running case final running?) {
+      _again = true;
+      return running;
+    }
+    return _running = _runUntilDone();
+  }
+
+  Future<void> _runUntilDone() async {
+    try {
+      do {
+        _again = false;
+        await _resyncOnce();
+      } while (_again);
+    } finally {
+      _running = null;
+    }
+  }
+
+  /// Bumped when what the notification plugin stores must be rebuilt.
+  /// 2: pill pictures are files, no longer bytes inside each reminder.
+  static const _storeVersion = 2;
+
+  Future<void> _resyncOnce() async {
     final db = ref.read(databaseProvider);
     final now = DateTime.now();
     final plan = await db.activePlan();
@@ -361,14 +390,19 @@ class ReminderSync {
       followUpMinutes: settings.repeat ? Prefs.followUpMinutes : const [],
     );
     final prefs = ref.read(sharedPreferencesProvider);
-    final scheduled = await ref
-        .read(notificationServiceProvider)
-        .replaceAll(
-          notifications,
-          localizationsFor(prefs),
-          stock: Prefs.pro(prefs) ? _stockReminders(plan, now) : const {},
-          previous: _decode(prefs.getString(Prefs.scheduledReminders)),
-        );
+    final service = ref.read(notificationServiceProvider);
+    if ((prefs.getInt(Prefs.reminderStoreVersion) ?? 1) < _storeVersion) {
+      // Drop the old heavy entries in one step instead of one by one.
+      await service.cancelAllPending();
+      await prefs.remove(Prefs.scheduledReminders);
+      await prefs.setInt(Prefs.reminderStoreVersion, _storeVersion);
+    }
+    final scheduled = await service.replaceAll(
+      notifications,
+      localizationsFor(prefs),
+      stock: Prefs.pro(prefs) ? _stockReminders(plan, now) : const {},
+      previous: _decode(prefs.getString(Prefs.scheduledReminders)),
+    );
     await prefs.setString(
       Prefs.scheduledReminders,
       jsonEncode({for (final e in scheduled.entries) '${e.key}': e.value}),
