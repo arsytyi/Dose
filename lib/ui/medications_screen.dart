@@ -8,6 +8,7 @@ import 'medication_detail_screen.dart';
 import 'medication_form_screen.dart';
 import 'pill_icon.dart';
 import 'stock_widgets.dart';
+import 'expressive.dart';
 import 'theme.dart';
 import 'widgets.dart';
 
@@ -42,10 +43,14 @@ class MedicationsScreen extends ConsumerWidget {
             : ListView(
                 padding: const EdgeInsets.only(bottom: Spacing.fabClearance),
                 children: [
-                  for (final m in list) _MedTile(m),
+                  const SizedBox(height: Spacing.sm),
+                  if (list.isNotEmpty)
+                    TileGroup(children: [for (final m in list) _MedTile(m)]),
                   if (archived.isNotEmpty) ...[
                     SectionTitle(l.archivedSection),
-                    for (final m in archived) _MedTile(m),
+                    TileGroup(
+                      children: [for (final m in archived) _MedTile(m)],
+                    ),
                   ],
                 ],
               ),
@@ -82,7 +87,7 @@ class _MedTile extends ConsumerWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis),
             if (stock?.isLow ?? false) ...[
               const SizedBox(height: Spacing.xs),
               LowStockChip(empty: stock!.isEmpty),

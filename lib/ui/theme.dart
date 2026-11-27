@@ -14,7 +14,11 @@ abstract final class Spacing {
 }
 
 abstract final class Radii {
+  /// Text fields and small surfaces.
   static const card = 12.0;
+
+  /// Cards and grouped tiles (Material 3 Expressive uses larger corners).
+  static const large = 20.0;
 }
 
 const _seed = Color(0xFF2E7D6B);
@@ -141,7 +145,29 @@ ThemeData buildTheme(Brightness brightness) {
     inputDecorationTheme: const InputDecorationTheme(border: border),
     cardTheme: const CardThemeData(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Radii.card)),
+        borderRadius: BorderRadius.all(Radius.circular(Radii.large)),
+      ),
+    ),
+    // Bigger, bolder screen titles.
+    appBarTheme: AppBarThemeData(
+      // ThemeData.textTheme has no sizes yet, so take them from Typography.
+      titleTextStyle: Typography.englishLike2021.headlineSmall!
+          .merge(Typography.blackMountainView.headlineSmall)
+          .copyWith(
+            fontSize: 26,
+            color: scheme.onSurface,
+            fontWeight: FontWeight.w600,
+          ),
+    ),
+    // A shorter bottom bar with bold labels on the current tab.
+    navigationBarTheme: NavigationBarThemeData(
+      height: 68,
+      labelTextStyle: WidgetStateProperty.resolveWith(
+        (states) => base.textTheme.labelMedium?.copyWith(
+          fontWeight: states.contains(WidgetState.selected)
+              ? FontWeight.w700
+              : FontWeight.w500,
+        ),
       ),
     ),
     listTileTheme: const ListTileThemeData(

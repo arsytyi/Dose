@@ -11,6 +11,7 @@ import 'analysis_widgets.dart';
 import 'history_screen.dart';
 import 'medication_stats_screen.dart';
 import 'pill_icon.dart';
+import 'expressive.dart';
 import 'theme.dart';
 import 'widgets.dart';
 
@@ -113,17 +114,13 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               Spacing.lg,
               0,
             ),
-            child: SizedBox(
-              width: double.infinity,
-              child: SegmentedButton<int>(
-                showSelectedIcon: false,
-                segments: [
-                  for (final d in const [7, 30, 90])
-                    ButtonSegment(value: d, label: Text(l.statsPeriod(d))),
-                ],
-                selected: {_period},
-                onSelectionChanged: (s) => setState(() => _period = s.first),
-              ),
+            child: ButtonGroup<int>(
+              choices: [
+                for (final d in const [7, 30, 90])
+                  GroupChoice(d, l.statsPeriod(d)),
+              ],
+              selected: _period,
+              onChanged: (d) => setState(() => _period = d),
             ),
           ),
           Expanded(child: body),

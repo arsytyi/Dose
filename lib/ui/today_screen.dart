@@ -11,6 +11,7 @@ import '../providers.dart';
 import 'dose_sheet.dart';
 import 'pill_icon.dart';
 import 'stock_widgets.dart';
+import 'expressive.dart';
 import 'theme.dart';
 import 'widgets.dart';
 
@@ -357,15 +358,10 @@ class _ProgressCard extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  SizedBox.square(
-                    dimension: 64,
-                    child: CircularProgressIndicator(
-                      value: future ? 0 : summary.progress,
-                      strokeWidth: 6,
-                      color: Accents.of(context).good,
-                      backgroundColor: scheme.surface,
-                      strokeCap: StrokeCap.round,
-                    ),
+                  WavyProgressRing(
+                    value: future ? 0 : summary.progress,
+                    color: Accents.of(context).good,
+                    trackColor: scheme.surface,
                   ),
                   if (done)
                     Icon(Icons.check, color: Accents.of(context).good, size: 32)
