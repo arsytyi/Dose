@@ -1234,4 +1234,75 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get exactAlarmPromptAllow => 'Разрешить';
+
+  @override
+  String get proTitle => 'Dose Pro';
+
+  @override
+  String get proTagline => 'Один платёж. Без подписки и рекламы.';
+
+  @override
+  String get proFeatureAnalytics => 'Подробная аналитика';
+
+  @override
+  String get proFeatureAnalyticsHint =>
+      'Каждый препарат и каждый день отдельно: серии, точность, тенденции.';
+
+  @override
+  String get proFeatureStock => 'Запас и напоминание купить';
+
+  @override
+  String get proFeatureStockHint =>
+      'Сколько дней осталось, и напоминание до того, как закончится.';
+
+  @override
+  String get proFeatureGuide => 'Полный справочник веществ';
+
+  @override
+  String get proFeatureGuideHint =>
+      'Как принимать каждую добавку, с источниками и готовыми продуктами.';
+
+  @override
+  String get proFeatureSounds => 'Свой звук напоминаний';
+
+  @override
+  String get proFeatureSoundsHint => 'Звуки Dose или любой звук с телефона.';
+
+  @override
+  String get proFreeNote =>
+      'Бесплатно навсегда: напоминания, журнал приёма, статистика, предупреждения о совместимости и резервные копии.';
+
+  @override
+  String proBuy(String price) {
+    return 'Купить за $price';
+  }
+
+  @override
+  String get proBuyNoPrice => 'Купить Dose Pro';
+
+  @override
+  String get proRestore => 'Восстановить покупку';
+
+  @override
+  String get proUnlockedThanks => 'Dose Pro активирован. Спасибо!';
+
+  @override
+  String get proPending =>
+      'Покупка ожидает оплаты. Pro откроется, как только Google Play её подтвердит.';
+
+  @override
+  String get proError =>
+      'Не удалось связаться с Google Play. Проверьте, что вы вошли в Play, и попробуйте ещё раз.';
+
+  @override
+  String get proLocked => 'Доступно в Dose Pro';
+
+  @override
+  String get proLearnMore => 'О Dose Pro';
+
+  @override
+  String get proSettingsActive => 'Активирован. Спасибо!';
+
+  @override
+  String get proSettingsInactive => 'Аналитика, запас, справочник и звуки';
 }

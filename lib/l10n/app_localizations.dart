@@ -1961,6 +1961,132 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Дозволити'**
   String get exactAlarmPromptAllow;
+
+  /// No description provided for @proTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Dose Pro'**
+  String get proTitle;
+
+  /// No description provided for @proTagline.
+  ///
+  /// In uk, this message translates to:
+  /// **'Один платіж. Без підписки й реклами.'**
+  String get proTagline;
+
+  /// No description provided for @proFeatureAnalytics.
+  ///
+  /// In uk, this message translates to:
+  /// **'Детальна аналітика'**
+  String get proFeatureAnalytics;
+
+  /// No description provided for @proFeatureAnalyticsHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Кожен препарат і кожен день окремо: серії, точність, тенденції.'**
+  String get proFeatureAnalyticsHint;
+
+  /// No description provided for @proFeatureStock.
+  ///
+  /// In uk, this message translates to:
+  /// **'Запас і нагадування купити'**
+  String get proFeatureStock;
+
+  /// No description provided for @proFeatureStockHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Скільки днів залишилося, і нагадування до того, як закінчиться.'**
+  String get proFeatureStockHint;
+
+  /// No description provided for @proFeatureGuide.
+  ///
+  /// In uk, this message translates to:
+  /// **'Повний довідник речовин'**
+  String get proFeatureGuide;
+
+  /// No description provided for @proFeatureGuideHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Як приймати кожну добавку, з джерелами й готовими продуктами.'**
+  String get proFeatureGuideHint;
+
+  /// No description provided for @proFeatureSounds.
+  ///
+  /// In uk, this message translates to:
+  /// **'Свій звук нагадувань'**
+  String get proFeatureSounds;
+
+  /// No description provided for @proFeatureSoundsHint.
+  ///
+  /// In uk, this message translates to:
+  /// **'Звуки Dose або будь-який звук з телефона.'**
+  String get proFeatureSoundsHint;
+
+  /// No description provided for @proFreeNote.
+  ///
+  /// In uk, this message translates to:
+  /// **'Безкоштовно назавжди: нагадування, журнал прийомів, статистика, попередження про сумісність і резервні копії.'**
+  String get proFreeNote;
+
+  /// No description provided for @proBuy.
+  ///
+  /// In uk, this message translates to:
+  /// **'Купити за {price}'**
+  String proBuy(String price);
+
+  /// No description provided for @proBuyNoPrice.
+  ///
+  /// In uk, this message translates to:
+  /// **'Купити Dose Pro'**
+  String get proBuyNoPrice;
+
+  /// No description provided for @proRestore.
+  ///
+  /// In uk, this message translates to:
+  /// **'Відновити покупку'**
+  String get proRestore;
+
+  /// No description provided for @proUnlockedThanks.
+  ///
+  /// In uk, this message translates to:
+  /// **'Dose Pro активовано. Дякуємо!'**
+  String get proUnlockedThanks;
+
+  /// No description provided for @proPending.
+  ///
+  /// In uk, this message translates to:
+  /// **'Покупка чекає оплати. Pro відкриється, щойно Google Play її підтвердить.'**
+  String get proPending;
+
+  /// No description provided for @proError.
+  ///
+  /// In uk, this message translates to:
+  /// **'Не вдалося зв\'язатися з Google Play. Перевірте, що ви увійшли в Play, і спробуйте ще раз.'**
+  String get proError;
+
+  /// No description provided for @proLocked.
+  ///
+  /// In uk, this message translates to:
+  /// **'Доступно в Dose Pro'**
+  String get proLocked;
+
+  /// No description provided for @proLearnMore.
+  ///
+  /// In uk, this message translates to:
+  /// **'Про Dose Pro'**
+  String get proLearnMore;
+
+  /// No description provided for @proSettingsActive.
+  ///
+  /// In uk, this message translates to:
+  /// **'Активовано. Дякуємо!'**
+  String get proSettingsActive;
+
+  /// No description provided for @proSettingsInactive.
+  ///
+  /// In uk, this message translates to:
+  /// **'Аналітика, запас, довідник і звуки'**
+  String get proSettingsInactive;
 }
 
 class _AppLocalizationsDelegate

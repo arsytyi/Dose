@@ -432,5 +432,33 @@
   "exactAlarmPromptAllow": "Allow",
   "@exactAlarmPromptTitle": {
     "description": "First-run dialog asking to allow exact alarms."
-  }
+  },
+  "proTitle": "Dose Pro",
+  "proTagline": "One payment. No subscription, no ads.",
+  "proFeatureAnalytics": "Detailed analytics",
+  "proFeatureAnalyticsHint": "Each medication and each day in depth: streaks, timing, trends.",
+  "proFeatureStock": "Stock and refill reminders",
+  "proFeatureStockHint": "See how many days are left and get reminded before you run out.",
+  "proFeatureGuide": "Full substance guide",
+  "proFeatureGuideHint": "How to take each supplement, with sources and ready-made products.",
+  "proFeatureSounds": "Your own reminder sound",
+  "proFeatureSoundsHint": "Dose sounds or any sound on your phone.",
+  "proFreeNote": "Free forever: reminders, the dose log, statistics, compatibility warnings and backups.",
+  "proBuy": "Buy for {price}",
+  "@proBuy": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "proBuyNoPrice": "Buy Dose Pro",
+  "proRestore": "Restore purchase",
+  "proUnlockedThanks": "Dose Pro is active. Thank you!",
+  "proPending": "The purchase is waiting for payment. Pro opens as soon as Google Play confirms it.",
+  "proError": "Couldn't reach Google Play. Check that you're signed in to Play and try again.",
+  "proLocked": "Available in Dose Pro",
+  "proLearnMore": "About Dose Pro",
+  "proSettingsActive": "Active. Thank you!",
+  "proSettingsInactive": "Analytics, stock, guide and sounds"
 }

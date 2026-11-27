@@ -805,5 +805,33 @@
   "ingredientsRemove": "Прибрати",
   "exactAlarmPromptTitle": "Нагадування вчасно",
   "exactAlarmPromptBody": "Без дозволу на точні будильники Android може затримувати нагадування на кілька хвилин. На наступному екрані увімкніть «Дозволити встановлювати будильники й нагадування».",
-  "exactAlarmPromptAllow": "Дозволити"
+  "exactAlarmPromptAllow": "Дозволити",
+  "proTitle": "Dose Pro",
+  "proTagline": "Один платіж. Без підписки й реклами.",
+  "proFeatureAnalytics": "Детальна аналітика",
+  "proFeatureAnalyticsHint": "Кожен препарат і кожен день окремо: серії, точність, тенденції.",
+  "proFeatureStock": "Запас і нагадування купити",
+  "proFeatureStockHint": "Скільки днів залишилося, і нагадування до того, як закінчиться.",
+  "proFeatureGuide": "Повний довідник речовин",
+  "proFeatureGuideHint": "Як приймати кожну добавку, з джерелами й готовими продуктами.",
+  "proFeatureSounds": "Свій звук нагадувань",
+  "proFeatureSoundsHint": "Звуки Dose або будь-який звук з телефона.",
+  "proFreeNote": "Безкоштовно назавжди: нагадування, журнал прийомів, статистика, попередження про сумісність і резервні копії.",
+  "proBuy": "Купити за {price}",
+  "proBuyNoPrice": "Купити Dose Pro",
+  "proRestore": "Відновити покупку",
+  "proUnlockedThanks": "Dose Pro активовано. Дякуємо!",
+  "proPending": "Покупка чекає оплати. Pro відкриється, щойно Google Play її підтвердить.",
+  "proError": "Не вдалося зв'язатися з Google Play. Перевірте, що ви увійшли в Play, і спробуйте ще раз.",
+  "proLocked": "Доступно в Dose Pro",
+  "proLearnMore": "Про Dose Pro",
+  "proSettingsActive": "Активовано. Дякуємо!",
+  "proSettingsInactive": "Аналітика, запас, довідник і звуки",
+  "@proBuy": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  }
 }

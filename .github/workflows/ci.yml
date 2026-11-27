@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
 
       - uses: subosito/flutter-action@v2
         with:
@@ -51,6 +51,12 @@ jobs:
           code=$(( $(date +%s) / 60 ))
           flutter build apk --release --flavor github --target-platform android-arm64 --build-number=$code
           flutter build appbundle --release --flavor play --build-number=$code
+
+      - name: Show the Play build's permissions
+        run: |
+          m=$(find build/app/intermediates -path '*playRelease*' -name AndroidManifest.xml | grep merged_manifest | head -1)
+          echo "$m"; grep -o 'uses-permission[^>]*' "$m"
+          ! grep -q 'android.permission.INTERNET' "$m" || { echo "Play build must not use INTERNET"; exit 1; }
 
       - uses: actions/upload-artifact@v4
         with:

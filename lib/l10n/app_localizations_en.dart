@@ -1214,4 +1214,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exactAlarmPromptAllow => 'Allow';
+
+  @override
+  String get proTitle => 'Dose Pro';
+
+  @override
+  String get proTagline => 'One payment. No subscription, no ads.';
+
+  @override
+  String get proFeatureAnalytics => 'Detailed analytics';
+
+  @override
+  String get proFeatureAnalyticsHint =>
+      'Each medication and each day in depth: streaks, timing, trends.';
+
+  @override
+  String get proFeatureStock => 'Stock and refill reminders';
+
+  @override
+  String get proFeatureStockHint =>
+      'See how many days are left and get reminded before you run out.';
+
+  @override
+  String get proFeatureGuide => 'Full substance guide';
+
+  @override
+  String get proFeatureGuideHint =>
+      'How to take each supplement, with sources and ready-made products.';
+
+  @override
+  String get proFeatureSounds => 'Your own reminder sound';
+
+  @override
+  String get proFeatureSoundsHint => 'Dose sounds or any sound on your phone.';
+
+  @override
+  String get proFreeNote =>
+      'Free forever: reminders, the dose log, statistics, compatibility warnings and backups.';
+
+  @override
+  String proBuy(String price) {
+    return 'Buy for $price';
+  }
+
+  @override
+  String get proBuyNoPrice => 'Buy Dose Pro';
+
+  @override
+  String get proRestore => 'Restore purchase';
+
+  @override
+  String get proUnlockedThanks => 'Dose Pro is active. Thank you!';
+
+  @override
+  String get proPending =>
+      'The purchase is waiting for payment. Pro opens as soon as Google Play confirms it.';
+
+  @override
+  String get proError =>
+      'Couldn\'t reach Google Play. Check that you\'re signed in to Play and try again.';
+
+  @override
+  String get proLocked => 'Available in Dose Pro';
+
+  @override
+  String get proLearnMore => 'About Dose Pro';
+
+  @override
+  String get proSettingsActive => 'Active. Thank you!';
+
+  @override
+  String get proSettingsInactive => 'Analytics, stock, guide and sounds';
 }
