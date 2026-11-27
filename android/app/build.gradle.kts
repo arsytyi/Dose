@@ -18,8 +18,9 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "app.bady.bady"
+        // Fixed forever once the app is on Google Play. (The Kotlin
+        // namespace stays app.bady.bady; users never see it.)
+        applicationId = "app.dose.reminder"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -51,6 +52,14 @@ android {
                 keyPassword = keystorePassword.trim()
             }
         }
+    }
+
+    // play: Google Play build (no network, updates come from Play).
+    // github: APK for GitHub Releases, can check GitHub for a newer version.
+    flavorDimensions += "store"
+    productFlavors {
+        create("play") { dimension = "store" }
+        create("github") { dimension = "store" }
     }
 
     buildTypes {

@@ -47,8 +47,15 @@ dart run build_runner build   # після змін у lib/data/database.dart
 flutter gen-l10n              # після змін у lib/l10n/*.arb
 flutter analyze
 flutter test
-flutter run
+flutter run --flavor github   # або --flavor play
 ```
+
+Дві збірки (Android product flavors), ідентифікатор `app.dose.reminder`:
+
+- `play` — для Google Play: без доступу до інтернету, оновлення приходять з Play.
+  `flutter build appbundle --release --flavor play`
+- `github` — APK для GitHub Releases, вміє перевіряти нову версію на GitHub.
+  `flutter build apk --release --flavor github --target-platform android-arm64`
 
 Структура:
 

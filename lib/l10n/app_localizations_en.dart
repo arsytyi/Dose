@@ -1204,4 +1204,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ingredientsRemove => 'Remove';
+
+  @override
+  String get exactAlarmPromptTitle => 'Reminders on time';
+
+  @override
+  String get exactAlarmPromptBody =>
+      'Android may delay reminders by several minutes unless Dose is allowed to set exact alarms. On the next screen, turn on “Allow setting alarms and reminders”.';
+
+  @override
+  String get exactAlarmPromptAllow => 'Allow';
 }

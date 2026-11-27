@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Only the GitHub build goes online, to check for a newer version.
+         The Google Play build has no network access at all. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

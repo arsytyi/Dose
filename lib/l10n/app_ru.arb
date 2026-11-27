@@ -306,5 +306,8 @@
   "ingredientsAdd": "Добавить вещество",
   "ingredientsPick": "Действующие вещества",
   "ingredientsDone": "Готово",
-  "ingredientsRemove": "Убрать"
+  "ingredientsRemove": "Убрать",
+  "exactAlarmPromptTitle": "Напоминания вовремя",
+  "exactAlarmPromptBody": "Без разрешения на точные будильники Android может задерживать напоминания на несколько минут. На следующем экране включите «Разрешить установку будильников и напоминаний».",
+  "exactAlarmPromptAllow": "Разрешить"
 }

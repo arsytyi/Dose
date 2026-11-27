@@ -1,7 +1,8 @@
 name: Release
 
 # Push a tag like v0.6.0 (matching lib/version.dart) to publish a signed APK
-# on the repository's Releases page.
+# on the repository's Releases page, plus the app bundle (.aab) to upload to
+# Google Play.
 on:
   push:
     tags: ['v*']
@@ -40,17 +41,20 @@ jobs:
       - run: flutter pub get
       - run: flutter test
 
-      - name: Build APK
+      - name: Build APK (GitHub) and app bundle (Google Play)
         env:
           BADY_KEYSTORE_BASE64: ${{ secrets.BADY_KEYSTORE_BASE64 }}
           BADY_KEYSTORE_PASSWORD: ${{ secrets.BADY_KEYSTORE_PASSWORD }}
         run: |
-          flutter build apk --release --target-platform android-arm64 --build-number=$(( $(date +%s) / 60 ))
-          cp build/app/outputs/flutter-apk/app-release.apk "dose-${GITHUB_REF_NAME}.apk"
+          code=$(( $(date +%s) / 60 ))
+          flutter build apk --release --flavor github --target-platform android-arm64 --build-number=$code
+          flutter build appbundle --release --flavor play --build-number=$code
+          cp build/app/outputs/flutter-apk/app-github-release.apk "dose-${GITHUB_REF_NAME}.apk"
+          cp build/app/outputs/bundle/playRelease/app-play-release.aab "dose-${GITHUB_REF_NAME}-play.aab"
 
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" "dose-${GITHUB_REF_NAME}.apk" \
+          gh release create "$GITHUB_REF_NAME" "dose-${GITHUB_REF_NAME}.apk" "dose-${GITHUB_REF_NAME}-play.aab" \
             --title "Dose ${GITHUB_REF_NAME#v}" --generate-notes

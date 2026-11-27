@@ -306,5 +306,8 @@
   "ingredientsAdd": "Añadir sustancia",
   "ingredientsPick": "Principios activos",
   "ingredientsDone": "Listo",
-  "ingredientsRemove": "Quitar"
+  "ingredientsRemove": "Quitar",
+  "exactAlarmPromptTitle": "Recordatorios a tiempo",
+  "exactAlarmPromptBody": "Sin permiso para alarmas exactas, Android puede retrasar los recordatorios varios minutos. En la siguiente pantalla, activa «Permitir configurar alarmas y recordatorios».",
+  "exactAlarmPromptAllow": "Permitir"
 }

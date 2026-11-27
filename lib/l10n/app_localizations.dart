@@ -1943,6 +1943,24 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Прибрати'**
   String get ingredientsRemove;
+
+  /// No description provided for @exactAlarmPromptTitle.
+  ///
+  /// In uk, this message translates to:
+  /// **'Нагадування вчасно'**
+  String get exactAlarmPromptTitle;
+
+  /// No description provided for @exactAlarmPromptBody.
+  ///
+  /// In uk, this message translates to:
+  /// **'Без дозволу на точні будильники Android може затримувати нагадування на кілька хвилин. На наступному екрані увімкніть «Дозволити встановлювати будильники й нагадування».'**
+  String get exactAlarmPromptBody;
+
+  /// No description provided for @exactAlarmPromptAllow.
+  ///
+  /// In uk, this message translates to:
+  /// **'Дозволити'**
+  String get exactAlarmPromptAllow;
 }
 
 class _AppLocalizationsDelegate
