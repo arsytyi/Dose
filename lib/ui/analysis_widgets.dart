@@ -266,16 +266,30 @@ class OutcomeCounts extends StatelessWidget {
     required this.counts,
     required this.color,
     this.onOpen,
+    this.colorfulIcons = false,
   });
 
   final DoseCounts counts;
   final Color color;
+
+  /// Outcome icons in the accent colors (taken green, skipped amber, not
+  /// marked coral); numbers and labels keep [color].
+  final bool colorfulIcons;
   final void Function(DoseOutcome outcome)? onOpen;
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
+
+    final accents = Accents.of(context);
+    Color iconColor(DoseOutcome o) => !colorfulIcons
+        ? color
+        : switch (o) {
+            DoseOutcome.taken => accents.good,
+            DoseOutcome.skipped => accents.warn,
+            DoseOutcome.missed => accents.bad,
+          };
 
     Widget item(DoseOutcome o, int value) {
       final label = outcomeLabel(o, l);
@@ -286,7 +300,7 @@ class OutcomeCounts extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(outcomeIcon(o), size: 20, color: color),
+              Icon(outcomeIcon(o), size: 24, color: iconColor(o)),
               const SizedBox(height: Spacing.xs),
               Text(
                 '$value',
@@ -351,8 +365,11 @@ class PercentRow extends StatelessWidget {
     required this.counts,
     this.leading,
     this.onTap,
+    this.barColor,
   });
 
+  /// Bar color; the theme's primary color when null.
+  final Color? barColor;
   final String label;
   final DoseCounts counts;
   final Widget? leading;
@@ -374,6 +391,7 @@ class PercentRow extends StatelessWidget {
           child: LinearProgressIndicator(
             value: counts.adherence ?? 0,
             minHeight: 8,
+            color: barColor,
             backgroundColor: theme.colorScheme.surfaceContainerHighest,
           ),
         ),
