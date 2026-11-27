@@ -12,7 +12,6 @@ import 'history_screen.dart';
 import 'medication_stats_screen.dart';
 import 'pill_icon.dart';
 import 'theme.dart';
-import 'accents.dart';
 import 'widgets.dart';
 
 /// Dose log for the last year, for statistics and history.
@@ -75,7 +74,6 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                     ))
                   if (meds[e.key] case final m?)
                     PercentRow(
-                      barColor: accentVariant == 'b' ? Color(m.color) : null,
                       leading: PillAvatar(m),
                       label: m.name,
                       counts: e.value,
@@ -146,13 +144,11 @@ class _SummaryCard extends StatelessWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final t = stats.total;
-    final b = accentVariant == 'b';
-    final acc = Accents(context);
-    final onCard = b ? scheme.onPrimary : scheme.onSecondaryContainer;
+    final onCard = scheme.onSecondaryContainer;
 
     return Card(
       margin: const EdgeInsets.all(Spacing.lg),
-      color: b ? scheme.primary : scheme.secondaryContainer,
+      color: scheme.secondaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(Spacing.lg),
         child: Column(
@@ -178,11 +174,6 @@ class _SummaryCard extends StatelessWidget {
             OutcomeCounts(
               counts: t,
               color: onCard,
-              iconColors: accentVariant == 'a'
-                  ? [acc.good, acc.warn, acc.bad]
-                  : b
-                  ? [onCard, onCard, onCard]
-                  : null,
               onOpen: (o) =>
                   showDoseListSheet(context, outcome: o, periodDays: period),
             ),
@@ -190,12 +181,7 @@ class _SummaryCard extends StatelessWidget {
               const SizedBox(height: Spacing.lg),
               Row(
                 children: [
-                  Icon(
-                    Icons.local_fire_department,
-                    color: accentsOn
-                        ? (b ? const Color(0xFFFFC857) : acc.flame)
-                        : onCard,
-                  ),
+                  Icon(Icons.local_fire_department, color: onCard),
                   const SizedBox(width: Spacing.sm),
                   Expanded(
                     child: Text(
@@ -392,12 +378,8 @@ class _Bar extends StatelessWidget {
     return Container(
       height: h,
       decoration: BoxDecoration(
-        color: accentVariant == 'a'
-            ? Accents(context).byFraction(fraction).withValues(
-                alpha: selected ? 1 : 0.7,
-              )
-            : selected
-            ? (accentVariant == 'b' ? scheme.tertiary : scheme.primary)
+        color: selected
+            ? scheme.primary
             : scheme.primary.withValues(alpha: 0.55),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
       ),

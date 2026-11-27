@@ -13,7 +13,6 @@ import 'day_analysis_screen.dart';
 import 'pill_icon.dart';
 import 'stats_screen.dart';
 import 'theme.dart';
-import 'accents.dart';
 import 'today_screen.dart';
 import 'widgets.dart';
 
@@ -267,12 +266,10 @@ class OutcomeCounts extends StatelessWidget {
     required this.counts,
     required this.color,
     this.onOpen,
-    this.iconColors,
   });
 
   final DoseCounts counts;
   final Color color;
-  final List<Color>? iconColors;
   final void Function(DoseOutcome outcome)? onOpen;
 
   @override
@@ -289,11 +286,7 @@ class OutcomeCounts extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                outcomeIcon(o),
-                size: accentsOn ? 24 : 20,
-                color: iconColors?[o.index] ?? color,
-              ),
+              Icon(outcomeIcon(o), size: 20, color: color),
               const SizedBox(height: Spacing.xs),
               Text(
                 '$value',
@@ -358,10 +351,8 @@ class PercentRow extends StatelessWidget {
     required this.counts,
     this.leading,
     this.onTap,
-    this.barColor,
   });
 
-  final Color? barColor;
   final String label;
   final DoseCounts counts;
   final Widget? leading;
@@ -383,11 +374,6 @@ class PercentRow extends StatelessWidget {
           child: LinearProgressIndicator(
             value: counts.adherence ?? 0,
             minHeight: 8,
-            color:
-                barColor ??
-                (accentVariant == 'a'
-                    ? Accents(context).byFraction(counts.adherence)
-                    : null),
             backgroundColor: theme.colorScheme.surfaceContainerHighest,
           ),
         ),

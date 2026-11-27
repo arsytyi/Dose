@@ -12,7 +12,6 @@ import 'dose_sheet.dart';
 import 'pill_icon.dart';
 import 'stock_widgets.dart';
 import 'theme.dart';
-import 'accents.dart';
 import 'widgets.dart';
 
 /// The "pillbox": what to take today, what has been taken, and swiping
@@ -363,7 +362,6 @@ class _ProgressCard extends StatelessWidget {
                     child: CircularProgressIndicator(
                       value: future ? 0 : summary.progress,
                       strokeWidth: 6,
-                      color: accentsOn ? Accents(context).good : null,
                       backgroundColor: scheme.surface,
                       strokeCap: StrokeCap.round,
                     ),
@@ -462,14 +460,7 @@ class _PartSection extends ConsumerWidget {
               Icon(
                 icon,
                 size: 20,
-                color: accentsOn
-                    ? switch (part) {
-                        DayPart.night => Accents(context).night,
-                        DayPart.morning => Accents(context).morning,
-                        DayPart.afternoon => Accents(context).afternoon,
-                        DayPart.evening => Accents(context).evening,
-                      }
-                    : Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(width: Spacing.sm),
               Expanded(
@@ -618,7 +609,7 @@ class StatusChip extends StatelessWidget {
         slot.actualAt == null
             ? l.stateTaken
             : l.stateTakenAt(hm(slot.actualAt)),
-        accentsOn ? Accents(context).good : scheme.primary,
+        scheme.primary,
       ),
       DoseState.skipped => (
         Icons.block,

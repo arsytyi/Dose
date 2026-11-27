@@ -14,7 +14,6 @@ import 'update_ui.dart';
 import 'guide_widgets.dart';
 import 'theme.dart';
 import 'widgets.dart';
-import 'accents.dart';
 import '../services/pro.dart';
 import 'pro_screen.dart';
 
@@ -187,7 +186,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           SectionTitle(l.settingsNotifications),
           ListTile(
-            leading: const ToneIcon(Icons.music_note_outlined, 0),
+            leading: const Icon(Icons.music_note_outlined),
             title: Text(l.settingsSound),
             subtitle: Text(soundName(reminders.sound, reminders.soundTitle, l)),
             trailing: Icon(
@@ -203,7 +202,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 : () => showPro(context),
           ),
           ListTile(
-            leading: const ToneIcon(Icons.notifications_active_outlined, 1),
+            leading: const Icon(Icons.notifications_active_outlined),
             title: Text(l.grantNotifications),
             onTap: () async {
               await service.requestPermissions();
@@ -212,7 +211,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           if (_exact == false)
             ListTile(
-              leading: const ToneIcon(Icons.alarm_on_outlined, 2),
+              leading: const Icon(Icons.alarm_on_outlined),
               title: Text(l.grantExactAlarms),
               subtitle: Text(l.grantExactAlarmsHint),
               onTap: () async {
@@ -222,7 +221,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
           ListTile(
-            leading: const ToneIcon(Icons.snooze, 3),
+            leading: const Icon(Icons.snooze),
             title: Text(l.snoozeDuration),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: Spacing.sm),
@@ -240,7 +239,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           SwitchListTile(
-            secondary: const ToneIcon(Icons.repeat, 4),
+            secondary: const Icon(Icons.repeat),
             title: Text(l.repeatReminders),
             subtitle: Text(l.repeatRemindersHint),
             value: reminders.repeat,
@@ -248,7 +247,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ref.read(reminderSettingsProvider.notifier).setRepeat(v),
           ),
           ListTile(
-            leading: const ToneIcon(Icons.send_outlined, 5),
+            leading: const Icon(Icons.send_outlined),
             title: Text(l.testNotification),
             subtitle: _pending == null
                 ? null
@@ -257,20 +256,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           SectionTitle(l.settingsData),
           ListTile(
-            leading: const ToneIcon(Icons.save_alt, 6),
+            leading: const Icon(Icons.save_alt),
             title: Text(l.backupExport),
             subtitle: Text(l.backupExportHint),
             onTap: _export,
           ),
           ListTile(
-            leading: const ToneIcon(Icons.settings_backup_restore, 7),
+            leading: const Icon(Icons.settings_backup_restore),
             title: Text(l.backupImport),
             subtitle: Text(l.backupImportHint),
             onTap: _import,
           ),
           SectionTitle(l.guideTitle),
           ListTile(
-            leading: const ToneIcon(Icons.menu_book_outlined, 8),
+            leading: const Icon(Icons.menu_book_outlined),
             title: Text(l.guideAll),
             subtitle: Text(l.guideAllSubtitle),
             onTap: () => Navigator.of(context).push(
@@ -280,7 +279,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           SectionTitle(l.about),
           if (Store.sellsPro)
             ListTile(
-              leading: const ToneIcon(Icons.workspace_premium_outlined, 9),
+              leading: const Icon(Icons.workspace_premium_outlined),
               title: Text(l.proTitle),
               subtitle: Text(
                 isPro ? l.proSettingsActive : l.proSettingsInactive,
@@ -290,13 +289,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           if (Store.selfUpdates) ...[
             ListTile(
-              leading: const ToneIcon(Icons.system_update_outlined, 10),
+              leading: const Icon(Icons.system_update_outlined),
               title: Text(l.updateCheck),
               subtitle: Text(l.updateCurrent(appVersion)),
               onTap: _checkUpdate,
             ),
             SwitchListTile(
-              secondary: const ToneIcon(Icons.autorenew, 11),
+              secondary: const Icon(Icons.autorenew),
               title: Text(l.updateAuto),
               subtitle: Text(l.updateAutoHint),
               value: _autoUpdate,
@@ -309,7 +308,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ],
           ListTile(
-            leading: const ToneIcon(Icons.info_outline, 12),
+            leading: const Icon(Icons.info_outline),
             title: const Text('Dose $appVersion'),
             subtitle: Text(l.disclaimer),
           ),
@@ -395,7 +394,7 @@ class _SoundSheet extends ConsumerWidget {
                 ),
               const Divider(),
               ListTile(
-                leading: const ToneIcon(Icons.library_music_outlined, 13),
+                leading: const Icon(Icons.library_music_outlined),
                 title: Text(l.soundPickPhone),
                 subtitle: Text(l.soundPickPhoneHint),
                 onTap: () async {
