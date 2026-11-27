@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 
 import 'package:material_ui/material_ui.dart';
 
+import 'accents.dart';
 import '../data/database.dart';
 import '../domain/look.dart';
 
@@ -288,7 +289,12 @@ class PillAvatar extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        color: accentsOn
+            ? Color.alphaBlend(
+                Color(medication.color).withValues(alpha: 0.18),
+                Theme.of(context).colorScheme.surface,
+              )
+            : Theme.of(context).colorScheme.surfaceContainerHighest,
         shape: BoxShape.circle,
       ),
       alignment: Alignment.center,
