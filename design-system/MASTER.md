@@ -39,21 +39,31 @@ System font (Roboto on Android) with Material 3 type roles:
 - Dose times: `titleLarge`/`titleMedium`, weight 600, tabular figures.
 - Section headers: `titleSmall` in primary.
 - Body: `bodyLarge` 16sp, list subtitles `bodyMedium`.
+- Screen titles (app bar): `headlineSmall` 26sp, weight 600. Selected nav label weight 700.
 - Supports system font scaling; text wraps instead of truncating where it carries meaning.
 
 ## Spacing and shape
 
 - 4/8dp rhythm: 4, 8, 12, 16, 24, 32. Screen gutter 16dp. Section gap 24dp.
-- Corner radius: 12dp for cards and inputs, full for avatars and chips.
+- Corner radius: 20dp (`Radii.large`) for cards, 12dp for inputs, full for avatars and chips.
 - Lists leave 96dp bottom inset so the FAB never covers the last row.
 
 ## Interaction
 
 - Touch targets ≥48dp; icon-only buttons always have a tooltip (accessible name).
 - One primary action per screen (FAB or Save). Delete lives in an overflow menu or app bar, in error color, and always asks for confirmation.
-- Material ripple for press feedback. Default Material motion; no custom animations yet.
+- Material ripple for press feedback. Default Material motion; button groups animate shape and color in 200ms easeOutCubic.
 - Forms: visible labels, required fields marked with *, errors shown next to the problem with a clear fix.
 
 ## Navigation
 
 Bottom navigation bar with three top-level destinations (Today, Medications, Settings), icon + label, active state highlighted. Detail screens push on top with a standard back arrow.
+
+## Expressive components (v0.15)
+
+Material 3 Expressive style, built in `lib/ui/expressive.dart`:
+
+- `TileGroup`: tiles of one section as separate rounded cards in `surfaceContainer`, 2dp apart. Outer corners of the group 20dp, inner corners 4dp. Used for Medications lists and every Settings section.
+- `ButtonGroup`: connected single-choice buttons, 48dp high, 2dp apart. The chosen one is `primary`, fully rounded, bold; the others `secondaryContainer` with 8dp inner corners. Used for the 7/30/90 day period, theme and snooze length. Exposes button + selected semantics.
+- `WavyProgressRing`: today's progress on the Today tab. Filled part is a gentle wave in the `good` accent, the rest is a plain track with a small gap.
+- Navigation bar is 68dp high.

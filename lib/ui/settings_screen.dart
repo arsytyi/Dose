@@ -13,6 +13,7 @@ import '../version.dart';
 import 'update_ui.dart';
 import 'guide_widgets.dart';
 import 'theme.dart';
+import 'expressive.dart';
 import 'widgets.dart';
 import '../services/pro.dart';
 import 'pro_screen.dart';
@@ -141,7 +142,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             onChanged: (code) => ref
                 .read(localeProvider.notifier)
                 .set(code == null || code.isEmpty ? null : Locale(code)),
-            child: Column(
+            child: TileGroup(
               children: [
                 RadioListTile(value: '', title: Text(l.langSystem)),
                 const RadioListTile(value: 'en', title: Text('English')),
@@ -157,167 +158,190 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               horizontal: Spacing.lg,
               vertical: Spacing.sm,
             ),
-            child: SizedBox(
-              width: double.infinity,
-              child: SegmentedButton<ThemeMode>(
-                showSelectedIcon: false,
-                segments: [
-                  ButtonSegment(
-                    value: ThemeMode.system,
-                    icon: const Icon(Icons.brightness_auto_outlined),
-                    label: Text(l.themeSystem),
-                  ),
-                  ButtonSegment(
-                    value: ThemeMode.light,
-                    icon: const Icon(Icons.light_mode_outlined),
-                    label: Text(l.themeLight),
-                  ),
-                  ButtonSegment(
-                    value: ThemeMode.dark,
-                    icon: const Icon(Icons.dark_mode_outlined),
-                    label: Text(l.themeDark),
-                  ),
-                ],
-                selected: {themeMode},
-                onSelectionChanged: (s) =>
-                    ref.read(themeModeProvider.notifier).set(s.first),
-              ),
+            child: ButtonGroup<ThemeMode>(
+              choices: [
+                GroupChoice(
+                  ThemeMode.system,
+                  l.themeSystem,
+                  icon: Icons.brightness_auto_outlined,
+                ),
+                GroupChoice(
+                  ThemeMode.light,
+                  l.themeLight,
+                  icon: Icons.light_mode_outlined,
+                ),
+                GroupChoice(
+                  ThemeMode.dark,
+                  l.themeDark,
+                  icon: Icons.dark_mode_outlined,
+                ),
+              ],
+              selected: themeMode,
+              onChanged: (m) => ref.read(themeModeProvider.notifier).set(m),
             ),
           ),
           SectionTitle(l.settingsNotifications),
-          ListTile(
-            leading: const TonalIcon(Icons.music_note_outlined, index: 0),
-            title: Text(l.settingsSound),
-            subtitle: Text(soundName(reminders.sound, reminders.soundTitle, l)),
-            trailing: Icon(
-              isPro ? Icons.chevron_right : Icons.workspace_premium_outlined,
-            ),
-            onTap: isPro
-                ? () => showModalBottomSheet<void>(
-                    context: context,
-                    showDragHandle: true,
-                    isScrollControlled: true,
-                    builder: (_) => const _SoundSheet(),
-                  ).whenComplete(SoundPicker.stop)
-                : () => showPro(context),
-          ),
-          ListTile(
-            leading: const TonalIcon(
-              Icons.notifications_active_outlined,
-              index: 1,
-            ),
-            title: Text(l.grantNotifications),
-            onTap: () async {
-              await service.requestPermissions();
-              await _refresh();
-            },
-          ),
-          if (_exact == false)
-            ListTile(
-              leading: const TonalIcon(Icons.alarm_on_outlined, index: 2),
-              title: Text(l.grantExactAlarms),
-              subtitle: Text(l.grantExactAlarmsHint),
-              onTap: () async {
-                await service.requestExactAlarms();
-                await ref.read(reminderSyncProvider).resync();
-                await _refresh();
-              },
-            ),
-          ListTile(
-            leading: const TonalIcon(Icons.snooze, index: 3),
-            title: Text(l.snoozeDuration),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: Spacing.sm),
-              child: SegmentedButton<int>(
-                showSelectedIcon: false,
-                segments: [
-                  for (final m in Prefs.snoozeChoices)
-                    ButtonSegment(value: m, label: Text(l.minutesShort(m))),
-                ],
-                selected: {reminders.snoozeMinutes},
-                onSelectionChanged: (s) => ref
-                    .read(reminderSettingsProvider.notifier)
-                    .setSnooze(s.first),
+          TileGroup(
+            children: [
+              ListTile(
+                leading: const TonalIcon(Icons.music_note_outlined, index: 0),
+                title: Text(l.settingsSound),
+                subtitle: Text(
+                  soundName(reminders.sound, reminders.soundTitle, l),
+                ),
+                trailing: Icon(
+                  isPro
+                      ? Icons.chevron_right
+                      : Icons.workspace_premium_outlined,
+                ),
+                onTap: isPro
+                    ? () => showModalBottomSheet<void>(
+                        context: context,
+                        showDragHandle: true,
+                        isScrollControlled: true,
+                        builder: (_) => const _SoundSheet(),
+                      ).whenComplete(SoundPicker.stop)
+                    : () => showPro(context),
               ),
-            ),
-          ),
-          SwitchListTile(
-            secondary: const TonalIcon(Icons.repeat, index: 4),
-            title: Text(l.repeatReminders),
-            subtitle: Text(l.repeatRemindersHint),
-            value: reminders.repeat,
-            onChanged: (v) =>
-                ref.read(reminderSettingsProvider.notifier).setRepeat(v),
-          ),
-          ListTile(
-            leading: const TonalIcon(Icons.send_outlined, index: 5),
-            title: Text(l.testNotification),
-            subtitle: _pending == null
-                ? null
-                : Text(l.scheduledCount(_pending!)),
-            onTap: () => service.showTest(l),
+              ListTile(
+                leading: const TonalIcon(
+                  Icons.notifications_active_outlined,
+                  index: 1,
+                ),
+                title: Text(l.grantNotifications),
+                onTap: () async {
+                  await service.requestPermissions();
+                  await _refresh();
+                },
+              ),
+              if (_exact == false)
+                ListTile(
+                  leading: const TonalIcon(Icons.alarm_on_outlined, index: 2),
+                  title: Text(l.grantExactAlarms),
+                  subtitle: Text(l.grantExactAlarmsHint),
+                  onTap: () async {
+                    await service.requestExactAlarms();
+                    await ref.read(reminderSyncProvider).resync();
+                    await _refresh();
+                  },
+                ),
+              ListTile(
+                leading: const TonalIcon(Icons.snooze, index: 3),
+                title: Text(l.snoozeDuration),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: Spacing.sm),
+                  child: ButtonGroup<int>(
+                    choices: [
+                      for (final m in Prefs.snoozeChoices)
+                        GroupChoice(m, l.minutesShort(m)),
+                    ],
+                    selected: reminders.snoozeMinutes,
+                    onChanged: (m) => ref
+                        .read(reminderSettingsProvider.notifier)
+                        .setSnooze(m),
+                  ),
+                ),
+              ),
+              SwitchListTile(
+                secondary: const TonalIcon(Icons.repeat, index: 4),
+                title: Text(l.repeatReminders),
+                subtitle: Text(l.repeatRemindersHint),
+                value: reminders.repeat,
+                onChanged: (v) =>
+                    ref.read(reminderSettingsProvider.notifier).setRepeat(v),
+              ),
+              ListTile(
+                leading: const TonalIcon(Icons.send_outlined, index: 5),
+                title: Text(l.testNotification),
+                subtitle: _pending == null
+                    ? null
+                    : Text(l.scheduledCount(_pending!)),
+                onTap: () => service.showTest(l),
+              ),
+            ],
           ),
           SectionTitle(l.settingsData),
-          ListTile(
-            leading: const TonalIcon(Icons.save_alt, index: 6),
-            title: Text(l.backupExport),
-            subtitle: Text(l.backupExportHint),
-            onTap: _export,
-          ),
-          ListTile(
-            leading: const TonalIcon(Icons.settings_backup_restore, index: 7),
-            title: Text(l.backupImport),
-            subtitle: Text(l.backupImportHint),
-            onTap: _import,
+          TileGroup(
+            children: [
+              ListTile(
+                leading: const TonalIcon(Icons.save_alt, index: 6),
+                title: Text(l.backupExport),
+                subtitle: Text(l.backupExportHint),
+                onTap: _export,
+              ),
+              ListTile(
+                leading: const TonalIcon(
+                  Icons.settings_backup_restore,
+                  index: 7,
+                ),
+                title: Text(l.backupImport),
+                subtitle: Text(l.backupImportHint),
+                onTap: _import,
+              ),
+            ],
           ),
           SectionTitle(l.guideTitle),
-          ListTile(
-            leading: const TonalIcon(Icons.menu_book_outlined, index: 8),
-            title: Text(l.guideAll),
-            subtitle: Text(l.guideAllSubtitle),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const GuideListScreen()),
-            ),
+          TileGroup(
+            children: [
+              ListTile(
+                leading: const TonalIcon(Icons.menu_book_outlined, index: 8),
+                title: Text(l.guideAll),
+                subtitle: Text(l.guideAllSubtitle),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const GuideListScreen(),
+                  ),
+                ),
+              ),
+            ],
           ),
           SectionTitle(l.about),
-          if (Store.sellsPro)
-            ListTile(
-              leading: const TonalIcon(
-                Icons.workspace_premium_outlined,
-                index: 9,
+          TileGroup(
+            children: [
+              if (Store.sellsPro)
+                ListTile(
+                  leading: const TonalIcon(
+                    Icons.workspace_premium_outlined,
+                    index: 9,
+                  ),
+                  title: Text(l.proTitle),
+                  subtitle: Text(
+                    isPro ? l.proSettingsActive : l.proSettingsInactive,
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => showPro(context),
+                ),
+              if (Store.selfUpdates) ...[
+                ListTile(
+                  leading: const TonalIcon(
+                    Icons.system_update_outlined,
+                    index: 10,
+                  ),
+                  title: Text(l.updateCheck),
+                  subtitle: Text(l.updateCurrent(appVersion)),
+                  onTap: _checkUpdate,
+                ),
+                SwitchListTile(
+                  secondary: const TonalIcon(Icons.autorenew, index: 11),
+                  title: Text(l.updateAuto),
+                  subtitle: Text(l.updateAutoHint),
+                  value: _autoUpdate,
+                  onChanged: (v) async {
+                    await ref
+                        .read(sharedPreferencesProvider)
+                        .setBool(Prefs.autoUpdateCheck, v);
+                    setState(() {});
+                  },
+                ),
+              ],
+              ListTile(
+                leading: const TonalIcon(Icons.info_outline, index: 12),
+                title: const Text('Dose $appVersion'),
+                subtitle: Text(l.disclaimer),
               ),
-              title: Text(l.proTitle),
-              subtitle: Text(
-                isPro ? l.proSettingsActive : l.proSettingsInactive,
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => showPro(context),
-            ),
-          if (Store.selfUpdates) ...[
-            ListTile(
-              leading: const TonalIcon(Icons.system_update_outlined, index: 10),
-              title: Text(l.updateCheck),
-              subtitle: Text(l.updateCurrent(appVersion)),
-              onTap: _checkUpdate,
-            ),
-            SwitchListTile(
-              secondary: const TonalIcon(Icons.autorenew, index: 11),
-              title: Text(l.updateAuto),
-              subtitle: Text(l.updateAutoHint),
-              value: _autoUpdate,
-              onChanged: (v) async {
-                await ref
-                    .read(sharedPreferencesProvider)
-                    .setBool(Prefs.autoUpdateCheck, v);
-                setState(() {});
-              },
-            ),
-          ],
-          ListTile(
-            leading: const TonalIcon(Icons.info_outline, index: 12),
-            title: const Text('Dose $appVersion'),
-            subtitle: Text(l.disclaimer),
+            ],
           ),
+          const SizedBox(height: Spacing.xl),
         ],
       ),
     );
