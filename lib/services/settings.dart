@@ -13,6 +13,9 @@ abstract final class Prefs {
   static const autoUpdateCheck = 'autoUpdateCheck';
   static const lastUpdateCheck = 'lastUpdateCheck';
 
+  /// Whether the first-run request for exact reminders was shown.
+  static const exactAlarmAsked = 'exactAlarmAsked';
+
   /// JSON map of notification id to signature, from the last reminder sync.
   static const scheduledReminders = 'scheduledReminders';
 

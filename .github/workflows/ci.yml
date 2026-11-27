@@ -41,16 +41,25 @@ jobs:
       - run: flutter analyze
       - run: flutter test
 
-      - name: Build APK
+      - name: Build APK (GitHub) and app bundle (Google Play)
         env:
           BADY_KEYSTORE_BASE64: ${{ secrets.BADY_KEYSTORE_BASE64 }}
           BADY_KEYSTORE_PASSWORD: ${{ secrets.BADY_KEYSTORE_PASSWORD }}
         # Version code = minutes since 1970, so every newer build (CI or
         # release) is accepted as an update over an older one.
-        run: flutter build apk --release --target-platform android-arm64 --build-number=$(( $(date +%s) / 60 ))
+        run: |
+          code=$(( $(date +%s) / 60 ))
+          flutter build apk --release --flavor github --target-platform android-arm64 --build-number=$code
+          flutter build appbundle --release --flavor play --build-number=$code
 
       - uses: actions/upload-artifact@v4
         with:
           name: dose-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-github-release.apk
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dose-play-aab
+          path: build/app/outputs/bundle/playRelease/app-play-release.aab
           retention-days: 30

@@ -1224,4 +1224,14 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get ingredientsRemove => 'Прибрати';
+
+  @override
+  String get exactAlarmPromptTitle => 'Нагадування вчасно';
+
+  @override
+  String get exactAlarmPromptBody =>
+      'Без дозволу на точні будильники Android може затримувати нагадування на кілька хвилин. На наступному екрані увімкніть «Дозволити встановлювати будильники й нагадування».';
+
+  @override
+  String get exactAlarmPromptAllow => 'Дозволити';
 }

@@ -3,7 +3,7 @@ description: "Dose: medication and supplement reminders"
 publish_to: 'none'
 
 # Keep in step with lib/version.dart (CI checks). CI sets the build number.
-version: 0.11.0+1
+version: 0.12.0+1
 
 environment:
   sdk: ^3.14.0

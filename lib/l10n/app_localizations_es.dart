@@ -1207,4 +1207,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ingredientsRemove => 'Quitar';
+
+  @override
+  String get exactAlarmPromptTitle => 'Recordatorios a tiempo';
+
+  @override
+  String get exactAlarmPromptBody =>
+      'Sin permiso para alarmas exactas, Android puede retrasar los recordatorios varios minutos. En la siguiente pantalla, activa «Permitir configurar alarmas y recordatorios».';
+
+  @override
+  String get exactAlarmPromptAllow => 'Permitir';
 }

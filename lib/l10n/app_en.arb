@@ -426,5 +426,11 @@
   "ingredientsAdd": "Add substance",
   "ingredientsPick": "Active substances",
   "ingredientsDone": "Done",
-  "ingredientsRemove": "Remove"
+  "ingredientsRemove": "Remove",
+  "exactAlarmPromptTitle": "Reminders on time",
+  "exactAlarmPromptBody": "Android may delay reminders by several minutes unless Dose is allowed to set exact alarms. On the next screen, turn on “Allow setting alarms and reminders”.",
+  "exactAlarmPromptAllow": "Allow",
+  "@exactAlarmPromptTitle": {
+    "description": "First-run dialog asking to allow exact alarms."
+  }
 }

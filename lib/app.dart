@@ -3,6 +3,9 @@ import 'package:material_ui/material_ui.dart';
 
 import 'l10n/app_localizations.dart';
 import 'providers.dart';
+import 'services/notification_service.dart';
+import 'services/settings.dart';
+import 'services/store.dart';
 import 'ui/medications_screen.dart';
 import 'ui/settings_screen.dart';
 import 'ui/stats_screen.dart';
@@ -59,12 +62,49 @@ class _HomeShellState extends ConsumerState<HomeShell>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.read(notificationServiceProvider).requestPermissions();
+      final service = ref.read(notificationServiceProvider);
+      await service.requestPermissions();
       ref.read(reminderSyncProvider);
-      if (mounted) {
+      if (mounted) await _askForExactAlarmsOnce();
+      if (mounted && Store.selfUpdates) {
         await autoCheckForUpdate(context, ref.read(sharedPreferencesProvider));
       }
     });
+  }
+
+  /// Explains once why exact reminders matter before Android's settings
+  /// page opens. Since Android 14 new installs don't get this by default.
+  Future<void> _askForExactAlarmsOnce() async {
+    final prefs = ref.read(sharedPreferencesProvider);
+    final service = ref.read(notificationServiceProvider);
+    if (prefs.getBool(Prefs.exactAlarmAsked) ?? false) return;
+    if (!NotificationService.supported) return;
+    if (await service.canScheduleExact()) return;
+    await prefs.setBool(Prefs.exactAlarmAsked, true);
+    if (!mounted) return;
+    final l = AppLocalizations.of(context);
+    final allow = await showDialog<bool>(
+      context: context,
+      builder: (dialog) => AlertDialog(
+        icon: const Icon(Icons.alarm_on_outlined),
+        title: Text(l.exactAlarmPromptTitle),
+        content: Text(l.exactAlarmPromptBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialog).pop(false),
+            child: Text(l.later),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialog).pop(true),
+            child: Text(l.exactAlarmPromptAllow),
+          ),
+        ],
+      ),
+    );
+    if (allow ?? false) {
+      await service.requestExactAlarms();
+      await ref.read(reminderSyncProvider).resync();
+    }
   }
 
   @override
