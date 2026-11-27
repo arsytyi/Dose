@@ -9,6 +9,8 @@ import '../services/files.dart';
 import 'pill_icon.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import '../services/pro.dart';
+import 'pro_screen.dart';
 
 String _lang(AppLocalizations l) => l.localeName.split('_').first;
 
@@ -94,6 +96,9 @@ Future<void> showSubstanceGuide(
   InteractionCatalog catalog,
   Substance substance,
 ) {
+  if (!ProviderScope.containerOf(context).read(isProProvider)) {
+    return showPro(context);
+  }
   final l = AppLocalizations.of(context);
   final lang = _lang(l);
   final info = substance.info;
@@ -354,6 +359,12 @@ class _GuideListScreenState extends ConsumerState<GuideListScreen> {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    if (!ref.watch(isProProvider)) {
+      return Scaffold(
+        appBar: AppBar(title: Text(l.guideTitle)),
+        body: ProLockedBody(feature: l.proFeatureGuide),
+      );
+    }
     final lang = _lang(l);
     final catalog = ref.watch(interactionCatalogProvider).value;
     final substances = <Substance>[

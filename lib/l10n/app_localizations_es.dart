@@ -1217,4 +1217,76 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get exactAlarmPromptAllow => 'Permitir';
+
+  @override
+  String get proTitle => 'Dose Pro';
+
+  @override
+  String get proTagline => 'Un solo pago. Sin suscripción ni anuncios.';
+
+  @override
+  String get proFeatureAnalytics => 'Análisis detallado';
+
+  @override
+  String get proFeatureAnalyticsHint =>
+      'Cada medicamento y cada día en detalle: rachas, puntualidad, tendencias.';
+
+  @override
+  String get proFeatureStock => 'Existencias y aviso de reposición';
+
+  @override
+  String get proFeatureStockHint =>
+      'Cuántos días quedan y un aviso antes de que se acabe.';
+
+  @override
+  String get proFeatureGuide => 'Guía completa de sustancias';
+
+  @override
+  String get proFeatureGuideHint =>
+      'Cómo tomar cada suplemento, con fuentes y productos listos.';
+
+  @override
+  String get proFeatureSounds => 'Tu propio sonido de aviso';
+
+  @override
+  String get proFeatureSoundsHint =>
+      'Sonidos de Dose o cualquier sonido del teléfono.';
+
+  @override
+  String get proFreeNote =>
+      'Gratis para siempre: recordatorios, registro de tomas, estadísticas, avisos de compatibilidad y copias de seguridad.';
+
+  @override
+  String proBuy(String price) {
+    return 'Comprar por $price';
+  }
+
+  @override
+  String get proBuyNoPrice => 'Comprar Dose Pro';
+
+  @override
+  String get proRestore => 'Restaurar compra';
+
+  @override
+  String get proUnlockedThanks => 'Dose Pro está activo. ¡Gracias!';
+
+  @override
+  String get proPending =>
+      'La compra espera el pago. Pro se abrirá en cuanto Google Play la confirme.';
+
+  @override
+  String get proError =>
+      'No se pudo conectar con Google Play. Comprueba que has iniciado sesión en Play e inténtalo de nuevo.';
+
+  @override
+  String get proLocked => 'Disponible en Dose Pro';
+
+  @override
+  String get proLearnMore => 'Sobre Dose Pro';
+
+  @override
+  String get proSettingsActive => 'Activo. ¡Gracias!';
+
+  @override
+  String get proSettingsInactive => 'Análisis, existencias, guía y sonidos';
 }

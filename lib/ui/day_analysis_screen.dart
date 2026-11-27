@@ -15,6 +15,8 @@ import 'medication_stats_screen.dart';
 import 'pill_icon.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import '../services/pro.dart';
+import 'pro_screen.dart';
 
 /// Everything about one day: what was due, what was taken and when, and
 /// how each medication did.
@@ -36,6 +38,12 @@ class _DayAnalysisScreenState extends ConsumerState<DayAnalysisScreen> {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final locale = Localizations.localeOf(context).toLanguageTag();
+    if (!ref.watch(isProProvider)) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: ProLockedBody(feature: l.proFeatureAnalytics),
+      );
+    }
     final plan = ref.watch(activePlanProvider);
     final events = ref.watch(dayEventsProvider(_day));
     final meds = ref.watch(allMedicationsProvider).value ?? const {};

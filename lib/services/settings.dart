@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/app_localizations.dart';
+import 'store.dart';
 
 /// Preference keys and defaults shared by the UI and the background isolate.
 abstract final class Prefs {
@@ -12,6 +13,9 @@ abstract final class Prefs {
   static const themeMode = 'themeMode';
   static const autoUpdateCheck = 'autoUpdateCheck';
   static const lastUpdateCheck = 'lastUpdateCheck';
+
+  /// Set once Google Play confirms the Dose Pro purchase.
+  static const proUnlocked = 'proUnlocked';
 
   /// Whether the first-run request for exact reminders was shown.
   static const exactAlarmAsked = 'exactAlarmAsked';
@@ -41,7 +45,14 @@ abstract final class Prefs {
 
   static bool repeat(SharedPreferences p) => p.getBool(repeatReminders) ?? true;
 
-  static String? soundKey(SharedPreferences p) => p.getString(sound);
+  /// Pro features are open in builds that don't sell Pro, and in the Play
+  /// build after the purchase.
+  static bool pro(SharedPreferences p) =>
+      !Store.sellsPro || (p.getBool(proUnlocked) ?? false);
+
+  /// A chosen sound is a Pro feature; without Pro the phone default plays.
+  static String? soundKey(SharedPreferences p) =>
+      pro(p) ? p.getString(sound) : null;
 
   static Locale? chosenLocale(SharedPreferences p) {
     final code = p.getString(locale);

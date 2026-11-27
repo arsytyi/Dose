@@ -9,6 +9,8 @@ import '../l10n/app_localizations.dart';
 import '../providers.dart';
 import 'medication_detail_screen.dart';
 import 'theme.dart';
+import '../services/pro.dart';
+import 'pro_screen.dart';
 
 double? _parse(String s) => double.tryParse(s.trim().replaceAll(',', '.'));
 
@@ -74,6 +76,13 @@ class StockSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final m = medication;
     final locale = Localizations.localeOf(context).toLanguageTag();
+
+    if (!ref.watch(isProProvider)) {
+      return ProLockedTile(
+        icon: Icons.inventory_2_outlined,
+        title: l.proFeatureStock,
+      );
+    }
 
     if (m.stock == null) {
       return ListTile(

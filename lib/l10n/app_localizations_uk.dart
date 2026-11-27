@@ -1234,4 +1234,76 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get exactAlarmPromptAllow => 'Дозволити';
+
+  @override
+  String get proTitle => 'Dose Pro';
+
+  @override
+  String get proTagline => 'Один платіж. Без підписки й реклами.';
+
+  @override
+  String get proFeatureAnalytics => 'Детальна аналітика';
+
+  @override
+  String get proFeatureAnalyticsHint =>
+      'Кожен препарат і кожен день окремо: серії, точність, тенденції.';
+
+  @override
+  String get proFeatureStock => 'Запас і нагадування купити';
+
+  @override
+  String get proFeatureStockHint =>
+      'Скільки днів залишилося, і нагадування до того, як закінчиться.';
+
+  @override
+  String get proFeatureGuide => 'Повний довідник речовин';
+
+  @override
+  String get proFeatureGuideHint =>
+      'Як приймати кожну добавку, з джерелами й готовими продуктами.';
+
+  @override
+  String get proFeatureSounds => 'Свій звук нагадувань';
+
+  @override
+  String get proFeatureSoundsHint =>
+      'Звуки Dose або будь-який звук з телефона.';
+
+  @override
+  String get proFreeNote =>
+      'Безкоштовно назавжди: нагадування, журнал прийомів, статистика, попередження про сумісність і резервні копії.';
+
+  @override
+  String proBuy(String price) {
+    return 'Купити за $price';
+  }
+
+  @override
+  String get proBuyNoPrice => 'Купити Dose Pro';
+
+  @override
+  String get proRestore => 'Відновити покупку';
+
+  @override
+  String get proUnlockedThanks => 'Dose Pro активовано. Дякуємо!';
+
+  @override
+  String get proPending =>
+      'Покупка чекає оплати. Pro відкриється, щойно Google Play її підтвердить.';
+
+  @override
+  String get proError =>
+      'Не вдалося зв\'язатися з Google Play. Перевірте, що ви увійшли в Play, і спробуйте ще раз.';
+
+  @override
+  String get proLocked => 'Доступно в Dose Pro';
+
+  @override
+  String get proLearnMore => 'Про Dose Pro';
+
+  @override
+  String get proSettingsActive => 'Активовано. Дякуємо!';
+
+  @override
+  String get proSettingsInactive => 'Аналітика, запас, довідник і звуки';
 }

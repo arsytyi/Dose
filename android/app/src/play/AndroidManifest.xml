@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- The Google Play build never goes online. Purchases go through the
+         Play Store app, which doesn't need this permission; the removal
+         keeps any library from adding it. -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove"/>
+</manifest>

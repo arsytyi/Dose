@@ -13,6 +13,8 @@ import 'stats_screen.dart';
 import 'stock_widgets.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import '../services/pro.dart';
+import 'pro_screen.dart';
 
 /// Everything the app knows about how one medication has been taken.
 class MedicationStatsScreen extends ConsumerStatefulWidget {
@@ -38,6 +40,12 @@ class _MedicationStatsScreenState extends ConsumerState<MedicationStatsScreen> {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    if (!ref.watch(isProProvider)) {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.medication.name)),
+        body: ProLockedBody(feature: l.proFeatureAnalytics),
+      );
+    }
     final plan = ref.watch(activePlanProvider);
     final log = ref.watch(yearLogProvider);
     final meds = ref.watch(allMedicationsProvider).value ?? const {};

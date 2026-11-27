@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -12,6 +14,7 @@ import 'ui/stats_screen.dart';
 import 'ui/theme.dart';
 import 'ui/today_screen.dart';
 import 'ui/update_ui.dart';
+import 'services/pro.dart';
 
 class DoseApp extends ConsumerWidget {
   const DoseApp({super.key, this.home});
@@ -62,6 +65,7 @@ class _HomeShellState extends ConsumerState<HomeShell>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      unawaited(ref.read(proProvider.notifier).connect());
       final service = ref.read(notificationServiceProvider);
       await service.requestPermissions();
       ref.read(reminderSyncProvider);

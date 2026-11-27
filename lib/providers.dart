@@ -15,6 +15,7 @@ import 'domain/interactions.dart';
 import 'domain/stock.dart';
 import 'services/dose_actions.dart';
 import 'services/notification_service.dart';
+import 'services/pro.dart';
 import 'services/settings.dart';
 
 final databaseProvider = Provider<AppDatabase>((ref) {
@@ -190,7 +191,9 @@ final allMedicationsProvider = StreamProvider<Map<int, Medication>>((ref) {
 });
 
 /// Stock forecast for each medication that tracks stock.
+/// Empty without Pro: stock tracking is a Pro feature.
 final stockForecastsProvider = Provider<Map<int, StockForecast>>((ref) {
+  if (!ref.watch(isProProvider)) return const {};
   final meds = ref.watch(medicationsProvider).value ?? const [];
   final plan = ref.watch(activePlanProvider).value ?? const [];
   final now = DateTime.now();
@@ -363,7 +366,7 @@ class ReminderSync {
         .replaceAll(
           notifications,
           localizationsFor(prefs),
-          stock: _stockReminders(plan, now),
+          stock: Prefs.pro(prefs) ? _stockReminders(plan, now) : const {},
           previous: _decode(prefs.getString(Prefs.scheduledReminders)),
         );
     await prefs.setString(

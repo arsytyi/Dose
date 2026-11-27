@@ -14,6 +14,8 @@ import 'update_ui.dart';
 import 'guide_widgets.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import '../services/pro.dart';
+import 'pro_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -125,6 +127,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final l = AppLocalizations.of(context);
     final locale = ref.watch(localeProvider);
     final reminders = ref.watch(reminderSettingsProvider);
+    final isPro = ref.watch(isProProvider);
     final themeMode = ref.watch(themeModeProvider);
     final service = ref.read(notificationServiceProvider);
 
@@ -186,13 +189,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             leading: const Icon(Icons.music_note_outlined),
             title: Text(l.settingsSound),
             subtitle: Text(soundName(reminders.sound, reminders.soundTitle, l)),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => showModalBottomSheet<void>(
-              context: context,
-              showDragHandle: true,
-              isScrollControlled: true,
-              builder: (_) => const _SoundSheet(),
-            ).whenComplete(SoundPicker.stop),
+            trailing: Icon(
+              isPro ? Icons.chevron_right : Icons.workspace_premium_outlined,
+            ),
+            onTap: isPro
+                ? () => showModalBottomSheet<void>(
+                    context: context,
+                    showDragHandle: true,
+                    isScrollControlled: true,
+                    builder: (_) => const _SoundSheet(),
+                  ).whenComplete(SoundPicker.stop)
+                : () => showPro(context),
           ),
           ListTile(
             leading: const Icon(Icons.notifications_active_outlined),
@@ -270,6 +277,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           SectionTitle(l.about),
+          if (Store.sellsPro)
+            ListTile(
+              leading: const Icon(Icons.workspace_premium_outlined),
+              title: Text(l.proTitle),
+              subtitle: Text(
+                isPro ? l.proSettingsActive : l.proSettingsInactive,
+              ),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => showPro(context),
+            ),
           if (Store.selfUpdates) ...[
             ListTile(
               leading: const Icon(Icons.system_update_outlined),
