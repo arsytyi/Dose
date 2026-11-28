@@ -10,7 +10,16 @@ import 'package:bady/app.dart';
 import 'package:bady/data/database.dart';
 import 'package:bady/domain/enums.dart';
 import 'package:bady/domain/schedule_rule.dart';
+import 'package:bady/l10n/app_localizations.dart';
 import 'package:bady/providers.dart';
+import 'package:bady/ui/day_analysis_screen.dart';
+import 'package:bady/ui/guide_widgets.dart';
+import 'package:bady/ui/history_screen.dart';
+import 'package:bady/ui/medication_detail_screen.dart';
+import 'package:bady/ui/medication_form_screen.dart';
+import 'package:bady/ui/medication_stats_screen.dart';
+import 'package:bady/ui/pro_screen.dart';
+import 'package:bady/ui/schedule_editor_screen.dart';
 import 'package:drift/drift.dart' show Value;
 import 'package:drift/native.dart';
 import 'package:flutter/rendering.dart';
@@ -23,6 +32,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 const _outDir = String.fromEnvironment('SHOTS_DIR');
 const _variant = String.fromEnvironment('SHOTS_PREFIX', defaultValue: 'shot');
 const _fontsDir = String.fromEnvironment('SHOTS_FONTS');
+const _locale = String.fromEnvironment('SHOTS_LOCALE', defaultValue: 'ru');
+// SHOTS_ALL=true also renders detail screens (forms, analysis, guide...).
+const _all = bool.fromEnvironment('SHOTS_ALL');
+const _uk = _locale == 'uk';
 
 Future<void> _loadFonts() async {
   final roboto = FontLoader('Roboto');
@@ -71,7 +84,7 @@ void main() {
       final rnd = Random(7);
       final meds = [
         (
-          'Витамин D3',
+          _uk ? 'Вітамін D3' : 'Витамин D3',
           MedKind.supplement,
           MedForm.capsule,
           0xFFF2B233,
@@ -79,9 +92,16 @@ void main() {
           0.95,
         ),
         ('Омега-3', MedKind.supplement, MedForm.capsule, 0xFF4F7DF3, [13], 0.8),
-        ('Магний', MedKind.supplement, MedForm.tablet, 0xFF8E6CEF, [21], 0.7),
         (
-          'Метформин',
+          _uk ? 'Магній' : 'Магний',
+          MedKind.supplement,
+          MedForm.tablet,
+          0xFF8E6CEF,
+          [21],
+          0.7,
+        ),
+        (
+          _uk ? 'Метформін' : 'Метформин',
           MedKind.medicine,
           MedForm.tablet,
           0xFFE8655A,
@@ -97,11 +117,13 @@ void main() {
             form: form,
             color: Value(color),
             createdAt: Value(first),
-            stock: Value(switch (name) {
-              'Омега-3' => 30,
-              'Метформин' => 90,
-              _ => 40,
-            }),
+            stock: Value(
+              name == 'Омега-3'
+                  ? 30
+                  : kind == MedKind.medicine
+                  ? 90
+                  : 40,
+            ),
             packSize: const Value(60),
           ),
         );
@@ -162,10 +184,11 @@ void main() {
           ? Brightness.dark
           : Brightness.light;
       addTearDown(tester.view.reset);
+      addTearDown(() => debugDisableShadows = true);
       addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
       await seed(tester);
       SharedPreferences.setMockInitialValues({
-        'locale': 'ru',
+        'locale': _locale,
         'exactAlarmAsked': true,
       });
       final prefs = await SharedPreferences.getInstance();
@@ -181,18 +204,57 @@ void main() {
           ),
         ),
       );
+      final l = lookupAppLocalizations(Locale(_locale));
       final suffix = dark ? 'dark' : 'light';
       await shot(tester, 'today_$suffix');
-      await tester.tap(find.text('Препараты'));
+      if (_all) {
+        await tester.tap(find.text(_uk ? 'Метформін' : 'Метформин').first);
+        await shot(tester, 'dosesheet_$suffix');
+        await tester.tapAt(const Offset(200, 60));
+        await settle(tester);
+      }
+      await tester.tap(find.text(l.navMedications));
       await shot(tester, 'meds_$suffix');
-      await tester.tap(find.text('Статистика'));
+      await tester.tap(find.text(l.navStats));
       await shot(tester, 'stats_$suffix');
       await tester.drag(find.byType(ListView).last, const Offset(0, -700));
       await shot(tester, 'statsmeds_$suffix');
-      await tester.tap(find.text('30 дней'));
+      await tester.tap(find.text(l.statsPeriod(30)));
       await shot(tester, 'stats30_$suffix');
-      await tester.tap(find.text('Настройки'));
+      await tester.tap(find.text(l.navSettings));
       await shot(tester, 'settings_$suffix');
+      if (_all) {
+        await tester.drag(find.byType(ListView).last, const Offset(0, -1400));
+        await shot(tester, 'settings2_$suffix');
+        final meds = await tester.runAsync(() => db.watchMedications().first);
+        final med = meds!.firstWhere((m) => m.kind == MedKind.medicine);
+        final nav = tester.state<NavigatorState>(find.byType(Navigator).first);
+        Future<void> open(String name, Widget screen) async {
+          nav.push(MaterialPageRoute<void>(builder: (_) => screen));
+          await shot(tester, '${name}_$suffix');
+          nav.pop();
+          await settle(tester);
+        }
+
+        final today = dateOnly(DateTime.now());
+        final supplement = meds.firstWhere((m) => m.kind == MedKind.supplement);
+        await open('detail', MedicationDetailScreen(id: supplement.id));
+        await open('form', MedicationFormScreen(existing: med));
+        await open('formnew', const MedicationFormScreen());
+        await open('schedule', ScheduleEditorScreen(medication: med));
+        await open('medstats', MedicationStatsScreen(medication: med));
+        await open('day', DayAnalysisScreen(day: addDays(today, -1)));
+        await open('history', const HistoryScreen());
+        nav.push(
+          MaterialPageRoute<void>(builder: (_) => const GuideListScreen()),
+        );
+        await shot(tester, 'guide_$suffix');
+        await tester.tap(find.textContaining('Ашваганда'));
+        await shot(tester, 'substance_$suffix');
+        nav.popUntil((r) => r.isFirst);
+        await settle(tester);
+        await open('pro', const ProScreen());
+      }
       await tester.pumpWidget(const SizedBox());
       await tester.pump(Duration.zero);
     });
